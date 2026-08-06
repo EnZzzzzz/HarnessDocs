@@ -117,9 +117,10 @@
 - 对照与后续：DeepSeek-R1 用大规模 RL；[arXiv:2507.14419](https://arxiv.org/pdf/2507.14419) 指出 s1 的缩放主要来自长度上限；
   [arXiv:2502.12118](https://arxiv.org/pdf/2502.12118) 证明带验证器的 RL/搜索方法更优。
 
-### gpt-oss-120b 技术报告
-- arXiv:2504.11405
-- OpenAI 开源模型报告，公开「自生成数据 + RL 自我提升」的完整配方（SFT 冷启动 → RLHF/GRPO）。
+### gpt-oss-120b 技术报告（Model Card）
+- arXiv:2508.10925（⚠️ 注意：网上流传的 2504.11405 是错的，那其实是篇天体物理论文）
+- OpenAI 开源权重模型卡：MoE 架构 + 大规模蒸馏与强化学习（与 o3 类似的 CoT RL）+ Harmony 格式 + 工具（浏览/Python/自定义函数）训练 + deliberative alignment 安全对齐。
+- 注意：报告为模型卡层面，未披露 GRPO/cooldown/SFT 等细节配方。
 - 上面多条线（SIA / HASE）都以其为基线，建议配套阅读。
 
 ---

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="drawio" version="31.1.5">
+  <diagram name="模板与设计系统构成" id="od-tpl-ds-arch">
+    <mxGraphModel dx="1200" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2280" pageHeight="1720" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="t" value="OpenDesign 渲染资产构成 · design-templates（114）× design-systems（151）" style="text;html=1;align=left;verticalAlign=middle;fontSize=15;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="40" y="0" width="1800" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="h1" value="design-templates · 渲染模板（来源 × 功能）" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="40" y="45" width="900" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="t162" value="design-templates/ 目录&amp;#xa;114 个渲染模板" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="70" width="220" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="t_self" value="项目自研 64（56%）&amp;#xa;无 upstream · 首方模板" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="380" y="180" width="330" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="t_third" value="三方来源 50（44%）&amp;#xa;带 upstream · 5 个组织" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="1560" y="180" width="330" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="te1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.3;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="t162" target="t_self">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="te2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.7;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="t162" target="t_third">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t_orgs" value="三方主要来源组织 · 合计 50" style="swimlane;startSize=26;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;verticalAlign=top;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="380" y="330" width="1510" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="torg0" value="zarazhangrui · 32" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;strokeWidth=1;" vertex="1" parent="t_orgs">
+          <mxGeometry x="25" y="50" width="270" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="torg1" value="lewislulu · 14" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;strokeWidth=1;" vertex="1" parent="t_orgs">
+          <mxGeometry x="320" y="50" width="270" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="torg2" value="alchaincyf · 2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;strokeWidth=1;" vertex="1" parent="t_orgs">
+          <mxGeometry x="615" y="50" width="270" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="torg3" value="op7418 · 1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;strokeWidth=1;" vertex="1" parent="t_orgs">
+          <mxGeometry x="910" y="50" width="270" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="torg4" value="anthropics · 1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;strokeWidth=1;" vertex="1" parent="t_orgs">
+          <mxGeometry x="1205" y="50" width="270" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="tc0" value="演示 / 汇报&amp;#xa;共 56 个&amp;#xa;三方 48 · 自研 8" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="380" y="560" width="330" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="tc1" value="文档 / 报告 / 单页&amp;#xa;共 15 个&amp;#xa;三方 0 · 自研 15" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="730" y="560" width="330" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="tc2" value="Web 页面 / 原型&amp;#xa;共 14 个&amp;#xa;三方 0 · 自研 14" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="560" width="330" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="tc3" value="仪表盘 / 看板&amp;#xa;共 10 个&amp;#xa;三方 0 · 自研 10" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="1430" y="560" width="330" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="tc4" value="研究 / 简报 agent&amp;#xa;共 7 个&amp;#xa;三方 0 · 自研 7" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="380" y="710" width="330" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="tc5" value="媒体 / 动效 / 3D&amp;#xa;共 5 个&amp;#xa;三方 0 · 自研 5" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="730" y="710" width="330" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="tc6" value="线框 / 设计交付&amp;#xa;共 4 个&amp;#xa;三方 0 · 自研 4" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="710" width="330" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="tc7" value="工具 / 包装&amp;#xa;共 3 个&amp;#xa;三方 2 · 自研 1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="1430" y="710" width="330" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="h2" value="design-systems · 设计系统（151 · 全部自研）" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="40" y="920" width="900" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="ds" value="design-systems/ 目录&amp;#xa;151 个设计系统" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="950" width="220" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ds_self" value="100% 自研 · bundled fixture&amp;#xa;0 upstream · 0 独立 LICENSE&amp;#xa;→ 整库 Apache-2.0 覆盖" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="930" y="1060" width="400" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="de1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ds" target="ds_self">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ds_brand" value="品牌重构 · 以真实品牌命名（87）" style="swimlane;startSize=26;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;verticalAlign=top;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="380" y="1200" width="460" height="310" as="geometry" />
+        </mxCell>
+        <mxCell id="dbc0" value="AI &amp; LLM · 15" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=9;strokeWidth=1;strokeWidth=1;" vertex="1" parent="ds_brand">
+          <mxGeometry x="20" y="45" width="210" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="dbc1" value="Media &amp; Consumer · 12" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=9;strokeWidth=1;strokeWidth=1;" vertex="1" parent="ds_brand">
+          <mxGeometry x="250" y="45" width="210" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="dbc2" value="Productivity &amp; SaaS · 12" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=9;strokeWidth=1;strokeWidth=1;" vertex="1" parent="ds_brand">
+          <mxGeometry x="20" y="90" width="210" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="dbc3" value="Backend &amp; Data · 9" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=9;strokeWidth=1;strokeWidth=1;" vertex="1" parent="ds_brand">
+          <mxGeometry x="250" y="90" width="210" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="dbc4" value="Dev Tools · 9" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=9;strokeWidth=1;strokeWidth=1;" vertex="1" parent="ds_brand">
+          <mxGeometry x="20" y="135" width="210" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="dbc5" value="Design &amp; Creative · 7" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=9;strokeWidth=1;strokeWidth=1;" vertex="1" parent="ds_brand">
+          <mxGeometry x="250" y="135" width="210" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="dbc6" value="Fintech &amp; Crypto · 7" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=9;strokeWidth=1;strokeWidth=1;" vertex="1" parent="ds_brand">
+          <mxGeometry x="20" y="180" width="210" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="dbc7" value="Automotive · 7" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=9;strokeWidth=1;strokeWidth=1;" vertex="1" parent="ds_brand">
+          <mxGeometry x="250" y="180" width="210" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="dbc8" value="E-Commerce &amp; Retail · 5" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=9;strokeWidth=1;strokeWidth=1;" vertex="1" parent="ds_brand">
+          <mxGeometry x="20" y="225" width="210" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="dbc9" value="其他 Editorial 等 · 4" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=9;strokeWidth=1;strokeWidth=1;" vertex="1" parent="ds_brand">
+          <mxGeometry x="250" y="225" width="210" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="ds_style" value="风格原型 · 视觉风格命名（61）" style="swimlane;startSize=26;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;verticalAlign=top;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="900" y="1200" width="460" height="310" as="geometry" />
+        </mxCell>
+        <mxCell id="dsc0" value="Creative &amp; Artistic · 11" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=9;strokeWidth=1;strokeWidth=1;" vertex="1" parent="ds_style">
+          <mxGeometry x="20" y="45" width="210" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="dsc1" value="Professional &amp; Corporate · 10" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=9;strokeWidth=1;strokeWidth=1;" vertex="1" parent="ds_style">
+          <mxGeometry x="250" y="45" width="210" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="dsc2" value="Modern &amp; Minimal · 10" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=9;strokeWidth=1;strokeWidth=1;" vertex="1" parent="ds_style">
+          <mxGeometry x="20" y="90" width="210" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="dsc3" value="Themed &amp; Unique · 8" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=9;strokeWidth=1;strokeWidth=1;" vertex="1" parent="ds_style">
+          <mxGeometry x="250" y="90" width="210" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="dsc4" value="Bold &amp; Expressive · 8" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=9;strokeWidth=1;strokeWidth=1;" vertex="1" parent="ds_style">
+          <mxGeometry x="20" y="135" width="210" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="dsc5" value="Morphism &amp; Effects · 6" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=9;strokeWidth=1;strokeWidth=1;" vertex="1" parent="ds_style">
+          <mxGeometry x="250" y="135" width="210" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="dsc6" value="Layout &amp; Structure · 4" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=9;strokeWidth=1;strokeWidth=1;" vertex="1" parent="ds_style">
+          <mxGeometry x="20" y="180" width="210" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="dsc7" value="Retro &amp; Nostalgic · 4" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=9;strokeWidth=1;strokeWidth=1;" vertex="1" parent="ds_style">
+          <mxGeometry x="250" y="180" width="210" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="ds_starter" value="Starter · 起步模板（3）" style="swimlane;startSize=26;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;verticalAlign=top;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1420" y="1200" width="460" height="310" as="geometry" />
+        </mxCell>
+        <mxCell id="dss0" value="default" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=9;strokeWidth=1;strokeWidth=1;" vertex="1" parent="ds_starter">
+          <mxGeometry x="20" y="45" width="210" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="dss1" value="tom-modern" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=9;strokeWidth=1;strokeWidth=1;" vertex="1" parent="ds_starter">
+          <mxGeometry x="20" y="95" width="210" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="dss2" value="warm-editorial" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=9;strokeWidth=1;strokeWidth=1;" vertex="1" parent="ds_starter">
+          <mxGeometry x="20" y="145" width="210" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="leg" value="图例" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;strokeWidth=1;verticalAlign=top;align=left;spacing=10;" vertex="1" parent="1">
+          <mxGeometry x="380" y="1560" width="1520" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="l0" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;strokeWidth=1;" vertex="1" parent="leg">
+          <mxGeometry x="40" y="40" width="26" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="l0t" value="三方来源（带 upstream）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ffffff;fontSize=9;strokeWidth=1;text;html=1;align=left;verticalAlign=middle;" vertex="1" parent="leg">
+          <mxGeometry x="75" y="38" width="190" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="l1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;strokeWidth=1;" vertex="1" parent="leg">
+          <mxGeometry x="280" y="40" width="26" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="l1t" value="项目自研 / 首方" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ffffff;fontSize=9;strokeWidth=1;text;html=1;align=left;verticalAlign=middle;" vertex="1" parent="leg">
+          <mxGeometry x="315" y="38" width="190" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="l2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;strokeWidth=1;" vertex="1" parent="leg">
+          <mxGeometry x="520" y="40" width="26" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="l2t" value="三方（面板 1 来源分叉）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ffffff;fontSize=9;strokeWidth=1;text;html=1;align=left;verticalAlign=middle;" vertex="1" parent="leg">
+          <mxGeometry x="555" y="38" width="190" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="l3" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;strokeWidth=1;" vertex="1" parent="leg">
+          <mxGeometry x="760" y="40" width="26" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="l3t" value="品牌重构设计系统" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ffffff;fontSize=9;strokeWidth=1;text;html=1;align=left;verticalAlign=middle;" vertex="1" parent="leg">
+          <mxGeometry x="795" y="38" width="190" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="l4" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;strokeWidth=1;" vertex="1" parent="leg">
+          <mxGeometry x="1000" y="40" width="26" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="l4t" value="风格原型设计系统" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ffffff;fontSize=9;strokeWidth=1;text;html=1;align=left;verticalAlign=middle;" vertex="1" parent="leg">
+          <mxGeometry x="1035" y="38" width="190" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="l5" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;strokeWidth=1;" vertex="1" parent="leg">
+          <mxGeometry x="1240" y="40" width="26" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="l5t" value="Starter / 兜底" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ffffff;fontSize=9;strokeWidth=1;text;html=1;align=left;verticalAlign=middle;" vertex="1" parent="leg">
+          <mxGeometry x="1275" y="38" width="190" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
