@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="drawio" version="31.1.5">
+  <diagram name="skills-构成" id="od-skills-arch">
+    <mxGraphModel dx="1200" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2280" pageHeight="1300" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="t" value="OpenDesign skills 构成架构图 · 162 个技能 · 来源（三方 / 官方 / 自研）× 功能划分" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ffffff;fontSize=10;text;html=1;align=left;verticalAlign=middle;fontSize=15;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="40" y="0" width="1200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="s162" value="skills/ 目录&amp;#xa;162 个技能" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="40" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="t3p" value="三方来源 115（71%）&amp;#xa;带 upstream · 来自 38 个外部组织" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="380" y="160" width="330" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="own" value="项目自有 47（29%）&amp;#xa;非三方来源合计" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1550" y="160" width="330" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="t24" value="官方 · nexu-io&amp;#xa;upstream 24&amp;#xa;同组织上游" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1550" y="300" width="160" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="t23" value="项目自研 23&amp;#xa;无 upstream&amp;#xa;首发技能 / 内部工具" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1720" y="300" width="160" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="orgbox" value="三方主要来源组织 · 前 13 大（共 92 个 = 三方技能的 80%）" style="swimlane;startSize=28;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;verticalAlign=top;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="380" y="310" width="1100" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="org600" value="Leonxlnx · 13" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="orgbox">
+          <mxGeometry x="20" y="45" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="org601" value="fal-ai-community · 12" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="orgbox">
+          <mxGeometry x="232" y="45" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="org602" value="anthropics · 10" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="orgbox">
+          <mxGeometry x="444" y="45" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="org603" value="openai · 8" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="orgbox">
+          <mxGeometry x="656" y="45" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="org604" value="greensock · 8" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="orgbox">
+          <mxGeometry x="868" y="45" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="org605" value="figma · 7" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="orgbox">
+          <mxGeometry x="20" y="107" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="org606" value="MiniMax-AI · 6" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="orgbox">
+          <mxGeometry x="232" y="107" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="org607" value="ComposioHQ · 5" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="orgbox">
+          <mxGeometry x="444" y="107" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="org608" value="veniceai · 5" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="orgbox">
+          <mxGeometry x="656" y="107" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="org609" value="coreyhaines31 · 4" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="orgbox">
+          <mxGeometry x="868" y="107" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="org610" value="google-labs-code · 4" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="orgbox">
+          <mxGeometry x="20" y="169" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="org611" value="vercel-labs · 3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="orgbox">
+          <mxGeometry x="232" y="169" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="org612" value="garrytan · 3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="orgbox">
+          <mxGeometry x="444" y="169" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="orgfoot" value="其余 25 个上游组织各 1 个（共 23 个）· 三方合计 115" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=9;" vertex="1" parent="orgbox">
+          <mxGeometry x="20" y="240" width="1040" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.3;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="s162" target="t3p">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.7;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="s162" target="own">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.3;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="own" target="t24">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.7;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="own" target="t23">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="div" value="—— 同一批 162 个技能，按功能划分如下 ——" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ffffff;fontSize=10;text;html=1;align=center;verticalAlign=middle;fontSize=12;fontStyle=3;fontColor=#999999;" vertex="1" parent="1">
+          <mxGeometry x="40" y="620" width="2000" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bandA" value="内容产出 · 直接产物（107）" style="swimlane;startSize=28;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;verticalAlign=top;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="40" y="670" width="2010" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="bandAb0" value="文档 / 演示 / 报告&amp;#xa;共 26 个&amp;#xa;三方 10 · 官方 8 · 自研 8" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="bandA">
+          <mxGeometry x="20" y="45" width="315" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="bandAb1" value="前端 / UI 界面构建&amp;#xa;共 26 个&amp;#xa;三方 22 · 官方 0 · 自研 4" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="bandA">
+          <mxGeometry x="355" y="45" width="315" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="bandAb2" value="图像生成 / 编辑&amp;#xa;共 22 个&amp;#xa;三方 20 · 官方 1 · 自研 1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="bandA">
+          <mxGeometry x="690" y="45" width="315" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="bandAb3" value="视频生成 / 剪辑 / GIF&amp;#xa;共 15 个&amp;#xa;三方 11 · 官方 1 · 自研 3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="bandA">
+          <mxGeometry x="1025" y="45" width="315" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="bandAb4" value="视频特效帧 / 社媒卡片&amp;#xa;共 14 个&amp;#xa;三方 0 · 官方 14 · 自研 0" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" vertex="1" parent="bandA">
+          <mxGeometry x="1360" y="45" width="315" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="bandAb5" value="音频 / 音乐 / 语音&amp;#xa;共 4 个&amp;#xa;三方 4 · 官方 0 · 自研 0" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="bandA">
+          <mxGeometry x="1695" y="45" width="315" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="bandB" value="设计方法 · Design Method（44）" style="swimlane;startSize=28;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;verticalAlign=top;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="40" y="870" width="2010" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="bandBb0" value="动画 / 动效 / 3D&amp;#xa;共 15 个&amp;#xa;三方 14 · 官方 0 · 自研 1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="bandB">
+          <mxGeometry x="20" y="45" width="315" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="bandBb1" value="设计系统 / 品牌资产&amp;#xa;共 9 个&amp;#xa;三方 8 · 官方 0 · 自研 1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="bandB">
+          <mxGeometry x="355" y="45" width="315" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="bandBb2" value="设计流程 / 评审 / 研究&amp;#xa;共 8 个&amp;#xa;三方 3 · 官方 0 · 自研 5" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="bandB">
+          <mxGeometry x="690" y="45" width="315" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="bandBb3" value="文案 / 营销 / 创意&amp;#xa;共 8 个&amp;#xa;三方 8 · 官方 0 · 自研 0" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="bandB">
+          <mxGeometry x="1025" y="45" width="315" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="bandBb4" value="数据可视化 / 设计知识&amp;#xa;共 4 个&amp;#xa;三方 4 · 官方 0 · 自研 0" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="bandB">
+          <mxGeometry x="1360" y="45" width="315" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="bandC" value="集成 / 工具 · Tooling（11）" style="swimlane;startSize=28;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;verticalAlign=top;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1070" width="2010" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="bandCb0" value="Figma 协作 / 设计交付&amp;#xa;共 7 个&amp;#xa;三方 7 · 官方 0 · 自研 0" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="bandC">
+          <mxGeometry x="20" y="45" width="315" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="bandCb1" value="浏览器 / 截图 / 代理工具&amp;#xa;共 4 个&amp;#xa;三方 4 · 官方 0 · 自研 0" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="bandC">
+          <mxGeometry x="355" y="45" width="315" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="leg" value="图例" style="swimlane;startSize=28;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;verticalAlign=top;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1890" y="170" width="320" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="lg1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="leg">
+          <mxGeometry x="15" y="40" width="30" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="lg1t" value="三方来源（带 upstream）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ffffff;fontSize=10;text;html=1;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="leg">
+          <mxGeometry x="55" y="38" width="250" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="lg2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" vertex="1" parent="leg">
+          <mxGeometry x="15" y="72" width="30" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="lg2t" value="官方 · nexu-io 上游" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ffffff;fontSize=10;text;html=1;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="leg">
+          <mxGeometry x="55" y="70" width="250" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="lg3" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="leg">
+          <mxGeometry x="15" y="104" width="30" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="lg3t" value="项目自研（无 upstream）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ffffff;fontSize=10;text;html=1;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="leg">
+          <mxGeometry x="55" y="102" width="250" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="lg4" value="注：功能分类框按「主导来源」着色，框内标注三方/官方/自研的精确数量；27 个 frame-*/card-*/social-* 特效帧类技能全部来自官方。" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ffffff;fontSize=10;text;html=1;align=left;verticalAlign=top;fontSize=9;fontColor=#555555;" vertex="1" parent="leg">
+          <mxGeometry x="15" y="150" width="290" height="120" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="drawio" version="31.1.5">
+  <diagram name="skill选择逻辑" id="od-skill-select">
+    <mxGraphModel dx="1200" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1620" pageHeight="1600" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="t" value="OpenDesign skill 选择逻辑 · web 入口 → daemon 优先级链 → prompt 注入与副作用" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ffffff;fontSize=15;strokeWidth=1;text;html=1;align=left;verticalAlign=middle;fontSize=15;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="40" y="0" width="1500" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="C1" value="① Web 前端 · 三类互斥入口" style="swimlane;startSize=28;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;verticalAlign=top;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="1520" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="w1" value="Home 自由输入 composer&amp;#xa;场景 chip / 模板 → pluginId&amp;#xa;显式技能 → skillId&amp;#xa;（两类互斥 · 未选 → od-default）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;strokeWidth=1;" vertex="1" parent="C1">
+          <mxGeometry x="40" y="45" width="440" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="w2" value="新建项目面板&amp;#xa;skillId = startTemplateId ?? skillIdForTab&amp;#xa;（选模板 = 选技能）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;strokeWidth=1;" vertex="1" parent="C1">
+          <mxGeometry x="560" y="45" width="440" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="w3" value="已有项目聊天&amp;#xa;skillId = project.skill_id（持久化）&amp;#xa;@-mention → skillIds（ad-hoc）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;strokeWidth=1;" vertex="1" parent="C1">
+          <mxGeometry x="1080" y="45" width="440" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="C2" value="daemon 解析 · 优先级链（server.ts）" style="swimlane;startSize=28;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;verticalAlign=top;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="40" y="270" width="1520" height="610" as="geometry" />
+        </mxCell>
+        <mxCell id="d4" value="插件本地 SKILL.md 无条件覆盖&amp;#xa;od.context.skills[{path} | {ref}]&amp;#xa;覆盖已拼 skillBody · 优先级最高" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;strokeWidth=1;" vertex="1" parent="C2">
+          <mxGeometry x="40" y="50" width="440" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="d1" value="effectiveSkillId&amp;#xa;= 本轮 skillId ?: project.skill_id" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;strokeWidth=1;" vertex="1" parent="C2">
+          <mxGeometry x="560" y="50" width="440" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="d3" value="ad-hoc skillIds → Composed skill 块&amp;#xa;（去重：排除主技能 id）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;strokeWidth=1;" vertex="1" parent="C2">
+          <mxGeometry x="1080" y="50" width="440" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="d2" value="resolveSkillId（别名）→ findSkillById&amp;#xa;跨四根 ALL_SKILL_LIKE_ROOTS&amp;#xa;用户技能 shadow 内置" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;strokeWidth=1;" vertex="1" parent="C2">
+          <mxGeometry x="560" y="180" width="440" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="d5" value="兜底：默认场景插件（runs.ts）&amp;#xa;请求无插件 &amp;&amp; 项目未 pin → 按 kind/intent 选插件" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;strokeWidth=1;" vertex="1" parent="C2">
+          <mxGeometry x="40" y="480" width="440" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="C3" value="prompt 注入 · 产物与副作用" style="swimlane;startSize=28;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;verticalAlign=top;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="40" y="910" width="1520" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="p1" value="## Active skill — &amp;lt;name&amp;gt;&amp;#xa;双通道同一格式（skill 通道 / 插件通道）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;strokeWidth=1;" vertex="1" parent="C3">
+          <mxGeometry x="40" y="50" width="440" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="p3" value="解析顺带聚合副作用&amp;#xa;skillMode · craftRequires（含插件/ad-hoc）&amp;#xa;· critiquePolicy · skillDir" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;strokeWidth=1;" vertex="1" parent="C3">
+          <mxGeometry x="560" y="50" width="440" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="p2" value="## Composed skill — &amp;lt;name&amp;gt;&amp;#xa;ad-hoc 每技能独立块，追加在主技能后" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;strokeWidth=1;" vertex="1" parent="C3">
+          <mxGeometry x="1080" y="50" width="440" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="p4" value="skillDir → stageActiveSkill&amp;#xa;拷贝到 &amp;lt;cwd&amp;gt;/.od-skills/" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;strokeWidth=1;" vertex="1" parent="C3">
+          <mxGeometry x="560" y="220" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="p5" value="按 mode/policy 决定块&amp;#xa;deck/media/craft/critique" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;strokeWidth=1;" vertex="1" parent="C3">
+          <mxGeometry x="780" y="220" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="b1g" value="①" style="ellipse;fillColor=#d79b00;strokeColor=#d79b00;fontColor=#ffffff;fontSize=12;fontStyle=1;whiteSpace=wrap;html=1;" vertex="1" parent="C3">
+          <mxGeometry x="480" y="58" width="26" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="b2g" value="②" style="ellipse;fillColor=#82b366;strokeColor=#82b366;fontColor=#ffffff;fontSize=12;fontStyle=1;whiteSpace=wrap;html=1;" vertex="1" parent="C1">
+          <mxGeometry x="960" y="53" width="26" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="b3g" value="③" style="ellipse;fillColor=#6c8ebf;strokeColor=#6c8ebf;fontColor=#ffffff;fontSize=12;fontStyle=1;whiteSpace=wrap;html=1;" vertex="1" parent="C2">
+          <mxGeometry x="1480" y="58" width="26" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="b4g" value="④" style="ellipse;fillColor=#9673a6;strokeColor=#9673a6;fontColor=#ffffff;fontSize=12;fontStyle=1;whiteSpace=wrap;html=1;" vertex="1" parent="C3">
+          <mxGeometry x="960" y="58" width="26" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="chip/预设 → pluginId" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=#ffffff;fontSize=9;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="w1" target="d4">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e2" value="startTemplateId ?? skillIdForTab" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=#ffffff;fontSize=9;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="w2" target="d1">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e3" value="@-mention → skillIds" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=#ffffff;fontSize=9;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="w3" target="d3">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e4" value="resolve + 四根" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=#ffffff;fontSize=9;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="d1" target="d2">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e5" value="mode/craft/critique/dir" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=#ffffff;fontSize=9;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="d2" target="p3">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e6" value="skillBody" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=#ffffff;fontSize=9;exitX=0.2;exitY=1;exitDx=0;exitDy=0;entryX=0.27;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="d2" target="p1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="688" y="920" /><mxPoint x="200" y="920" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e7" value="composed blocks" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=#ffffff;fontSize=9;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="d3" target="p2">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e8" value="覆盖 override" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=#ffffff;fontSize=9;dashed=1;strokeColor=#d79b00;strokeWidth=2;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="d4" target="p1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="60" y="380" /><mxPoint x="60" y="920" /><mxPoint x="80" y="920" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e9" value="生成 pluginId" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=#ffffff;fontSize=9;dashed=1;strokeColor=#999999;strokeWidth=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="d5" target="d4">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e10" value="dir → staging" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=#ffffff;fontSize=9;exitX=0.3;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="p3" target="p4">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e11" value="mode/policy → 开关" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=#ffffff;fontSize=9;exitX=0.7;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="p3" target="p5">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="k1" value="① 双通道 → 同一格式&amp;#xa;&amp;#xa;skill 通道 / 插件通道都注入为 ## Active skill；插件本地 SKILL.md 优先级最高，无条件覆盖。" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d79b00;fontSize=10;strokeWidth=2;verticalAlign=top;align=left;spacing=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1290" width="360" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="k2" value="② 选模板 = 选技能&amp;#xa;&amp;#xa;design-template 本身就是四根（ALL_SKILL_LIKE_ROOTS）之一；startTemplateId 直接当 skillId。" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=10;strokeWidth=2;verticalAlign=top;align=left;spacing=10;" vertex="1" parent="1">
+          <mxGeometry x="420" y="1290" width="360" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="k3" value="③ 两处去重&amp;#xa;&amp;#xa;ad-hoc 排除主技能 id（server.ts:3730）；listSkills 首个 root 命中即胜，用户技能 shadow 内置。" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=10;strokeWidth=2;verticalAlign=top;align=left;spacing=10;" vertex="1" parent="1">
+          <mxGeometry x="800" y="1290" width="360" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="k4" value="④ 解析顺带聚合副作用&amp;#xa;&amp;#xa;带回 skillMode · craftRequires · critiquePolicy · skillDir，决定 staging 与 deck/media/craft/critique 块开关。" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=10;strokeWidth=2;verticalAlign=top;align=left;spacing=10;" vertex="1" parent="1">
+          <mxGeometry x="1180" y="1290" width="360" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="leg" value="图例" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;strokeWidth=1;verticalAlign=top;align=left;spacing=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1470" width="1520" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="l0" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;strokeWidth=1;" vertex="1" parent="leg">
+          <mxGeometry x="30" y="35" width="26" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="l0t" value="技能 / 输入" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ffffff;fontSize=9;strokeWidth=1;text;html=1;align=left;verticalAlign=middle;" vertex="1" parent="leg">
+          <mxGeometry x="65" y="33" width="210" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="l1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;strokeWidth=1;" vertex="1" parent="leg">
+          <mxGeometry x="280" y="35" width="26" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="l1t" value="决策" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ffffff;fontSize=9;strokeWidth=1;text;html=1;align=left;verticalAlign=middle;" vertex="1" parent="leg">
+          <mxGeometry x="315" y="33" width="210" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="l2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;strokeWidth=1;" vertex="1" parent="leg">
+          <mxGeometry x="530" y="35" width="26" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="l2t" value="插件覆盖 · 优先级最高" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ffffff;fontSize=9;strokeWidth=1;text;html=1;align=left;verticalAlign=middle;" vertex="1" parent="leg">
+          <mxGeometry x="565" y="33" width="210" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="l3" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;strokeWidth=1;" vertex="1" parent="leg">
+          <mxGeometry x="780" y="35" width="26" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="l3t" value="产物（## Active skill）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ffffff;fontSize=9;strokeWidth=1;text;html=1;align=left;verticalAlign=middle;" vertex="1" parent="leg">
+          <mxGeometry x="815" y="33" width="210" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="l4" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;strokeWidth=1;" vertex="1" parent="leg">
+          <mxGeometry x="1030" y="35" width="26" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="l4t" value="副作用聚合" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ffffff;fontSize=9;strokeWidth=1;text;html=1;align=left;verticalAlign=middle;" vertex="1" parent="leg">
+          <mxGeometry x="1065" y="33" width="210" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="l5" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;strokeWidth=1;" vertex="1" parent="leg">
+          <mxGeometry x="1280" y="35" width="26" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="l5t" value="兜底 / 外部" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ffffff;fontSize=9;strokeWidth=1;text;html=1;align=left;verticalAlign=middle;" vertex="1" parent="leg">
+          <mxGeometry x="1315" y="33" width="210" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
