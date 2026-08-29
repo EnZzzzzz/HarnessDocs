@@ -13,98 +13,120 @@ const AUTO_EXPAND_MS = 1050
 const HARNESS_ILLUSTRATIONS: Record<
   string,
   {
-    concept: { src: string; alt: string }
-    mechanism: { src: string; alt: string }
-    evolution: { src: string; alt: string }
+    concept: { src: string; alt: string; caption: string }
+    mechanism: { src: string; alt: string; caption: string }
+    evolution: { src: string; alt: string; caption: string }
   }
 > = {
   I_obs: {
     concept: {
       src: '/harness/observation-concept.png',
       alt: '观察接口把终端、代码、网页与性能信号过滤成模型可消费观察的手绘插画',
+      caption: '观察接口像一座感官中枢：它接收终端、代码、网页与性能信号，再过滤成少量、清晰、与当前决策有关的观察。',
     },
     mechanism: {
       src: '/harness/observation-mechanism.png',
       alt: '长日志经过首尾保留与按需拉取机制提取有效信号的手绘插画',
+      caption: '面对超长输出，Harness 保留信息密度最高的首尾，并让模型按需拉取后续结果，避免噪声挤占上下文。',
     },
     evolution: {
       src: '/harness/observation-evolution.png',
       alt: 'Agent 为自己接入浏览器视觉通道并开始检查页面的手绘插画',
+      caption: '当终端不足以判断页面质量时，Agent 可以为自己接入截图与浏览器检查能力，让观察接口随任务生长。',
     },
   },
   C: {
     concept: {
       src: '/harness/context-concept.png',
       alt: 'Harness 从记忆、技能与文件档案中选择少量信息放入有限上下文的手绘插画',
+      caption: '上下文窗口是一张有限的工作台；Harness 的职责是从庞大档案中挑出此刻真正需要的信息。',
     },
     mechanism: {
       src: '/harness/context-mechanism.png',
       alt: '对话历史经过分级压缩且技能按需展开的手绘插画',
+      caption: '旧工具结果、对话历史和技能说明依次被裁剪、折叠或按需展开，以有限 token 维持长任务。',
     },
     evolution: {
       src: '/harness/context-evolution.png',
       alt: '模型在活动上下文与外置档案之间自主调度记忆的手绘插画',
+      caption: '更进一步，模型可以自己决定记什么、移出什么、何时重新读取，让上下文管理从固定规则变成主动调度。',
     },
   },
   L: {
     concept: {
       src: '/harness/control-loop-concept.png',
       alt: '观察、推理、行动与反馈围绕模型持续循环的手绘插画',
+      caption: '模型只决定下一步；Harness 让观察、推理、行动与反馈首尾相接，形成可以持续推进任务的闭环。',
     },
     mechanism: {
       src: '/harness/control-loop-mechanism.png',
       alt: '确定性流水线与模型决策分支共同编排任务的手绘插画',
+      caption: '权限、执行和结果回灌走确定性轨道，真正需要判断的位置才交给模型或子 Agent。',
     },
     evolution: {
       src: '/harness/control-loop-evolution.png',
       alt: '新会话接力推进任务并由异步复盘支线改进循环的手绘插画',
+      caption: '循环可以在每轮换用干净上下文，并在任务结束后分出异步复盘支线，把经验写回下一轮。',
     },
   },
   I_act: {
     concept: {
       src: '/harness/action-concept.png',
       alt: '模型意图经过 Harness 转换成终端、文件、浏览器与外部工具动作的手绘插画',
+      caption: '模型并不直接操作世界；动作接口把抽象意图转换成终端、文件、浏览器和外部工具能够执行的调用。',
     },
     mechanism: {
       src: '/harness/action-mechanism.png',
       alt: '结构化动作依次经过校验、权限与沙箱后执行并反馈错误的手绘插画',
+      caption: '每个动作先经过结构校验、权限判断和沙箱执行；失败结果再回到模型，成为下一步修正的依据。',
     },
     evolution: {
       src: '/harness/action-evolution.png',
       alt: 'Agent 现场制造、测试并安装新插件以扩展动作集的手绘插画',
+      caption: '当现有工具不够用时，Agent 可以现场开发、测试并安装插件，让可执行动作从固定集合变成可生长能力。',
     },
   },
   S: {
     concept: {
       src: '/harness/state-concept.png',
       alt: '模型上下文清空后仍从外置状态仓库恢复任务的手绘插画',
+      caption: '模型可以失忆、上下文可以清空，但计划、进度、日志、diff 与产物必须独立保存，任务才能恢复。',
     },
     mechanism: {
       src: '/harness/state-mechanism.png',
       alt: '不可变事件轨迹支持恢复、分叉与回退且保留原始历史的手绘插画',
+      caption: 'Append-only 轨迹把消息、工具调用和检查点连续记录下来，从同一历史支持恢复、分叉与回退。',
     },
     evolution: {
       src: '/harness/state-evolution.png',
       alt: '失忆的新 Agent 通过结构化交接文件无缝继续任务的手绘插画',
+      caption: '每个新会话都像一位失忆的新工程师；结构化交接文件和 Git 历史让它准确接过上一班的工作。',
     },
   },
   V: {
     concept: {
       src: '/harness/verification-concept.png',
       alt: 'Agent 动作通过多层安全闸门并接受独立验证的手绘插画',
+      caption: '治理负责用规则、审批和沙箱拦住危险动作；验证则像独立裁判，判断最终结果是否真的正确。',
     },
     mechanism: {
       src: '/harness/verification-mechanism.png',
       alt: '独立 evaluator 使用测试、代码检查与浏览器证据审查生成结果的手绘插画',
+      caption: '生成者与裁判彼此分离：Evaluator 用测试、代码检查和浏览器证据发现问题，再把精确反馈送回生成端。',
     },
     evolution: {
       src: '/harness/verification-evolution.png',
       alt: '设计师用样例校准 evaluator 并逐步形成可追溯证据树的手绘插画',
+      caption: '在审美等没有标准答案的领域，人用准则和样例校准 Evaluator，Harness 再把判断沉淀成可追溯的证据树。',
     },
   },
 }
 
-function DetailIllustration({ image }: { image: { src: string; alt: string } }) {
+function DetailIllustration({
+  image,
+}: {
+  image: { src: string; alt: string; caption: string }
+}) {
   return (
     <figure className="mt-5 overflow-hidden rounded-2xl border border-slate-100 bg-slate-50">
       <img
@@ -114,6 +136,9 @@ function DetailIllustration({ image }: { image: { src: string; alt: string } }) 
         decoding="async"
         className="aspect-3/2 w-full object-cover"
       />
+      <figcaption className="border-t border-slate-100 bg-white px-4 py-3 text-[11px] leading-relaxed text-slate-400 sm:px-5">
+        {image.caption}
+      </figcaption>
     </figure>
   )
 }

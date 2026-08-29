@@ -151,19 +151,19 @@ export const S01_FOUNDATION: OutlineSectionData = {
       ],
       images: [
         {
-          src: '/outline/slime-exercise-vs-project.jpg',
+          src: '/outline/slime-exercise-vs-project-editorial.png',
           caption:
             '概念图 · 从“刷题”到“交付项目”：左侧只有单文件、短任务和一次通过；右侧则是计算集群、存储、代码库、内部资料、历史实验与多轮验证组成的真实工程现场。环境规模扩大后，模型训练的不再是孤立答案，而是调查—实验—修改—复验—交付的完整工作链。',
           afterParagraph: 0,
         },
         {
-          src: '/outline/slime-plugin-environments.jpg',
+          src: '/outline/slime-plugin-environments-editorial.png',
           caption:
             '概念图 · 一个稳定训练循环，连接多种可替换环境：代码测试、搜索、网络安全沙箱、ML 集群和多 Agent 工作流都使用相同的数据接口接入。外围插件可以持续增加或更换，中心的 Buffer—rollout—训练循环不需要随任务重写。',
           afterParagraph: 2,
         },
         {
-          src: '/outline/slime-async-trajectories.jpg',
+          src: '/outline/slime-async-trajectories-editorial.png',
           caption:
             '概念图 · 异步处理长尾轨迹：蓝色短轨迹完成后立即进入训练并回传新权重，绿色节点表示已验证样本；橙色长轨迹仍可在另一条通道继续探索。系统始终维持在途任务，不必让整批 GPU 等待最慢的一条轨迹。',
           afterParagraph: 3,
