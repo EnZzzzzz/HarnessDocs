@@ -1,6 +1,6 @@
 # Harness Docs 前端设计文档
 
-文档可视化站点的前端（`web/`），浅色梦幻风格单页应用：首页 Hero + AI 发展脉络时间线。
+文档可视化站点的前端（`web/`），浅色梦幻风格单页应用：首页 Hero + AI 发展脉络时间线 + Harness 六职责解剖。
 
 ## 技术栈
 
@@ -45,7 +45,7 @@
 
 ### 两级卡片体系
 
-- **里程碑**（`milestone: true`，目前 15 个）：照片墙大相框——白色边框 + 靛蓝内页 + 底部说明，微倾斜（±0.6°），悬停回正放大；带类型徽章、中性灰主题名、「◆ 关键节点」标记、常驻来源链接（论文类显示「论文 ↗」）、**代表性配图**（`public/timeline/`，点击跳来源）
+- **里程碑**（`milestone: true`，目前 20 个）：照片墙大相框——白色边框 + 靛蓝内页 + 底部说明，微倾斜（±0.6°），悬停回正放大；带类型徽章、中性灰主题名、「◆ 关键节点」标记、常驻来源链接（论文类显示「论文 ↗」）、**代表性配图**（`public/timeline/`，点击跳来源）
 - **次要事件**：紧凑小卡片（半透明底、小标题、淡色说明），作为铺垫
 
 ### 滚动焦点（`scroll-focus.tsx`）
@@ -54,9 +54,29 @@ rAF 节流监听滚动，每个 `data-fade-row` 按与视口中心的距离实�
 
 ### 数据（`timeline-data.ts`）
 
-- `EVENTS`：扁平数组，严格按日期排序；每条含 date / title / description / theme / type / milestone / image / source
+- `EVENTS`：扁平数组，严格按日期排序；每条含 date / title / description / theme / type / milestone / image / source / links（补充阅读，可选）
 - `THEME_META`：三条脉络的 keyword / en / range / description（阶段判定用 `stageOf(date)`：≤2023 → prompt，2024–2025 → context，≥2026 → harness）
 - 事件日期与来源均经过联网考证（arXiv / 官方博客 / 权威报道）
+
+## Harness 六职责段落（`components/harness/`）
+
+时间线之后继续向下滚动进入，锚点 `#harness`。内容依据 arXiv:2606.20683 综述的形式化定义 `A_LLM = ⟨M, I_obs, C, L, I_act, S, V⟩`。
+
+### 结构
+
+- **引子**：标题「Harness 是什么？」+「Agent = Model + Harness」说明
+- **滚动轨道**（`harness-section.tsx`，260vh sticky）：六张职责卡片初始**随机堆叠**在画面中心（确定性伪随机偏移 + 旋转，手写在 `PILE` 数组）；随滚动逐张**展开平铺**成 3×2 网格（窄屏 2×3），每张卡错开 0.05 进度起步，`easeInOutCubic` 快进慢出；展开完成（进度 0.9）后留 10% 轨道供点击
+- **卡片正面**：形式化符号徽章（I_obs / C / L / I_act / S / V）+ 中文名 + 英文名 + 一句话概括，悬停出现「查看详情 →」
+- **详情弹层**：点击卡片打开（backdrop blur 遮罩 + 白卡），含职责详解与代表性实践（OpenAI / Anthropic / Stripe / Carlini 案例）；Esc / 点遮罩关闭，打开时锁定背景滚动
+
+### 实现要点
+
+- 滚动驱动用 rAF + getBoundingClientRect 直接写 DOM transform（不经过 React 重渲染），与 `scroll-focus.tsx` 同一套模式
+- 卡片位置在 JS 里按舞台实测尺寸计算（堆叠点 → 网格点插值），整体缩放适配窄屏；展开进度 < 0.85 时禁用 pointer-events 防误点
+
+### 数据（`harness-data.ts`）
+
+`HARNESS_PARTS`：六个职责各含 symbol / name / en / tagline（卡片正面）/ detail / examples（弹层详情）。
 
 ## 动画规范
 
@@ -66,6 +86,7 @@ rAF 节流监听滚动，每个 `data-fade-row` 按与视口中心的距离实�
 | `orbit-converge` | 图标由外向内聚合 | `cubic-bezier(0.16, 1, 0.3, 1)` 快进慢出 |
 | `chip-float` | 图标缓慢浮动 | `ease-in-out` 无限循环，各图标错开周期 |
 | `stage-in` | 吸顶主题切换 | `cubic-bezier(0.22, 1, 0.36, 1)` |
+| 滚动插值（非 keyframes） | 六职责卡片堆叠→展开 | `easeInOutCubic`，逐张 stagger |
 
 ## 资源
 

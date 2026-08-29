@@ -24,6 +24,8 @@ export interface TimelineEvent {
   image?: string
   /** 来源链接（官方博客 / arXiv / 权威报道） */
   source: string
+  /** 补充阅读链接（中文纪要、相关报道等），可选 */
+  links?: { label: string; url: string }[]
 }
 
 export interface ThemeMeta {
@@ -424,6 +426,60 @@ export const EVENTS: TimelineEvent[] = [
     theme: 'harness',
     type: 'event',
     source: 'https://martinfowler.com/articles/harness-engineering.html',
+  },
+  {
+    date: '2026-03',
+    title: 'Anthropic 发布长任务开发的 Harness 设计',
+    milestone: true,
+    image: '/timeline/anthropic-harness.png',
+    description: '3 月 24 日工程博客：借鉴 GAN 的 planner–generator–evaluator 三智能体架构，evaluator 用 Playwright 实测打分，让 Claude 连续数小时自主构建完整应用。',
+    theme: 'harness',
+    type: 'concept',
+    source: 'https://www.anthropic.com/engineering/harness-design-long-running-apps',
+  },
+  {
+    date: '2026-08',
+    title: 'DeepSeek Harness 开源',
+    milestone: true,
+    image: '/timeline/deepseek-harness.png',
+    description: '8 月 13 日随 V4 Pro 同日发布：「一切皆插件」的 Agent 运行时底座，模型、工具、沙箱、UI 均可替换，MIT 开源，一日破万星。',
+    theme: 'harness',
+    type: 'open-source',
+    source: 'https://github.com/deepseek-ai/deepseek-harness',
+  },
+  {
+    date: '2026-08',
+    title: 'GLM-5.3：一切增益来自后训练',
+    milestone: true,
+    image: '/timeline/glm-5-3.png',
+    description: '8 月 14 日智谱发布：复用 GLM-5.2 底座，只靠扩展可执行、可验证的长周期训练环境换来编程与长任务能力大涨——环境本身成为核心资产。',
+    theme: 'harness',
+    type: 'product',
+    source: 'https://z.ai/blog/glm-5.3',
+  },
+  {
+    date: '2026-08',
+    title: 'HarnessEval：开启 Benchmark 的 Harness 时代',
+    milestone: true,
+    image: '/timeline/harnesseval.png',
+    description: '8 月 18 日，MirroS 联合清北、Berkeley、MIT、NVIDIA 等 15 家机构发布：Route–Decompose–Verify 评测工作流加可追溯证据树，benchmark 从离线计算器变成可执行的评测系统。',
+    theme: 'harness',
+    type: 'open-source',
+    source: 'https://mirros.ai/blog/harnesseval',
+  },
+  {
+    date: '2026-08',
+    title: 'Tibo 访谈：Codex 自进化与「去 Skill」',
+    milestone: true,
+    image: '/timeline/tibo-codex-interview.jpg',
+    description: '8 月下旬 Matthew Berman 专访 OpenAI Codex 负责人 Tibo Sottiaux：手动维护的 Skills / Memory / Sub-agent 只是中间形态，模型应自行决定调用什么；模型已在优化自己的推理基础设施——递归自我改进的早期形态。',
+    theme: 'harness',
+    type: 'event',
+    source: 'https://www.youtube.com/watch?v=4qjEgPojjzM',
+    links: [
+      { label: '量子位纪要', url: 'https://www.qbitai.com/2026/08/478996.html' },
+      { label: '网易完整纪要', url: 'https://www.163.com/dy/article/L561C9NN0556703U.html' },
+    ],
   },
 ]
 

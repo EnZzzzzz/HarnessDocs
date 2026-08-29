@@ -1,5 +1,6 @@
 import { ChevronDown } from 'lucide-react'
 import type { CSSProperties } from 'react'
+import { HarnessSection } from '@/components/harness/harness-section'
 import { TimelineSection } from '@/components/timeline/timeline-section'
 
 /**
@@ -119,6 +120,9 @@ export default function Page() {
 
     {/* 向下滚动进入时间线 */}
     <TimelineSection />
+
+    {/* 继续向下：Harness 六职责 */}
+    <HarnessSection />
     </>
   )
 }

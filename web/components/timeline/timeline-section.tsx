@@ -99,6 +99,24 @@ function MilestoneCard({ event, index }: { event: TimelineEvent; index: number }
       <p className="px-2.5 pt-3 text-sm leading-relaxed text-slate-600">
         {event.description}
       </p>
+      {/* 补充阅读 */}
+      {event.links && event.links.length > 0 && (
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 px-2.5 pt-2 text-xs text-slate-400">
+          <span>延伸：</span>
+          {event.links.map((link) => (
+            <a
+              key={link.url}
+              href={link.url}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-0.5 text-indigo-400 transition-colors hover:text-indigo-600"
+            >
+              {link.label}
+              <ExternalLink className="size-3" />
+            </a>
+          ))}
+        </div>
+      )}
     </article>
   )
 }
