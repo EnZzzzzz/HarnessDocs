@@ -18,6 +18,8 @@ export interface OutlineCardImage {
   caption?: string
   /** 出处链接 */
   source?: string
+  /** 插入到第几个正文段落之后（从 0 开始）；不填则展示在正文末尾的图集 */
+  afterParagraph?: number
 }
 
 export interface OutlineCard {
@@ -33,8 +35,8 @@ export interface OutlineCard {
     src: string
     alt: string
   }
-  /** 详情弹层：正文段落（有 detail 或 points 时卡片可点击展开） */
-  detail?: string
+  /** 详情弹层：正文段落（有 detail 或 points 时卡片可点击展开）；数组表示多个自然段 */
+  detail?: string | string[]
   /** 详情弹层：配图 */
   images?: OutlineCardImage[]
   /** 详情弹层：要点列表 */

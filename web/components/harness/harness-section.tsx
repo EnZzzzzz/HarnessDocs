@@ -41,7 +41,8 @@ export function HarnessSection() {
   const cardRefs = useRef<(HTMLButtonElement | null)[]>([])
   const expandProgress = useRef(0)
   const expandRaf = useRef(0)
-  const hasExpanded = useRef(false)
+  const animationTarget = useRef<0 | 1>(0)
+  const lastScrollY = useRef(0)
   const [active, setActive] = useState<HarnessPart | null>(null)
   // 详情弹层滚动条自动隐藏：仅在滚动中/悬停时显现
   const [scrolling, setScrolling] = useState(false)
@@ -110,21 +111,23 @@ export function HarnessSection() {
     })
   }, [])
 
-  const startAutoExpand = useCallback(() => {
-    if (hasExpanded.current) return
-    hasExpanded.current = true
+  const animateTo = useCallback((target: 0 | 1) => {
+    if (animationTarget.current === target) return
+    animationTarget.current = target
+    cancelAnimationFrame(expandRaf.current)
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      expandProgress.current = 1
-      renderCards(1)
+      expandProgress.current = target
+      renderCards(target)
       return
     }
 
     const from = expandProgress.current
     const startedAt = performance.now()
+    const duration = AUTO_EXPAND_MS * Math.abs(target - from)
     const animate = (now: number) => {
-      const elapsed = clamp01((now - startedAt) / AUTO_EXPAND_MS)
-      expandProgress.current = from + (1 - from) * elapsed
+      const elapsed = clamp01((now - startedAt) / Math.max(1, duration))
+      expandProgress.current = from + (target - from) * elapsed
       renderCards(expandProgress.current)
       if (elapsed < 1) expandRaf.current = requestAnimationFrame(animate)
     }
@@ -138,18 +141,24 @@ export function HarnessSection() {
       if (!track) return
       const rect = track.getBoundingClientRect()
       const triggerDistance = Math.min(72, window.innerHeight * 0.06)
+      const currentScrollY = window.scrollY
+      const delta = currentScrollY - lastScrollY.current
+      const sectionVisible = rect.bottom > 0 && rect.top < window.innerHeight
 
-      // 离开板块上方后允许下次进入时重新播放；进入后轻滚一下即自动播完。
+      // 进入后向下轻滚自动展开；板块可见时向上轻滚则从当前帧自动收起。
       if (rect.top > window.innerHeight * 0.2) {
         cancelAnimationFrame(expandRaf.current)
-        hasExpanded.current = false
+        animationTarget.current = 0
         expandProgress.current = 0
         renderCards(0)
-      } else if (rect.top <= -triggerDistance) {
-        startAutoExpand()
+      } else if (sectionVisible && delta < -2) {
+        animateTo(0)
+      } else if (rect.top <= -triggerDistance && delta > 2) {
+        animateTo(1)
       } else {
         renderCards(expandProgress.current)
       }
+      lastScrollY.current = currentScrollY
     }
     const schedule = () => {
       cancelAnimationFrame(scrollRaf)
@@ -164,7 +173,7 @@ export function HarnessSection() {
       window.removeEventListener('scroll', schedule)
       window.removeEventListener('resize', schedule)
     }
-  }, [renderCards, startAutoExpand])
+  }, [animateTo, renderCards])
 
   // 详情弹层：Esc 关闭 + 锁定背景滚动
   useEffect(() => {
@@ -209,7 +218,7 @@ export function HarnessSection() {
             </div>
             <div className="flex items-center gap-2 text-xs text-slate-400">
               <ChevronDown className="size-4 animate-bounce" />
-              轻轻滚动 · 自动展开六张卡片
+              上下轻滚 · 自动展开 / 收起
             </div>
           </div>
 

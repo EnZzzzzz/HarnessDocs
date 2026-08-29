@@ -2,7 +2,38 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { X } from 'lucide-react'
-import type { OutlineCard, OutlineSectionData } from './outline-data'
+import type {
+  OutlineCard,
+  OutlineCardImage,
+  OutlineSectionData,
+} from './outline-data'
+
+function DetailFigure({
+  image,
+  fallbackAlt,
+}: {
+  image: OutlineCardImage
+  fallbackAlt: string
+}) {
+  return (
+    <figure>
+      {/* eslint-disable-next-line @next/next/no-img-element -- 本地静态配图，无需优化管线 */}
+      <img
+        src={image.src}
+        alt={image.caption ?? fallbackAlt}
+        className="w-full rounded-xl border border-slate-100 bg-white"
+      />
+      {(image.caption || image.source) && (
+        <figcaption className="mt-1.5 text-[11px] leading-relaxed text-slate-400">
+          {image.caption}
+          {image.source && (
+            <span className="block font-mono break-all">{image.source}</span>
+          )}
+        </figcaption>
+      )}
+    </figure>
+  )
+}
 
 /**
  * 大纲章节通用组件：一页 = 顶部小胶囊 + 大标题 + 引言 + 卡片网格。
@@ -168,32 +199,48 @@ export function OutlineSection({ data }: { data: OutlineSectionData }) {
                   )}
                 </h3>
                 {active.detail && (
-                  <p className="mt-4 text-sm leading-relaxed text-slate-600">
-                    {active.detail}
-                  </p>
+                  <div className="mt-4 space-y-3">
+                    {(Array.isArray(active.detail)
+                      ? active.detail
+                      : [active.detail]
+                    ).map((paragraph, paragraphIndex) => {
+                      const inlineImages = active.images?.filter(
+                        (image) => image.afterParagraph === paragraphIndex,
+                      )
+
+                      return (
+                        <div
+                          key={paragraph.slice(0, 32)}
+                          className="space-y-3"
+                        >
+                          <p className="text-sm leading-relaxed text-slate-600">
+                            {paragraph}
+                          </p>
+                          {inlineImages?.map((image) => (
+                            <DetailFigure
+                              key={image.src}
+                              image={image}
+                              fallbackAlt={active.title}
+                            />
+                          ))}
+                        </div>
+                      )
+                    })}
+                  </div>
                 )}
-              {active.images && active.images.length > 0 && (
+              {active.images?.some(
+                (image) => image.afterParagraph === undefined,
+              ) && (
                 <div className="mt-5 space-y-4">
-                  {active.images.map((image) => (
-                    <figure key={image.src}>
-                      {/* eslint-disable-next-line @next/next/no-img-element -- 本地静态配图，无需优化管线 */}
-                      <img
-                        src={image.src}
-                        alt={image.caption ?? active.title}
-                        className="w-full rounded-xl border border-slate-100 bg-white"
+                  {active.images
+                    .filter((image) => image.afterParagraph === undefined)
+                    .map((image) => (
+                      <DetailFigure
+                        key={image.src}
+                        image={image}
+                        fallbackAlt={active.title}
                       />
-                      {(image.caption || image.source) && (
-                        <figcaption className="mt-1.5 text-[11px] leading-relaxed text-slate-400">
-                          {image.caption}
-                          {image.source && (
-                            <span className="block font-mono break-all">
-                              {image.source}
-                            </span>
-                          )}
-                        </figcaption>
-                      )}
-                    </figure>
-                  ))}
+                    ))}
                 </div>
               )}
               {active.points && active.points.length > 0 && (

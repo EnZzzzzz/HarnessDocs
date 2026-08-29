@@ -17,8 +17,11 @@ export const S09_GEN_VS_JUDGE: OutlineSectionData = {
       title: '生成 Harness',
       en: 'Generation Harness',
       tagline: '专注生成与工程可用性，极简工具，产出纯净训练数据',
-      detail:
-        '生成侧不太需要懂美学，它的职责是把东西做出来、做得工程上可用。保持极简模式——只挂必要的 tool——干扰更少，产出的轨迹也更干净，适合直接作为训练数据。',
+      detail: [
+        '问题：Anthropic 在长时程编码实验里观察到两个持续存在的失败模式——上下文填满后模型失去连贯、甚至因「上下文焦虑」提前收尾；以及更棘手的自评失真：让 agent 评价自己的作品，它总是自信地溢美，哪怕在人看来质量平庸。生成侧要稳定产出，先得把它从「评判自己」这件事里解放出来。',
+        '做法：generator 的职责被压到极窄——按 sprint 一次只从 spec 里领一个特性，固定 React/Vite/FastAPI 技术栈，用 git 管版本，与其他智能体全部通过文件交接；每个 sprint 结束只做一次自评就交给 QA，真正的判断外包给独立的 evaluator。生成侧不挂视觉工具、不背评分标准，只保留把东西做出来所必需的工具。',
+        '效果与演进：这种极简不是教条，而是可裁剪的基线——Opus 4.6 变强之后，作者把整个 sprint 分解结构删掉，generator 在 DAW 任务上一次连续构建 2 小时 7 分钟仍保持连贯。正如原文的原则：harness 里每个组件都编码了一个「模型自己做不到」的假设，假设过期就该删。干扰越少，生成轨迹越干净，也越适合直接沉淀为训练数据。',
+      ],
       images: [
         {
           src: '/outline/anthropic-generator-sprint.png',
@@ -59,8 +62,11 @@ export const S09_GEN_VS_JUDGE: OutlineSectionData = {
       title: '判别 Harness',
       en: 'Judgement Harness',
       tagline: '需要大量视觉工具，还要注入美学知识，比生成贵得多',
-      detail:
-        '判别侧要回答「做得好不好」，这在视觉场景里没有现成答案：需要截图、渲染、对比等一整套视觉工具来搜集证据，还需要把美学知识显式注入成可打分的标准。实践中评测器往往要单独校准、单独计费。',
+      detail: [
+        '问题：判别 Harness 要回答「做得好不好」，而这恰恰没有现成答案——主观任务里不存在等价于软件测试的二元检验，「丑」不会抛异常。HarnessEval 在评测侧遇到的是同一个矛盾：一套统一 rubric 覆盖得足够全，就会混入大量与当前案例无关的检查；为自动化而简化，又会漏掉真正依赖上下文、时序与因果的关键判断。',
+        '做法：两个实践给出同方向的答案——把「判断」变成「搜集证据的工作流」。Anthropic 的 evaluator 拿到 Playwright MCP，像真实用户一样点击运行中的应用、截图研究实现细节之后，才逐条对照标准打分；MirroS 的 HarnessEval 则把评测组织成 Plan–Route–Decompose–Verify 四个阶段：先理解案例再决定测什么，从技能库路由适用技能，把抽象判断拆成可验证的子问题交给 sub-agent 和诊断工具，主智能体审计证据充分性后才聚合评分。',
+        '效果：判别侧交付的不只是一个分数，而是一棵可追溯的证据树——测了什么、为什么测、哪个工具提供了哪条证据、证据如何支撑结论，全部可检查、可复现。代价同样实在：evaluator 实际操作页面而非给静态截图打分，单次完整运行可长达 4 小时，还要单独撰写标准、单独校准、单独计费。判别比生成贵，贵就贵在证据上。',
+      ],
       images: [
         {
           src: '/outline/anthropic-grading-criteria.png',
@@ -112,8 +118,11 @@ export const S09_GEN_VS_JUDGE: OutlineSectionData = {
       title: '设计师必须介入',
       en: 'Designer in the Loop',
       tagline: '判别的美学能力还无法完全自动化，人来定标准、做校准',
-      detail:
-        '判别 Harness 最难的部分不是工程，而是「什么算好」。现有实践里，评分标准由人撰写、用人的偏好校准、发现评分漂移后由人调 prompt——美学判断的源头仍然是设计师。',
+      detail: [
+        '问题：判别 Harness 最难的部分不是工程，而是「什么算好」。作者的原话是「开箱的 Claude 是个糟糕的 QA」：早期运行里，evaluator 明明发现了真问题，却会说服自己「这不是大事」然后照样放行；测试也流于表面，不碰边界情况，更隐蔽的 bug 就此漏网。模型自评的宽容倾向，不会因为换个角色就自动消失。',
+        '做法：人分两步介入。第一步是定标准：作者亲手写下四条可打分的标准——设计质量、原创性、工艺、功能——并刻意给设计与原创性更高权重，明确惩罚「白色卡片配紫色渐变」这类 AI 套路；第二步是校准：用带详细分数拆解的 few-shot 示例让 evaluator 对齐「我的偏好」，此后进入调优循环——读 evaluator 日志、找出与自己判断分歧的案例、改 QA prompt，如此反复数轮。',
+        '效果：校准后的 evaluator 评分漂移明显减少，判断与作者对齐，打回的 FAIL 能精确到文件行号与路由定义。但作者也诚实记录了天花板：小布局问题、不直觉的交互、深层嵌套功能里的 bug 仍会漏网，「还有更多可挖的验证空间」。换句话说，evaluator 可以被调教得可用，但美学判断的源头仍然是设计师——这也是判别 Harness 至今无法全自动化的原因。',
+      ],
       images: [
         {
           src: '/outline/anthropic-evaluator-calibration.png',
@@ -155,8 +164,12 @@ export const S09_GEN_VS_JUDGE: OutlineSectionData = {
       title: '实例：planner–generator–evaluator',
       en: 'GAN-inspired Trio',
       tagline: 'Anthropic 借鉴 GAN：生成与判别分离，让 Claude 连续数小时构建完整应用',
-      detail:
-        'Anthropic 2026-03 的工程博客给出了一套完整实例：planner 把一句话需求扩成产品 spec，generator 按 sprint 实现，evaluator 用 Playwright 实测并逐条打分，不达标就打回。单智能体跑 20 分钟、产出应用核心功能直接坏掉；三智能体跑 6 小时、成本贵 20 倍，但应用真的能玩。',
+      detail: [
+        '问题：此前 Anthropic 的长时程 coding harness 已经能跨会话保持连贯，但产出的应用有个共同毛病——看起来惊艳，真正去用却到处是 bug。根因是自评失真：做事的模型评判自己的作品，总会把坏成果当成品交付。作者要验证一个借鉴 GAN 的假设：把「做事的」和「评判的」分开，能不能让 Claude 在无人工干预下构建真正完整的应用。',
+        '做法：搭一套 planner–generator–evaluator 三智能体架构。planner 把 1-4 句话的需求扩成完整产品 spec；generator 按 sprint 逐个特性实现；关键是每个 sprint 动工前，generator 与 evaluator 先协商一份 sprint 契约——「做完长什么样、如何验证」——evaluator 随后用 Playwright 实测运行中的应用，逐条对照契约判分，任一项低于硬阈值就打回并附上可操作的反馈。契约细到什么程度？仅 Sprint 3 的关卡编辑器就有 27 条验收标准。',
+        '效果：对照实验是同一个「2D 复古游戏制作器」提示词。solo harness 跑 20 分钟、花 $9，产出的游戏实体出现在屏幕上却对输入毫无响应——核心玩法直接坏掉；三智能体 harness 跑 6 小时、花 $200，planner 把需求扩成 16 个特性、10 个 sprint，最终产物作者真的能操控角色玩起来。20 倍的成本，换来的是「能跑」与「不能跑」的质变。',
+        '演进：Opus 4.6 发布后作者重审了这套 harness——删掉 sprint 分解，evaluator 从逐 sprint 评分改为末尾单轮终检；V2 构建一个浏览器 DAW 只花 3 小时 50 分、$124.70，其中三轮 QA 合计仅约 25 分钟、$10 出头，仍抓到了「音频录制只是桩实现」这类真实缺口。结论是：evaluator 不是永久组件，任务超出模型可靠能力边界时才值得这笔开销——生成与判别的分离是个可调旋钮，而不是固定架构。',
+      ],
       images: [
         {
           src: '/outline/anthropic-harness-cost-table.png',
@@ -176,6 +189,13 @@ export const S09_GEN_VS_JUDGE: OutlineSectionData = {
           src: '/outline/anthropic-full-game-playable.png',
           caption:
             '三智能体 harness 产出的游戏：关卡、物理、调试信息齐全，作者真的能操控角色玩起来——evaluator 逐 sprint 打回修复的结果',
+          source:
+            'https://www.anthropic.com/engineering/harness-design-long-running-apps',
+        },
+        {
+          src: '/outline/anthropic-v2-cost-breakdown.png',
+          caption:
+            'V2 harness（Opus 4.6）构建浏览器 DAW 的分阶段成本表：纵向看 Build 与 QA 交替出现，QA 三轮各只花 6.8–9.6 分钟、$3–4，而构建轮次以小时计、$71 起步——判别侧按轮次计费、成本占比很小，却每轮都抓到真实缺口。这解释了为什么 evaluator 可以做成「按需启用」的可调组件',
           source:
             'https://www.anthropic.com/engineering/harness-design-long-running-apps',
         },
