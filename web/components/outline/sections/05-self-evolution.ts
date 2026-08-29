@@ -9,7 +9,7 @@ import type { OutlineSectionData } from '../outline-data'
 export const S05_SELF_EVOLUTION: OutlineSectionData = {
   id: 'self-evolution',
   kicker: '关键词 · 自进化',
-  title: 'Codex 的 AGI 方案',
+  title: 'Codex 产品负责人 Tibo：Harness 将走向哪里',
   intro:
     '在 2026 年 8 月的访谈中，Codex 负责人 Tibo Sottiaux 描述了一个会随用户自我进化的 Harness：底座通用、机制隐形，并且模型已经开始反过来优化运行自己的系统。',
   cards: [
