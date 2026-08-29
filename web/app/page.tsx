@@ -1,6 +1,8 @@
 import { ChevronDown } from 'lucide-react'
 import type { CSSProperties } from 'react'
 import { HarnessSection } from '@/components/harness/harness-section'
+import { OutlineSection } from '@/components/outline/outline-section'
+import { FEATURED_SECTION, OUTLINE_SECTIONS } from '@/components/outline/sections'
 import { TimelineSection } from '@/components/timeline/timeline-section'
 
 /**
@@ -121,8 +123,16 @@ export default function Page() {
     {/* 向下滚动进入时间线 */}
     <TimelineSection />
 
+    {/* 时间线后优先展示：Codex 的自进化方案 */}
+    <OutlineSection data={FEATURED_SECTION} />
+
     {/* 继续向下：Harness 六职责 */}
     <HarnessSection />
+
+    {/* 大纲章节：每章一页，统一卡片样式 */}
+    {OUTLINE_SECTIONS.map((section) => (
+      <OutlineSection key={section.id} data={section} />
+    ))}
     </>
   )
 }

@@ -1,6 +1,6 @@
 # Harness Docs 前端设计文档
 
-文档可视化站点的前端（`web/`），浅色梦幻风格单页应用：首页 Hero + AI 发展脉络时间线 + Harness 六职责解剖。
+文档可视化站点的前端（`web/`），浅色梦幻风格单页应用：首页 Hero + AI 发展脉络时间线 + Codex 自进化方案 + Harness 六职责解剖 + 其余大纲章节。
 
 ## 技术栈
 
@@ -64,18 +64,34 @@ rAF 节流监听滚动，每个 `data-fade-row` 按与视口中心的距离实�
 
 ### 结构
 
-- **左右布局**（`harness-section.tsx`，260vh sticky 轨道）：左侧常驻 Harness 介绍（徽章 +「Harness 是什么？」+「Agent = Model + Harness」说明）；右侧六张职责卡片初始**随机堆叠**（确定性伪随机偏移 + 旋转，手写在 `PILE` 数组），随滚动逐张**向下竖排平铺**成单列紧凑横版卡片（400×110），每张卡错开 0.05 进度起步，`easeInOutCubic` 快进慢出；展开完成（进度 0.9）后留 10% 轨道供点击
-- **卡片正面**：形式化符号徽章（I_obs / C / L / I_act / S / V）+ 中文名 + 英文名（同行）+ 一句话概括，悬停出现「查看详情 →」
-- **详情弹层**：点击卡片打开（backdrop blur 遮罩 + 白卡），含职责详解 + Codex / Claude Code 两个产品的真实实现要点（每条带源码路径或文档出处，数据来自 `docs/harness/` 下两份调研文档）；Esc / 点遮罩关闭，打开时锁定背景滚动
+- **上下布局**（`harness-section.tsx`，260vh sticky 轨道）：上方常驻 Harness 介绍（徽章 +「Harness 是什么？」+「Agent = Model + Harness」说明，`max-w-sm`）；六张职责卡片（200×300 竖版）初始**随机堆叠**在介绍文字右侧的空白区域（堆叠点按舞台实测尺寸计算，与标题垂直居中对齐），随滚动逐张**横向平铺**成一整行，每张卡错开 0.05 进度起步，`easeInOutCubic` 快进慢出；展开完成后可点击
+- **卡片正面**：形式化符号徽章（I_obs / C / L / I_act / S / V）+ 中文名 + 英文名 + 一句话概括，悬停出现「查看详情 →」
+- **详情弹层**：点击卡片打开（backdrop blur 遮罩 + 白卡），含职责详解 + Codex / Claude Code 两个产品的真实实现要点（每条带源码路径或文档出处，数据来自 `docs/harness/` 下两份调研文档）；Esc / 点遮罩关闭，打开时锁定背景滚动。弹层 `article` 必须带 `[transform:translateZ(0)]`——强制独立合成层，否则会被遮罩的 backdrop-blur 一并模糊；关闭按钮弱化（淡色 X）收进卡片头部常规布局，不浮动
 
 ### 实现要点
 
 - 滚动驱动用 rAF + getBoundingClientRect 直接写 DOM transform（不经过 React 重渲染），与 `scroll-focus.tsx` 同一套模式
-- 卡片位置在 JS 里按舞台实测尺寸计算（堆叠点 → 竖排位置插值），整体缩放适配窄屏；窄屏（<lg）退化为上下布局（介绍在上、卡片在下）；展开进度 < 0.85 时禁用 pointer-events 防误点
+- 卡片位置在 JS 里按舞台实测尺寸计算（堆叠点 → 横向整行位置插值），整体缩放保证整行放进舞台；展开进度 < 0.85 时禁用 pointer-events 防误点
+- 详情弹层滚动条自动隐藏：仅滚动中/悬停时显现（`--sb` 自定义属性 + data-scrolling）
 
 ### 数据（`harness-data.ts`）
 
 `HARNESS_PARTS`：六个职责各含 symbol / name / en / tagline（卡片正面）/ detail / implementations（弹层详情，按产品分块的实现要点，每条含 text + source 出处）。
+
+## 大纲章节段落（`components/outline/`）
+
+Harness 六职责之后继续向下滚动，按 `大纲.md` 的一级标题顺序共 11 页（`sections.ts` 汇总排序）。
+
+### 结构（`outline-section.tsx`）
+
+- 每章一页：`min-h-screen`，顶部小胶囊（kicker，大纲原标题）+ 大标题（渐变文字）+ 引言 + 卡片网格（≤2 张时两列，否则三列）
+- **卡片样式与 Harness 六职责一致**：白色半透明圆角卡 + 靛蓝徽章（01/02…）+ 标题 + 英文副标题 + 一句话概括；有 detail/points 的卡片可点击，悬停出现「查看详情 →」
+- **详情弹层**：复用 Harness 板块的弹层结构（含 translateZ(0) 合成层修复、弱化关闭按钮、自动隐藏细滚动条）
+
+### 数据（`outline-data.ts` + `sections/`）
+
+- `OutlineSectionData`：id / kicker / title（大标题）/ intro / cards；`OutlineCard`：badge / title / en / tagline / detail / points（每条含 text + source 出处）
+- 每章一个文件（`sections/01-…ts` 至 `11-…ts`），内容经核实：事实优先取自时间线事件卡片，其余按大纲标注的出处（Cordis 论文翻译、tibo 访谈纪要、Continual-Harness PDF、Anthropic/智谱/HarnessEval 原文、知识库 `design-harness/` 笔记）
 
 ## 动画规范
 

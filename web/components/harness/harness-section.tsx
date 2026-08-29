@@ -8,6 +8,7 @@ import { HARNESS_PARTS, type HarnessPart } from './harness-data'
 const CARD_W = 200
 const CARD_H = 300
 const GAP = 12
+const AUTO_EXPAND_MS = 1050
 
 /** 堆叠状态：确定性的伪随机散落（手写，避免每次渲染变化） */
 const PILE = [
@@ -38,6 +39,9 @@ export function HarnessSection() {
   const introRef = useRef<HTMLDivElement>(null)
   const titleRef = useRef<HTMLDivElement>(null)
   const cardRefs = useRef<(HTMLButtonElement | null)[]>([])
+  const expandProgress = useRef(0)
+  const expandRaf = useRef(0)
+  const hasExpanded = useRef(false)
   const [active, setActive] = useState<HarnessPart | null>(null)
   // 详情弹层滚动条自动隐藏：仅在滚动中/悬停时显现
   const [scrolling, setScrolling] = useState(false)
@@ -49,14 +53,10 @@ export function HarnessSection() {
     scrollTimer.current = setTimeout(() => setScrolling(false), 800)
   }, [])
 
-  const update = useCallback(() => {
+  const renderCards = useCallback((progress: number) => {
     const track = trackRef.current
     const stage = stageRef.current
     if (!track || !stage) return
-    const vh = window.innerHeight
-    const rect = track.getBoundingClientRect()
-    // 整个轨道上的滚动进度 0 → 1
-    const p = clamp01(-rect.top / Math.max(1, rect.height - vh))
 
     const W = stage.clientWidth
     const H = stage.clientHeight
@@ -94,7 +94,7 @@ export function HarnessSection() {
     cardRefs.current.forEach((el, i) => {
       if (!el) return
       // 每张卡错开一点起步，从左往右逐张铺开
-      const pi = easeInOutCubic(clamp01((p - 0.1 - i * 0.05) / 0.55))
+      const pi = easeInOutCubic(clamp01((progress - i * 0.055) / 0.725))
       const fx = (i - (cols - 1) / 2) * (CARD_W + GAP) * s
       const fy = 0
       const pile = PILE[i % PILE.length]
@@ -110,21 +110,61 @@ export function HarnessSection() {
     })
   }, [])
 
-  useEffect(() => {
-    let raf = 0
-    const schedule = () => {
-      cancelAnimationFrame(raf)
-      raf = requestAnimationFrame(update)
+  const startAutoExpand = useCallback(() => {
+    if (hasExpanded.current) return
+    hasExpanded.current = true
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      expandProgress.current = 1
+      renderCards(1)
+      return
     }
-    update()
+
+    const from = expandProgress.current
+    const startedAt = performance.now()
+    const animate = (now: number) => {
+      const elapsed = clamp01((now - startedAt) / AUTO_EXPAND_MS)
+      expandProgress.current = from + (1 - from) * elapsed
+      renderCards(expandProgress.current)
+      if (elapsed < 1) expandRaf.current = requestAnimationFrame(animate)
+    }
+    expandRaf.current = requestAnimationFrame(animate)
+  }, [renderCards])
+
+  useEffect(() => {
+    let scrollRaf = 0
+    const updateFromViewport = () => {
+      const track = trackRef.current
+      if (!track) return
+      const rect = track.getBoundingClientRect()
+      const triggerDistance = Math.min(72, window.innerHeight * 0.06)
+
+      // 离开板块上方后允许下次进入时重新播放；进入后轻滚一下即自动播完。
+      if (rect.top > window.innerHeight * 0.2) {
+        cancelAnimationFrame(expandRaf.current)
+        hasExpanded.current = false
+        expandProgress.current = 0
+        renderCards(0)
+      } else if (rect.top <= -triggerDistance) {
+        startAutoExpand()
+      } else {
+        renderCards(expandProgress.current)
+      }
+    }
+    const schedule = () => {
+      cancelAnimationFrame(scrollRaf)
+      scrollRaf = requestAnimationFrame(updateFromViewport)
+    }
+    updateFromViewport()
     window.addEventListener('scroll', schedule, { passive: true })
     window.addEventListener('resize', schedule)
     return () => {
-      cancelAnimationFrame(raf)
+      cancelAnimationFrame(scrollRaf)
+      cancelAnimationFrame(expandRaf.current)
       window.removeEventListener('scroll', schedule)
       window.removeEventListener('resize', schedule)
     }
-  }, [update])
+  }, [renderCards, startAutoExpand])
 
   // 详情弹层：Esc 关闭 + 锁定背景滚动
   useEffect(() => {
@@ -147,7 +187,7 @@ export function HarnessSection() {
   return (
     <div id="harness" className="mx-auto w-full max-w-6xl scroll-mt-4 px-6">
       {/* 堆叠 → 横向平铺的滚动轨道 */}
-      <div ref={trackRef} className="relative h-[260vh]">
+      <div ref={trackRef} className="relative h-[175vh]">
         <div className="sticky top-0 flex h-screen flex-col justify-center gap-8">
           {/* 上：常驻的 Harness 介绍（卡片堆未展开时停在它右侧） */}
           <div
@@ -169,7 +209,7 @@ export function HarnessSection() {
             </div>
             <div className="flex items-center gap-2 text-xs text-slate-400">
               <ChevronDown className="size-4 animate-bounce" />
-              继续滚动 · 展开六张卡片
+              轻轻滚动 · 自动展开六张卡片
             </div>
           </div>
 
