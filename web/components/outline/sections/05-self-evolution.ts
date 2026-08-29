@@ -11,7 +11,7 @@ export const S05_SELF_EVOLUTION: OutlineSectionData = {
   kicker: '关键词 · 自进化',
   title: 'Codex 产品负责人 Tibo：Harness 将走向哪里',
   intro:
-    '在 2026 年 8 月的访谈中，Codex 负责人 Tibo Sottiaux 描述了一个会随用户自我进化的 Harness：底座通用、机制隐形，并且模型已经开始反过来优化运行自己的系统。',
+    '2026 年 8 月，鲜少公开露面的 Codex 负责人 Tibo Sottiaux 罕见地参加了一档播客，系统谈论 Harness 的未来：底座将走向通用、机制逐渐隐形，并且模型已经开始反过来优化运行自己的系统。',
   cards: [
     {
       badge: '01',
