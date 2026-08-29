@@ -64,19 +64,18 @@ rAF 节流监听滚动，每个 `data-fade-row` 按与视口中心的距离实�
 
 ### 结构
 
-- **引子**：标题「Harness 是什么？」+「Agent = Model + Harness」说明
-- **滚动轨道**（`harness-section.tsx`，260vh sticky）：六张职责卡片初始**随机堆叠**在画面中心（确定性伪随机偏移 + 旋转，手写在 `PILE` 数组）；随滚动逐张**展开平铺**成 3×2 网格（窄屏 2×3），每张卡错开 0.05 进度起步，`easeInOutCubic` 快进慢出；展开完成（进度 0.9）后留 10% 轨道供点击
-- **卡片正面**：形式化符号徽章（I_obs / C / L / I_act / S / V）+ 中文名 + 英文名 + 一句话概括，悬停出现「查看详情 →」
-- **详情弹层**：点击卡片打开（backdrop blur 遮罩 + 白卡），含职责详解与代表性实践（OpenAI / Anthropic / Stripe / Carlini 案例）；Esc / 点遮罩关闭，打开时锁定背景滚动
+- **左右布局**（`harness-section.tsx`，260vh sticky 轨道）：左侧常驻 Harness 介绍（徽章 +「Harness 是什么？」+「Agent = Model + Harness」说明）；右侧六张职责卡片初始**随机堆叠**（确定性伪随机偏移 + 旋转，手写在 `PILE` 数组），随滚动逐张**向下竖排平铺**成单列紧凑横版卡片（400×110），每张卡错开 0.05 进度起步，`easeInOutCubic` 快进慢出；展开完成（进度 0.9）后留 10% 轨道供点击
+- **卡片正面**：形式化符号徽章（I_obs / C / L / I_act / S / V）+ 中文名 + 英文名（同行）+ 一句话概括，悬停出现「查看详情 →」
+- **详情弹层**：点击卡片打开（backdrop blur 遮罩 + 白卡），含职责详解 + Codex / Claude Code 两个产品的真实实现要点（每条带源码路径或文档出处，数据来自 `docs/harness/` 下两份调研文档）；Esc / 点遮罩关闭，打开时锁定背景滚动
 
 ### 实现要点
 
 - 滚动驱动用 rAF + getBoundingClientRect 直接写 DOM transform（不经过 React 重渲染），与 `scroll-focus.tsx` 同一套模式
-- 卡片位置在 JS 里按舞台实测尺寸计算（堆叠点 → 网格点插值），整体缩放适配窄屏；展开进度 < 0.85 时禁用 pointer-events 防误点
+- 卡片位置在 JS 里按舞台实测尺寸计算（堆叠点 → 竖排位置插值），整体缩放适配窄屏；窄屏（<lg）退化为上下布局（介绍在上、卡片在下）；展开进度 < 0.85 时禁用 pointer-events 防误点
 
 ### 数据（`harness-data.ts`）
 
-`HARNESS_PARTS`：六个职责各含 symbol / name / en / tagline（卡片正面）/ detail / examples（弹层详情）。
+`HARNESS_PARTS`：六个职责各含 symbol / name / en / tagline（卡片正面）/ detail / implementations（弹层详情，按产品分块的实现要点，每条含 text + source 出处）。
 
 ## 动画规范
 

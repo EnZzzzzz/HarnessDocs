@@ -465,7 +465,7 @@ export const EVENTS: TimelineEvent[] = [
     description: '8 月 18 日，MirroS 联合清北、Berkeley、MIT、NVIDIA 等 15 家机构发布：Route–Decompose–Verify 评测工作流加可追溯证据树，benchmark 从离线计算器变成可执行的评测系统。',
     theme: 'harness',
     type: 'open-source',
-    source: 'https://mirros.ai/blog/harnesseval',
+    source: 'https://mp.weixin.qq.com/s/T_fBh7p82OHaKw75oq-5cQ',
   },
   {
     date: '2026-08',
