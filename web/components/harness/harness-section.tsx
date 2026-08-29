@@ -10,6 +10,114 @@ const CARD_H = 300
 const GAP = 12
 const AUTO_EXPAND_MS = 1050
 
+const HARNESS_ILLUSTRATIONS: Record<
+  string,
+  {
+    concept: { src: string; alt: string }
+    mechanism: { src: string; alt: string }
+    evolution: { src: string; alt: string }
+  }
+> = {
+  I_obs: {
+    concept: {
+      src: '/harness/observation-concept.png',
+      alt: '观察接口把终端、代码、网页与性能信号过滤成模型可消费观察的手绘插画',
+    },
+    mechanism: {
+      src: '/harness/observation-mechanism.png',
+      alt: '长日志经过首尾保留与按需拉取机制提取有效信号的手绘插画',
+    },
+    evolution: {
+      src: '/harness/observation-evolution.png',
+      alt: 'Agent 为自己接入浏览器视觉通道并开始检查页面的手绘插画',
+    },
+  },
+  C: {
+    concept: {
+      src: '/harness/context-concept.png',
+      alt: 'Harness 从记忆、技能与文件档案中选择少量信息放入有限上下文的手绘插画',
+    },
+    mechanism: {
+      src: '/harness/context-mechanism.png',
+      alt: '对话历史经过分级压缩且技能按需展开的手绘插画',
+    },
+    evolution: {
+      src: '/harness/context-evolution.png',
+      alt: '模型在活动上下文与外置档案之间自主调度记忆的手绘插画',
+    },
+  },
+  L: {
+    concept: {
+      src: '/harness/control-loop-concept.png',
+      alt: '观察、推理、行动与反馈围绕模型持续循环的手绘插画',
+    },
+    mechanism: {
+      src: '/harness/control-loop-mechanism.png',
+      alt: '确定性流水线与模型决策分支共同编排任务的手绘插画',
+    },
+    evolution: {
+      src: '/harness/control-loop-evolution.png',
+      alt: '新会话接力推进任务并由异步复盘支线改进循环的手绘插画',
+    },
+  },
+  I_act: {
+    concept: {
+      src: '/harness/action-concept.png',
+      alt: '模型意图经过 Harness 转换成终端、文件、浏览器与外部工具动作的手绘插画',
+    },
+    mechanism: {
+      src: '/harness/action-mechanism.png',
+      alt: '结构化动作依次经过校验、权限与沙箱后执行并反馈错误的手绘插画',
+    },
+    evolution: {
+      src: '/harness/action-evolution.png',
+      alt: 'Agent 现场制造、测试并安装新插件以扩展动作集的手绘插画',
+    },
+  },
+  S: {
+    concept: {
+      src: '/harness/state-concept.png',
+      alt: '模型上下文清空后仍从外置状态仓库恢复任务的手绘插画',
+    },
+    mechanism: {
+      src: '/harness/state-mechanism.png',
+      alt: '不可变事件轨迹支持恢复、分叉与回退且保留原始历史的手绘插画',
+    },
+    evolution: {
+      src: '/harness/state-evolution.png',
+      alt: '失忆的新 Agent 通过结构化交接文件无缝继续任务的手绘插画',
+    },
+  },
+  V: {
+    concept: {
+      src: '/harness/verification-concept.png',
+      alt: 'Agent 动作通过多层安全闸门并接受独立验证的手绘插画',
+    },
+    mechanism: {
+      src: '/harness/verification-mechanism.png',
+      alt: '独立 evaluator 使用测试、代码检查与浏览器证据审查生成结果的手绘插画',
+    },
+    evolution: {
+      src: '/harness/verification-evolution.png',
+      alt: '设计师用样例校准 evaluator 并逐步形成可追溯证据树的手绘插画',
+    },
+  },
+}
+
+function DetailIllustration({ image }: { image: { src: string; alt: string } }) {
+  return (
+    <figure className="mt-5 overflow-hidden rounded-2xl border border-slate-100 bg-slate-50">
+      <img
+        src={image.src}
+        alt={image.alt}
+        loading="lazy"
+        decoding="async"
+        className="aspect-3/2 w-full object-cover"
+      />
+    </figure>
+  )
+}
+
 /** 堆叠状态：确定性的伪随机散落（手写，避免每次渲染变化） */
 const PILE = [
   { x: -14, y: -10, r: -8 },
@@ -44,6 +152,7 @@ export function HarnessSection() {
   const animationTarget = useRef<0 | 1>(0)
   const lastScrollY = useRef(0)
   const [active, setActive] = useState<HarnessPart | null>(null)
+  const activeIllustrations = active ? HARNESS_ILLUSTRATIONS[active.symbol] : null
   // 详情弹层滚动条自动隐藏：仅在滚动中/悬停时显现
   const [scrolling, setScrolling] = useState(false)
   const scrollTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -274,7 +383,7 @@ export function HarnessSection() {
           <div className="absolute inset-0 bg-slate-900/30 backdrop-blur-sm" />
           {/* translateZ(0)：强制弹层独立合成层，避免被遮罩的 backdrop-blur 一并模糊 */}
           <article
-            className="flex max-h-[85vh] w-full max-w-xl [transform:translateZ(0)] flex-col rounded-3xl border border-white bg-white p-8 shadow-2xl shadow-indigo-500/20"
+            className="flex max-h-[85vh] w-full max-w-3xl [transform:translateZ(0)] flex-col rounded-3xl border border-white bg-white p-8 shadow-2xl shadow-indigo-500/20"
             onClick={(e) => e.stopPropagation()}
           >
             {/* 卡片头部：符号徽章 + 弱化关闭按钮（常规布局，不浮动） */}
@@ -301,15 +410,27 @@ export function HarnessSection() {
               {active.name}
               <span className="ml-2.5 text-sm font-medium text-slate-400">{active.en}</span>
             </h3>
-            <p className="mt-4 text-sm leading-relaxed text-slate-600">{active.detail}</p>
+            {activeIllustrations && <DetailIllustration image={activeIllustrations.concept} />}
+            {active.detail.map((paragraph) => (
+              <p
+                key={paragraph.slice(0, 24)}
+                className="mt-4 text-sm leading-relaxed text-slate-600"
+              >
+                {paragraph}
+              </p>
+            ))}
             <p className="mt-6 text-xs font-semibold tracking-wider text-slate-400">
               真实实现 · 来自 Codex / Claude Code 源码调研
             </p>
+            {activeIllustrations && <DetailIllustration image={activeIllustrations.mechanism} />}
             {active.implementations.map((impl) => (
               <div key={impl.product} className="mt-4">
                 <span className="rounded-md bg-indigo-50 px-1.5 py-0.5 text-[11px] font-semibold text-indigo-500">
                   {impl.product}
                 </span>
+                <p className="mt-2.5 text-sm leading-relaxed text-slate-600">
+                  {impl.intro}
+                </p>
                 <ul className="mt-2.5 space-y-2.5">
                   {impl.points.map((point) => (
                     <li
@@ -328,6 +449,25 @@ export function HarnessSection() {
                     </li>
                   ))}
                 </ul>
+              </div>
+            ))}
+            <p className="mt-6 text-xs font-semibold tracking-wider text-slate-400">
+              自进化实践 · 真实场景中这一层如何被改写
+            </p>
+            {activeIllustrations && <DetailIllustration image={activeIllustrations.evolution} />}
+            {active.evolution.map((evo) => (
+              <div key={evo.name} className="mt-4">
+                <span className="rounded-md bg-emerald-50 px-1.5 py-0.5 text-[11px] font-semibold text-emerald-600">
+                  {evo.name}
+                </span>
+                <p className="mt-2.5 text-sm leading-relaxed text-slate-500">
+                  {evo.text}
+                  {evo.source && (
+                    <span className="mt-0.5 block font-mono text-[11px] break-all text-slate-400">
+                      {evo.source}
+                    </span>
+                  )}
+                </p>
               </div>
             ))}
             </div>
