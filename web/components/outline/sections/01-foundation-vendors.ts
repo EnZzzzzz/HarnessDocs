@@ -134,7 +134,7 @@ export const S01_FOUNDATION: OutlineSectionData = {
     },
     {
       badge: '03',
-      title: 'slime：训练循环不动，环境像插件一样扩展',
+      title: 'GLM slime：训练循环不动，环境像插件一样扩展',
       en: 'One Training Loop, Many Environments',
       tagline: '从 GLM-5.2 到 GLM-5.3：用同一套异步后训练内核承载不断扩张的长周期任务',
       detail: [
