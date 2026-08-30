@@ -2,6 +2,7 @@ import { ChevronDown } from 'lucide-react'
 import type { CSSProperties } from 'react'
 import { HarnessDutySection } from '@/components/harness/harness-duty-section'
 import { HarnessSection } from '@/components/harness/harness-section'
+import { SelfEvolutionSections } from '@/components/harness/self-evolution-sections'
 import { SkillAssetSection } from '@/components/harness/skill-asset-section'
 import { SkillQuestionsSection } from '@/components/harness/skill-questions-section'
 import { SkillTraitsSection } from '@/components/harness/skill-traits-section'
@@ -152,6 +153,9 @@ export default function Page() {
 
     {/* 延伸观点：未来真正值钱的是 Skill，不是 Agent */}
     <SkillAssetSection />
+
+    {/* Agent 自进化：四个章节，每章一页，右侧预留配图区域 */}
+    <SelfEvolutionSections />
 
     {/* 大纲章节：每章一页，统一卡片样式 */}
     {OUTLINE_SECTIONS.map((section) => (
