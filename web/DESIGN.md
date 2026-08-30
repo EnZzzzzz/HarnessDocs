@@ -97,8 +97,8 @@ rAF 节流监听滚动，每个 `data-fade-row` 按与视口中心的距离实�
 
 「Skill 即资产」之后插入，内容来自 `docs/agent自进化-字幕整理.md`（抖音视频字幕），共 4 页：`#se-what`（自进化是什么）/ `#se-vs-reflection`（Reflection vs 自进化）/ `#se-layers`（进化的五层）/ `#se-flywheel`（经验飞轮）。
 
-- 布局与「Skill 即资产」一致：左侧 eyebrow + 渐变标题 + 引言 + 编号要点卡片，右侧 `aspect-[3/2]` 区域
-- 右侧目前是**虚线占位框**（「配图预留区域」），后续替换为 `<Image>` 配图即可
+- 布局：标题区（eyebrow + 渐变标题 + 引言）通栏横跨整页（`md:col-span-2`），其下两列——左侧编号要点卡片、右侧 3:2 配图（`public/harness/`，含图注），两列互相垂直居中（`md:self-center`）
+- 同样的通栏布局也应用于「Skill 即资产」页（`skill-asset-section.tsx`），保证两类章节版式统一
 
 ## 章节配图：编辑部手绘风
 

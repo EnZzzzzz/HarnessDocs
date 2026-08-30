@@ -167,7 +167,7 @@ export function SelfEvolutionSections() {
           className="mx-auto w-full max-w-6xl scroll-mt-24 px-6 py-24 sm:py-32"
         >
           <div className="grid items-start gap-y-8 md:grid-cols-2 md:gap-x-10 lg:gap-x-16">
-            <header className="md:col-start-1 md:row-start-1">
+            <header className="md:col-span-2">
               <p className="text-xs font-semibold tracking-[0.18em] text-indigo-600 uppercase">
                 {section.eyebrow}
               </p>
@@ -182,7 +182,7 @@ export function SelfEvolutionSections() {
               </p>
             </header>
 
-            <ol className="space-y-3 md:col-start-1 md:row-start-2 md:self-center">
+            <ol className="space-y-3 md:col-start-1 md:self-center">
               {section.points.map((point, i) => (
                 <li
                   key={point.en}
@@ -204,7 +204,7 @@ export function SelfEvolutionSections() {
               ))}
             </ol>
 
-            <figure className="md:col-start-2 md:row-span-2 md:row-start-1 md:self-center">
+            <figure className="md:col-start-2 md:self-center">
               <div className="overflow-hidden rounded-3xl">
                 <Image
                   src={section.image.src}
