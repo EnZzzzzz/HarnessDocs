@@ -8,7 +8,7 @@ import { SkillQuestionsSection } from '@/components/harness/skill-questions-sect
 import { SkillTraitsSection } from '@/components/harness/skill-traits-section'
 import { SkillVsPromptSection } from '@/components/harness/skill-vs-prompt-section'
 import { OutlineSection } from '@/components/outline/outline-section'
-import { FEATURED_SECTION, OUTLINE_SECTIONS } from '@/components/outline/sections'
+import { FEATURED_SECTION } from '@/components/outline/sections'
 import { TimelineSection } from '@/components/timeline/timeline-section'
 import { TocRail } from '@/components/toc-rail'
 
@@ -156,11 +156,6 @@ export default function Page() {
 
     {/* Agent 自进化：四个章节，每章一页，右侧预留配图区域 */}
     <SelfEvolutionSections />
-
-    {/* 大纲章节：每章一页，统一卡片样式 */}
-    {OUTLINE_SECTIONS.map((section) => (
-      <OutlineSection key={section.id} data={section} />
-    ))}
 
     {/* 页面最左侧的整体目录条：点击快速跳转各章节 */}
     <TocRail />

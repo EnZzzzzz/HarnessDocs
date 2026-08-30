@@ -1,6 +1,6 @@
 # Harness Docs 前端设计文档
 
-文档可视化站点的前端（`web/`），浅色梦幻风格单页应用：首页 Hero + AI 发展脉络时间线 + Codex 自进化方案 + Harness 六职责解剖 + 其余大纲章节。
+文档可视化站点的前端（`web/`），浅色梦幻风格单页应用：首页 Hero + AI 发展脉络时间线 + Codex 自进化方案 + Harness 六职责解剖 + Skill 即资产 + Agent 自进化四章节。
 
 ## 技术栈
 
@@ -80,7 +80,7 @@ rAF 节流监听滚动，每个 `data-fade-row` 按与视口中心的距离实�
 
 ## 大纲章节段落（`components/outline/`）
 
-Harness 六职责之后继续向下滚动，按 `大纲.md` 的一级标题顺序共 11 页（`sections.ts` 汇总排序）。
+原按 `大纲.md` 一级标题共 11 页；按需求目前仅保留 1 页核心章节（Codex 自进化方案，`sections/05-self-evolution.ts`），由 `sections.ts` 以 `FEATURED_SECTION` 导出，在时间线之后优先展示，其余章节及其数据文件已移除。
 
 ### 结构（`outline-section.tsx`）
 
@@ -91,7 +91,14 @@ Harness 六职责之后继续向下滚动，按 `大纲.md` 的一级标题顺�
 ### 数据（`outline-data.ts` + `sections/`）
 
 - `OutlineSectionData`：id / kicker / title（大标题）/ intro / cards；`OutlineCard`：badge / title / en / tagline / detail / points（每条含 text + source 出处）
-- 每章一个文件（`sections/01-…ts` 至 `11-…ts`），内容经核实：事实优先取自时间线事件卡片，其余按大纲标注的出处（Cordis 论文翻译、tibo 访谈纪要、Continual-Harness PDF、Anthropic/智谱/HarnessEval 原文、知识库 `design-harness/` 笔记）
+- 每章一个文件（现仅存 `sections/05-self-evolution.ts`），内容经核实：事实优先取自时间线事件卡片，其余按大纲标注的出处（Cordis 论文翻译、tibo 访谈纪要、Continual-Harness PDF、Anthropic/智谱/HarnessEval 原文、知识库 `design-harness/` 笔记）
+
+## Agent 自进化四章节（`components/harness/self-evolution-sections.tsx`）
+
+「Skill 即资产」之后插入，内容来自 `docs/agent自进化-字幕整理.md`（抖音视频字幕），共 4 页：`#se-what`（自进化是什么）/ `#se-vs-reflection`（Reflection vs 自进化）/ `#se-layers`（进化的五层）/ `#se-flywheel`（经验飞轮）。
+
+- 布局与「Skill 即资产」一致：左侧 eyebrow + 渐变标题 + 引言 + 编号要点卡片，右侧 `aspect-[3/2]` 区域
+- 右侧目前是**虚线占位框**（「配图预留区域」），后续替换为 `<Image>` 配图即可
 
 ## 章节配图：编辑部手绘风
 

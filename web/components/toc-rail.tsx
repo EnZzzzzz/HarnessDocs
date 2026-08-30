@@ -22,16 +22,6 @@ const TOC_ITEMS = [
   { id: 'se-vs-reflection', label: 'Reflection vs 自进化' },
   { id: 'se-layers', label: '进化的五层' },
   { id: 'se-flywheel', label: '经验飞轮' },
-  { id: 'foundation-vendors', label: '基模厂商' },
-  { id: 'b-end-vendors', label: 'B 端厂商' },
-  { id: 'vscode-limits', label: 'VS Code 局限' },
-  { id: 'spatiotemporal', label: '时空可组合性' },
-  { id: 'hermes-loop', label: '经验式自进化' },
-  { id: 'plugin-functions', label: 'Function 自进化' },
-  { id: 'design-harness', label: '让 Agent 在做决策时遵循同一种的专家标准' },
-  { id: 'gen-vs-judge', label: '生成与判别' },
-  { id: 'key-outputs', label: '关键产物' },
-  { id: 'delivery-scenarios', label: '交付场景' },
 ] as const
 
 /** 程序坞放大参数：影响半径与最大放大倍数 */
