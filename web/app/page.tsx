@@ -2,6 +2,7 @@ import { ChevronDown } from 'lucide-react'
 import type { CSSProperties } from 'react'
 import { HarnessDutySection } from '@/components/harness/harness-duty-section'
 import { HarnessSection } from '@/components/harness/harness-section'
+import { SkillAssetSection } from '@/components/harness/skill-asset-section'
 import { SkillQuestionsSection } from '@/components/harness/skill-questions-section'
 import { SkillTraitsSection } from '@/components/harness/skill-traits-section'
 import { SkillVsPromptSection } from '@/components/harness/skill-vs-prompt-section'
@@ -148,6 +149,9 @@ export default function Page() {
 
     {/* 再给出答案的骨架：Harness 六职责 */}
     <HarnessSection />
+
+    {/* 延伸观点：未来真正值钱的是 Skill，不是 Agent */}
+    <SkillAssetSection />
 
     {/* 大纲章节：每章一页，统一卡片样式 */}
     {OUTLINE_SECTIONS.map((section) => (

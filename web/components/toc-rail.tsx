@@ -17,6 +17,7 @@ const TOC_ITEMS = [
   { id: 'skill-traits', label: 'Skill 特性' },
   { id: 'skill-vs-prompt', label: 'Skill vs Prompt' },
   { id: 'harness', label: '四层架构' },
+  { id: 'skill-asset', label: 'Skill 即资产' },
   { id: 'foundation-vendors', label: '基模厂商' },
   { id: 'b-end-vendors', label: 'B 端厂商' },
   { id: 'vscode-limits', label: 'VS Code 局限' },
