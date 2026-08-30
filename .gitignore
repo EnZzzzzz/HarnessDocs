@@ -1,3 +1,5 @@
 .DS_Store
 # symlink, not tracked
 opende-design
+# 下载的视频与字幕缓存（video-subtitle-extract skill）
+.cache/

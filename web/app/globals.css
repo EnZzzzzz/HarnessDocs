@@ -240,3 +240,49 @@
   animation: chip-float 6s ease-in-out infinite;
   animation-delay: var(--fd, 1.6s);
 }
+
+/* ---------------------------------------------------------------------------
+ * Harness 四层架构入场：左侧卡片自上而下依次从屏幕左侧滑入，配图从右往左滑入。
+ * 初始隐藏；section 进入视口后由 JS 挂上 .harness-inview 触发，只播一次。
+ * ------------------------------------------------------------------------- */
+
+@keyframes harness-card-in {
+  from {
+    opacity: 0;
+    transform: translateX(-48px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes harness-figure-in {
+  from {
+    opacity: 0;
+    transform: translateX(64px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+  }
+}
+
+.harness-card,
+.harness-figure {
+  opacity: 0;
+}
+
+.harness-inview .harness-card {
+  animation: harness-card-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: var(--d, 0s);
+}
+
+.harness-inview .harness-figure {
+  animation: harness-figure-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: var(--d, 0.3s);
+}

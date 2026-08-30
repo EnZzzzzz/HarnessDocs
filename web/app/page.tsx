@@ -1,9 +1,14 @@
 import { ChevronDown } from 'lucide-react'
 import type { CSSProperties } from 'react'
+import { HarnessDutySection } from '@/components/harness/harness-duty-section'
 import { HarnessSection } from '@/components/harness/harness-section'
+import { SkillQuestionsSection } from '@/components/harness/skill-questions-section'
+import { SkillTraitsSection } from '@/components/harness/skill-traits-section'
+import { SkillVsPromptSection } from '@/components/harness/skill-vs-prompt-section'
 import { OutlineSection } from '@/components/outline/outline-section'
 import { FEATURED_SECTION, OUTLINE_SECTIONS } from '@/components/outline/sections'
 import { TimelineSection } from '@/components/timeline/timeline-section'
+import { TocRail } from '@/components/toc-rail'
 
 /**
  * 右侧 Harness 图标阵列：真实 logo，像随手一撒一样随机散落在区域内。
@@ -31,7 +36,10 @@ const ORBIT_SIZE = 560
 export default function Page() {
   return (
     <>
-      <section className="relative mx-auto flex min-h-[calc(100svh-130px)] w-full max-w-6xl flex-1 flex-col items-center gap-14 px-6 pt-10 pb-16 lg:flex-row lg:items-center lg:gap-8 lg:pt-4">
+      <section
+        id="overview"
+        className="relative mx-auto flex min-h-[calc(100svh-130px)] w-full max-w-6xl flex-1 flex-col items-center gap-14 px-6 pt-10 pb-16 lg:flex-row lg:items-center lg:gap-8 lg:pt-4"
+      >
         {/* 左：大标题，从左向右入场 */}
         <div className="flex max-w-xl flex-col items-start gap-7 lg:flex-1">
         <p
@@ -126,13 +134,28 @@ export default function Page() {
     {/* 时间线后优先展示：Codex 的自进化方案 */}
     <OutlineSection data={FEATURED_SECTION} />
 
-    {/* 继续向下：Harness 六职责 */}
+    {/* 继续向下：先抛出 Harness × Skill 的关系之问 */}
+    <SkillQuestionsSection />
+
+    {/* 回答第一问：Harness 的职责（Agent 闭环） */}
+    <HarnessDutySection />
+
+    {/* 接着回答：Skill 带来什么——专业性与一致性 */}
+    <SkillTraitsSection />
+
+    {/* 澄清常见误解：Skill 和 Prompt 的区别 */}
+    <SkillVsPromptSection />
+
+    {/* 再给出答案的骨架：Harness 六职责 */}
     <HarnessSection />
 
     {/* 大纲章节：每章一页，统一卡片样式 */}
     {OUTLINE_SECTIONS.map((section) => (
       <OutlineSection key={section.id} data={section} />
     ))}
+
+    {/* 页面最左侧的整体目录条：点击快速跳转各章节 */}
+    <TocRail />
     </>
   )
 }
