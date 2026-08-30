@@ -21,6 +21,8 @@ const TOC_ITEMS = [
   { id: 'se-what', label: '自进化是什么' },
   { id: 'se-vs-reflection', label: 'Reflection vs 自进化' },
   { id: 'se-layers', label: '进化的五层' },
+  { id: 'se-hermes', label: 'Hermes 实例' },
+  { id: 'cordis', label: 'Cordis 时空可组合' },
   { id: 'se-flywheel', label: '经验飞轮' },
 ] as const
 

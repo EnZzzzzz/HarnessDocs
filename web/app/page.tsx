@@ -1,8 +1,9 @@
 import { ChevronDown } from 'lucide-react'
 import type { CSSProperties } from 'react'
+import { CordisSection } from '@/components/harness/cordis-section'
 import { HarnessDutySection } from '@/components/harness/harness-duty-section'
 import { HarnessSection } from '@/components/harness/harness-section'
-import { SelfEvolutionSections } from '@/components/harness/self-evolution-sections'
+import { SelfEvolutionFlywheelSection, SelfEvolutionSections } from '@/components/harness/self-evolution-sections'
 import { SkillAssetSection } from '@/components/harness/skill-asset-section'
 import { SkillQuestionsSection } from '@/components/harness/skill-questions-section'
 import { SkillTraitsSection } from '@/components/harness/skill-traits-section'
@@ -156,6 +157,12 @@ export default function Page() {
 
     {/* Agent 自进化：四个章节，每章一页，右侧预留配图区域 */}
     <SelfEvolutionSections />
+
+    {/* 最后一页：Cordis 时空可组合性编程范式（DeepSeek Harness 理论基础） */}
+    <CordisSection />
+
+    {/* 收尾：经验飞轮——越工作越聪明的 Agent */}
+    <SelfEvolutionFlywheelSection />
 
     {/* 页面最左侧的整体目录条：点击快速跳转各章节 */}
     <TocRail />

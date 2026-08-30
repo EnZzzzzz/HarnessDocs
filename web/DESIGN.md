@@ -93,12 +93,16 @@ rAF 节流监听滚动，每个 `data-fade-row` 按与视口中心的距离实�
 - `OutlineSectionData`：id / kicker / title（大标题）/ intro / cards；`OutlineCard`：badge / title / en / tagline / detail / points（每条含 text + source 出处）
 - 每章一个文件（现仅存 `sections/05-self-evolution.ts`），内容经核实：事实优先取自时间线事件卡片，其余按大纲标注的出处（Cordis 论文翻译、tibo 访谈纪要、Continual-Harness PDF、Anthropic/智谱/HarnessEval 原文、知识库 `design-harness/` 笔记）
 
-## Agent 自进化四章节（`components/harness/self-evolution-sections.tsx`）
+## Agent 自进化章节（`components/harness/self-evolution-sections.tsx`）
 
-「Skill 即资产」之后插入，内容来自 `docs/agent自进化-字幕整理.md`（抖音视频字幕），共 4 页：`#se-what`（自进化是什么）/ `#se-vs-reflection`（Reflection vs 自进化）/ `#se-layers`（进化的五层）/ `#se-flywheel`（经验飞轮）。
+「Skill 即资产」之后插入，内容来自 `docs/agent自进化-字幕整理.md`（抖音视频字幕），共 5 页：`#se-what`（自进化是什么）/ `#se-vs-reflection`（Reflection vs 自进化）/ `#se-layers`（进化的五层）/ `#se-hermes`（Hermes 实例：Learning Loop 四步闭环、Skill+Memory 双资产制、写满报错倒逼精简、后台异步复盘，配图 `public/outline/hermes-memory-files.png`，调研见 `docs/hermes记忆沉淀调研.md`）/ `#se-flywheel`（经验飞轮）。前四页由 `SelfEvolutionSections` 连续渲染；`#se-flywheel` 单独拆为 `SelfEvolutionFlywheelSection`（复用同一 `SeSection` 版式），挪到整页最后、Cordis 之后作为收尾。
 
 - 布局：标题区（eyebrow + 渐变标题 + 引言）通栏横跨整页（`md:col-span-2`），其下两列——左侧编号要点卡片、右侧 3:2 配图（`public/harness/`，含图注），两列互相垂直居中（`md:self-center`）
 - 同样的通栏布局也应用于「Skill 即资产」页（`skill-asset-section.tsx`），保证两类章节版式统一
+
+## Cordis 时空可组合性段落（`components/harness/cordis-section.tsx`）
+
+全页最后一章（`#cordis`），总结论文 *A Programming Paradigm for Spatiotemporal Composability*（DeepSeek Harness 底层插件框架 Cordis 的理论基础；原文与全文翻译在 `docs/deepseek-harness/`）。复用「Skill 即资产」的通栏版式：左侧五张编号要点卡（动态组合问题 → 时间×空间两维度 → 可逆效应/响应式共效应 → 上下文范式 → Cordis 实现与 Koishi 验证），右侧论文信息卡片（作者、发布、外链），无配图。
 
 ## 章节配图：编辑部手绘风
 

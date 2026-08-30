@@ -121,51 +121,83 @@ const SECTIONS: Section[] = [
     },
   },
   {
-    id: 'se-flywheel',
+    id: 'se-hermes',
     eyebrow: 'Self-Evolution · 04',
-    title: '经验飞轮：越工作越聪明的 Agent',
+    title: 'Hermes：经验是怎么沉淀的？',
     intro:
-      '真正的 Agent 应该形成它的经验飞轮——这也是未来判断一个 Agent 聪不聪明的新标准。',
+      '自进化不是纸面概念——Nous Research 的开源 Agent 系统 Hermes 已经把经验沉淀做成了 Learning Loop，每次会话的经验都在后台被自动蒸馏成可复用资产。Continual-Harness 论文（arXiv:2605.09998）把这类闭环形式化，并把 Hermes 列为 assistant 任务的典型参照。',
     points: [
       {
-        zh: '一个内容 Agent 的进化',
-        en: 'Example',
-        desc: '第一周发现技术科普类平均点赞 500、AI 职场类 1500，于是调整选题；又发现带具体数字的标题点击率高 30%，就把这条规律写进自己的 Skill。一个月后，它和第一天拿到的那个 Agent 已经完全不一样了。',
+        zh: '四步学习闭环，持续转动',
+        en: 'Observe → Distill → Reuse → Refine',
+        desc: '记录每轮交互的轨迹作为原料，回复结束后后台复盘蒸馏经验，沉淀物注入后续会话直接复用，发现更优路径时回头 patch 旧条目——而不是只增不改。',
       },
       {
-        zh: '经验飞轮',
-        en: 'Experience Flywheel',
-        desc: '执行 → feedback → reflection → 经验 → 更新 → 更好的下一次执行，这样不断循环。',
+        zh: '双资产制：Skill + Memory',
+        en: 'Skill & Memory',
+        desc: '程序性经验（怎么做）沉淀为 Skill，agent 通过 skill_manage 工具自建、自改、自删；陈述性经验（是什么）沉淀为有硬性容量上限的 MEMORY.md / USER.md（2200 / 1375 字符），会话开始以冻结快照注入系统提示。',
       },
       {
-        zh: '新的评价指标',
-        en: 'A New Metric',
-        desc: '不再只看一次任务完成得多好，而是看它做完 1000 次任务以后有没有比第一次更强——真正厉害的 Agent 不一定出厂时最聪明，而是在真实世界里工作越久越聪明。',
+        zh: '写满报错，倒逼精简',
+        en: 'Hard Capacity Limit',
+        desc: '记忆不自动压缩——写入超限就报错，并把现有条目清单还给 agent，由它当场合并精简再重试。上限倒逼资产保持信息密度，冻结快照还保住了 LLM 的前缀缓存。',
+      },
+      {
+        zh: '后台异步复盘，前台无感',
+        en: 'Async Review Agent',
+        desc: 'Distill 的具体形态：每轮回复结束后 fork 一个 review agent，从记忆、技能、执行过程三个维度复盘。换便宜模型复盘成本降 3–5×，而 memory 捕获完全一致——用户只看到一行「💾 Memory updated」。',
       },
     ],
     image: {
-      src: '/harness/experience-flywheel.png',
-      alt: '内容 Agent 在执行、反馈、反思、经验沉淀和更新构成的飞轮中持续增强',
+      src: '/outline/hermes-memory-files.png',
+      alt: 'Hermes 从本轮周报纠正中提取“结论先写、数据带环比”的经验，经后台复盘写入 USER.md 与 MEMORY.md，并在下一次会话复用',
       caption:
-        '内容 Agent 每轮工作都会收集选题、标题与受众反馈，经过复盘后把有效规律固化成可复用经验，再写回下一轮执行。评价它是否聪明，不只看第一次交付，而要看大量真实任务之后是否形成了更稳定的策略与更强的结果。',
+        '一个直观例子：用户在本轮周报中纠正“结论先写、数据带环比”；回复结束后，后台 Review Agent 从对话轨迹中提炼稳定偏好，写入 USER.md / MEMORY.md。下一次会话开始时，这些记忆以冻结快照注入系统提示，Agent 无需再次提醒就会直接按新规则输出；后续发现更优做法，还能继续回写精炼。',
     },
   },
 ]
 
 /**
- * 「Agent 自进化」四个章节：每章一页，布局统一——
- * 左侧标题 + 若干要点卡片，右侧展示对应的自进化机制插画。
+ * 「经验飞轮」单独一页，挪到整页最后（Cordis 之后）作为收尾。
  */
-export function SelfEvolutionSections() {
+const FLYWHEEL_SECTION: Section = {
+  id: 'se-flywheel',
+  eyebrow: 'Self-Evolution · 05',
+  title: '经验飞轮：越工作越聪明的 Agent',
+  intro:
+    '真正的 Agent 应该形成它的经验飞轮——这也是未来判断一个 Agent 聪不聪明的新标准。',
+  points: [
+    {
+      zh: '一个内容 Agent 的进化',
+      en: 'Example',
+      desc: '第一周发现技术科普类平均点赞 500、AI 职场类 1500，于是调整选题；又发现带具体数字的标题点击率高 30%，就把这条规律写进自己的 Skill。一个月后，它和第一天拿到的那个 Agent 已经完全不一样了。',
+    },
+    {
+      zh: '经验飞轮',
+      en: 'Experience Flywheel',
+      desc: '执行 → feedback → reflection → 经验 → 更新 → 更好的下一次执行，这样不断循环。',
+    },
+    {
+      zh: '新的评价指标',
+      en: 'A New Metric',
+      desc: '不再只看一次任务完成得多好，而是看它做完 1000 次任务以后有没有比第一次更强——真正厉害的 Agent 不一定出厂时最聪明，而是在真实世界里工作越久越聪明。',
+    },
+  ],
+  image: {
+    src: '/harness/experience-flywheel.png',
+    alt: '内容 Agent 在执行、反馈、反思、经验沉淀和更新构成的飞轮中持续增强',
+    caption:
+      '内容 Agent 每轮工作都会收集选题、标题与受众反馈，经过复盘后把有效规律固化成可复用经验，再写回下一轮执行。评价它是否聪明，不只看第一次交付，而要看大量真实任务之后是否形成了更稳定的策略与更强的结果。',
+  },
+}
+
+function SeSection({ section }: { section: Section }) {
   return (
-    <>
-      {SECTIONS.map((section) => (
-        <section
-          key={section.id}
-          id={section.id}
-          aria-labelledby={`${section.id}-title`}
-          className="mx-auto w-full max-w-6xl scroll-mt-24 px-6 py-24 sm:py-32"
-        >
+    <section
+      id={section.id}
+      aria-labelledby={`${section.id}-title`}
+      className="mx-auto w-full max-w-6xl scroll-mt-24 px-6 py-24 sm:py-32"
+    >
           <div className="grid items-start gap-y-8 md:grid-cols-2 md:gap-x-10 lg:gap-x-16">
             <header className="md:col-span-2">
               <p className="text-xs font-semibold tracking-[0.18em] text-indigo-600 uppercase">
@@ -219,8 +251,27 @@ export function SelfEvolutionSections() {
               </figcaption>
             </figure>
           </div>
-        </section>
+    </section>
+  )
+}
+
+/**
+ * 「Agent 自进化」前四个章节：每章一页，布局统一——
+ * 左侧标题 + 若干要点卡片，右侧展示对应的自进化机制插画。
+ */
+export function SelfEvolutionSections() {
+  return (
+    <>
+      {SECTIONS.map((section) => (
+        <SeSection key={section.id} section={section} />
       ))}
     </>
   )
+}
+
+/**
+ * 「经验飞轮」收尾页：单独放在整页最后（Cordis 之后）。
+ */
+export function SelfEvolutionFlywheelSection() {
+  return <SeSection section={FLYWHEEL_SECTION} />
 }
