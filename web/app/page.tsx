@@ -2,8 +2,10 @@ import { ChevronDown } from 'lucide-react'
 import type { CSSProperties } from 'react'
 import { CordisSection } from '@/components/harness/cordis-section'
 import { HarnessDutySection } from '@/components/harness/harness-duty-section'
+import { HarnessPuritySection } from '@/components/harness/harness-purity-section'
 import { HarnessSection } from '@/components/harness/harness-section'
-import { SelfEvolutionFlywheelSection, SelfEvolutionSections } from '@/components/harness/self-evolution-sections'
+import { ChartEvolutionSection, DataAugmentationSections, DeliveryModelsSection, DesignHarnessAssetsSection, SelfEvolutionFlywheelSection, SelfEvolutionSections } from '@/components/harness/self-evolution-sections'
+import { SeQuestionsSection } from '@/components/harness/se-questions-section'
 import { SkillAssetSection } from '@/components/harness/skill-asset-section'
 import { SkillQuestionsSection } from '@/components/harness/skill-questions-section'
 import { SkillTraitsSection } from '@/components/harness/skill-traits-section'
@@ -61,9 +63,7 @@ export default function Page() {
           className="hero-stagger text-base leading-relaxed text-slate-600 sm:text-lg"
           style={{ '--d': '0.3s' } as CSSProperties}
         >
-          关于 Agent Harness 与模型训练的研究文档可视化：Harness
-          设计与自我进化、轨迹数据收集、数据合成与工具调用、RL
-          后训练——把分散的论文笔记，变成可探索的知识地图。
+          洞察 & 思考
         </p>
       </div>
 
@@ -134,9 +134,6 @@ export default function Page() {
     {/* 向下滚动进入时间线 */}
     <TimelineSection />
 
-    {/* 时间线后优先展示：Codex 的自进化方案 */}
-    <OutlineSection data={FEATURED_SECTION} />
-
     {/* 继续向下：先抛出 Harness × Skill 的关系之问 */}
     <SkillQuestionsSection />
 
@@ -155,14 +152,35 @@ export default function Page() {
     {/* 延伸观点：未来真正值钱的是 Skill，不是 Agent */}
     <SkillAssetSection />
 
+    {/* 自进化开篇提问：Agent 的自进化是进化什么（大标题 + 散落问题气泡） */}
+    <SeQuestionsSection />
+
     {/* Agent 自进化：四个章节，每章一页，右侧预留配图区域 */}
     <SelfEvolutionSections />
 
     {/* 最后一页：Cordis 时空可组合性编程范式（DeepSeek Harness 理论基础） */}
     <CordisSection />
 
+    {/* DeepSeek Harness 优势之二：上下文纯净度，对照 Codex / Claude Code / OpenCode */}
+    <HarnessPuritySection />
+
     {/* 收尾：经验飞轮——越工作越聪明的 Agent */}
     <SelfEvolutionFlywheelSection />
+
+    {/* 延伸：DesignHarness 自增长要沉淀的两类资产（右侧配图待补） */}
+    <DesignHarnessAssetsSection />
+
+    {/* 举例：以图表场景跑通 Harness 自进化四步闭环（右侧配图待补） */}
+    <ChartEvolutionSection />
+
+    {/* 深入：轨迹与思维链数据如何增广，以及大厂公开的共同流水线 */}
+    <DataAugmentationSections />
+
+    {/* 落地：Design Harness 的多种交付形态（右侧配图待补） */}
+    <DeliveryModelsSection />
+
+    {/* 压轴：Codex 产品负责人 Tibo 谈 Harness 将走向哪里 */}
+    <OutlineSection data={FEATURED_SECTION} />
 
     {/* 页面最左侧的整体目录条：点击快速跳转各章节 */}
     <TocRail />

@@ -11,19 +11,28 @@ import { useEffect, useRef, useState } from 'react'
 const TOC_ITEMS = [
   { id: 'overview', label: '首页' },
   { id: 'timeline', label: 'AI 发展脉络' },
-  { id: 'self-evolution', label: 'Codex 自进化' },
   { id: 'skill-questions', label: 'Harness × Skill' },
   { id: 'harness-duty', label: 'Harness 的职责' },
   { id: 'skill-traits', label: 'Skill 特性' },
   { id: 'skill-vs-prompt', label: 'Skill vs Prompt' },
   { id: 'harness', label: '四层架构' },
   { id: 'skill-asset', label: 'Skill 即资产' },
-  { id: 'se-what', label: '自进化是什么' },
+  { id: 'se-questions', label: '自进化之问' },
+  { id: 'se-what', label: 'T+1 的问题' },
   { id: 'se-vs-reflection', label: 'Reflection vs 自进化' },
   { id: 'se-layers', label: '进化的五层' },
   { id: 'se-hermes', label: 'Hermes 实例' },
   { id: 'cordis', label: 'Cordis 时空可组合' },
+  { id: 'purity', label: '上下文纯净' },
   { id: 'se-flywheel', label: '经验飞轮' },
+  { id: 'design-harness-assets', label: 'DesignHarness 资产' },
+  { id: 'chart-evolution', label: '图表场景自进化' },
+  { id: 'trajectory-augmentation', label: '轨迹数据增广' },
+  { id: 'cot-sft-augmentation', label: 'CoT SFT 增广' },
+  { id: 'industry-augmentation-pipeline', label: '大厂数据流水线' },
+  { id: 'augmentation-quality-gates', label: '增广质量门禁' },
+  { id: 'delivery-models', label: '多种落地方式' },
+  { id: 'self-evolution', label: 'Codex 自进化' },
 ] as const
 
 /** 程序坞放大参数：影响半径与最大放大倍数 */
@@ -93,7 +102,7 @@ export function TocRail() {
   return (
     <nav
       aria-label="页面目录"
-      className="fixed top-1/2 left-2 z-40 hidden -translate-y-1/2 sm:block"
+      className="fixed top-1/2 left-2 z-40 hidden -translate-y-1/2 xl:block"
     >
       <ul
         className="flex flex-col gap-2.5 rounded-full border border-white/70 bg-white/50 px-2 py-3 shadow-[0_10px_30px_-15px_rgba(60,80,160,0.35)] backdrop-blur"

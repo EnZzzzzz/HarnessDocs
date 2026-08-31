@@ -6,13 +6,14 @@ type Point = {
   desc: string
 }
 
-type Section = {
+export type Section = {
   id: string
   eyebrow: string
   title: string
   intro: string
   points: Point[]
-  image: {
+  /** 省略时右侧渲染虚线占位框，待后续补图 */
+  image?: {
     src: string
     alt: string
     caption: string
@@ -23,7 +24,7 @@ const SECTIONS: Section[] = [
   {
     id: 'se-what',
     eyebrow: 'Self-Evolution · 01',
-    title: 'Agent 自进化是什么？',
+    title: 'Agent 的自进化，解决的是 T+1 的问题',
     intro:
       '今天绝大多数 Agent 干了一万次活以后，和第一次干活的时候能力几乎没有区别——昨天踩过的坑今天继续踩，昨天走过的弯路今天继续走。',
     points: [
@@ -237,22 +238,290 @@ function SeSection({ section }: { section: Section }) {
             </ol>
 
             <figure className="md:col-start-2 md:self-center">
-              <div className="overflow-hidden rounded-3xl">
-                <Image
-                  src={section.image.src}
-                  alt={section.image.alt}
-                  width={1536}
-                  height={1024}
-                  className="h-auto w-full"
-                />
-              </div>
-              <figcaption className="mt-3 px-1 text-left text-[11px] leading-5 text-slate-400">
-                {section.image.caption}
-              </figcaption>
+              {section.image ? (
+                <>
+                  <div className="overflow-hidden rounded-3xl">
+                    <Image
+                      src={section.image.src}
+                      alt={section.image.alt}
+                      width={1536}
+                      height={1024}
+                      className="h-auto w-full"
+                    />
+                  </div>
+                  <figcaption className="mt-3 px-1 text-left text-[11px] leading-5 text-slate-400">
+                    {section.image.caption}
+                  </figcaption>
+                </>
+              ) : (
+                <div className="flex aspect-[3/2] items-center justify-center rounded-3xl border-2 border-dashed border-slate-300 bg-white/40">
+                  <span className="text-xs font-medium tracking-wide text-slate-400">
+                    配图占位
+                  </span>
+                </div>
+              )}
             </figure>
           </div>
     </section>
   )
+}
+
+/**
+ * 「DesignHarness 的自增长要沉淀什么资产」：收尾页之后再加一页，
+ * 复用 SeSection 版式，右侧先用占位框，待补配图。
+ */
+const DESIGN_HARNESS_ASSETS_SECTION: Section = {
+  id: 'design-harness-assets',
+  eyebrow: 'DesignHarness · Self-Growth',
+  title: 'DesignHarness 的自增长要沉淀什么资产',
+  intro:
+    'DesignHarness 要在使用中越变越强，关键不在于模型本身，而在于两类资产被持续沉淀下来。',
+  points: [
+    {
+      zh: '组件和配套的使用 Skill',
+      en: 'Components + Usage Skills',
+      desc: '沉淀可复用的设计组件，以及每个组件「怎么用、什么时候用」的配套 Skill，让下一次设计直接站在已有资产上。',
+    },
+    {
+      zh: '自身设计师的真实使用轨迹',
+      en: 'Real Usage Trajectories',
+      desc: '记录设计师在真实工作中的挑选、调整与放弃过程，这些轨迹是后续复盘与自增长的原料。',
+    },
+  ],
+}
+
+export function DesignHarnessAssetsSection() {
+  return <SeSection section={DESIGN_HARNESS_ASSETS_SECTION} />
+}
+
+/**
+ * 「以图表场景为例的 Harness 自进化」：四步闭环，复用 SeSection 版式，
+ * 右侧先用占位框，待补配图。
+ */
+const CHART_EVOLUTION_SECTION: Section = {
+  id: 'chart-evolution',
+  eyebrow: 'DesignHarness · Chart Case',
+  title: '以图表这个场景为例，可以怎么去做 Harness 的自进化',
+  intro:
+    '图表是最适合跑通自进化闭环的场景之一：组件有开源供给、好坏有设计师把关、反馈能直接变成资产。',
+  points: [
+    {
+      zh: '批量爬取优秀 shadcn 组件',
+      en: 'Crawl Components',
+      desc: '批量爬取网上公开的、开源的、优秀的 shadcn 图表组件，作为组件库的初始供给。',
+    },
+    {
+      zh: '做设计 Demo，设计师评审打分',
+      en: 'Demo & Review',
+      desc: '基于这些组件去做设计的 Demo，然后由设计师进行复合评审打分。',
+    },
+    {
+      zh: '自动总结经验，沉淀 Skill + 组件',
+      en: 'Distill into Assets',
+      desc: 'Harness 根据设计师的反馈自动总结经验，沉淀出对应的 Skill 和配套的 shadcn 组件。',
+    },
+    {
+      zh: '打分轨迹做数据增广',
+      en: 'Trajectory Augmentation',
+      desc: '设计师打分的过程本身就是轨迹数据——把好的设计做数据增广，泛化到不同的 Query 上。',
+    },
+  ],
+}
+
+export function ChartEvolutionSection() {
+  return <SeSection section={CHART_EVOLUTION_SECTION} />
+}
+
+const DATA_AUGMENTATION_SECTIONS: Section[] = [
+  {
+    id: 'trajectory-augmentation',
+    eyebrow: 'Data Augmentation · 01',
+    title: '轨迹数据可以增广，但要重新执行，而不是只改写文本',
+    intro:
+      '对 Agent 来说，一条轨迹不仅是自然语言记录，还包含状态、观察、动作、工具返回与最终结果。最可靠的增广，是让同一个任务产生多条真实可执行的路径。',
+    points: [
+      {
+        zh: '同一任务，多次 Rollout',
+        en: 'Multi-Rollout',
+        desc: '改变采样温度、计划粒度与工具顺序，为同一 Query 生成多条候选轨迹；用真实环境执行后，只保留成功或高价值路径。',
+      },
+      {
+        zh: '任务变体，重新走完整轨迹',
+        en: 'Task Variation',
+        desc: '替换实体、数据、约束、语言与难度，再让 Agent 从头执行。不能只改 Prompt 却复用旧动作，否则状态与工具反馈会失真。',
+      },
+      {
+        zh: '故障注入，训练恢复能力',
+        en: 'Failure & Recovery',
+        desc: '主动制造超时、空结果、错误参数或页面变化，让 Agent 学会诊断、回退和修复，而不只会模仿理想路径。',
+      },
+      {
+        zh: '从中间状态分叉',
+        en: 'Prefix Branching',
+        desc: '从同一轨迹前缀重新采样后续动作，形成成功、绕路与失败分支，可同时用于 SFT、偏好学习和过程奖励。',
+      },
+    ],
+    image: {
+      src: '/outline/trajectory-data-augmentation.png',
+      alt: '同一任务分叉为多条经过工具和环境执行的轨迹，失败路径被修复后与其他成功路径共同进入数据集',
+      caption:
+        '同一个任务从共享起点分叉：不同轨迹调用不同工具、接收真实环境反馈，其中一条在失败后完成恢复。只有通过执行与结果验证的路径，才被收入训练数据。',
+    },
+  },
+  {
+    id: 'cot-sft-augmentation',
+    eyebrow: 'Data Augmentation · 02',
+    title: '思维链 SFT 也能增广，核心是多路径采样 + 过程验证',
+    intro:
+      'CoT 不是普通文案：最终答案正确，并不保证中间推理正确。有效做法是生成多条不同推理链，再用可执行验证、步骤检查和拒绝采样控制质量。',
+    points: [
+      {
+        zh: '一题多解，而不是同义改写',
+        en: 'Multiple Rationales',
+        desc: '为同一道题采样不同解法、不同长度和不同工具辅助路径，增加推理结构的覆盖，而不是只替换措辞。',
+      },
+      {
+        zh: '答案验证只是第一道门',
+        en: 'Beyond Final Answer',
+        desc: '数学用计算器或证明器、代码用测试、工具任务用环境状态；还要检查中间步骤是否自洽，防止猜中答案或事后合理化。',
+      },
+      {
+        zh: '保留正确链，也利用错误链',
+        en: 'Correct & Corrective',
+        desc: '正确推理用于 SFT；带错误位置、批评与修复过程的数据，可训练 critic、自我纠错、DPO 或过程奖励模型。',
+      },
+      {
+        zh: '完整、简洁、工具版共同配比',
+        en: 'Style Mixture',
+        desc: '保留探索型长链，也生产简洁严谨版和工具辅助版，避免模型只学会一种固定长度与固定话术。',
+      },
+    ],
+    image: {
+      src: '/outline/cot-sft-augmentation.png',
+      alt: '一个问题生长出多条推理分支，经逐步检查与剪枝后形成多种高质量推理样本',
+      caption:
+        '同一问题产生多条推理分支；检查镜逐步核验逻辑，错误枝条被剪除，正确的长链、短链与不同解法共同进入 SFT 数据集。',
+    },
+  },
+  {
+    id: 'industry-augmentation-pipeline',
+    eyebrow: 'Data Augmentation · 03',
+    title: '大厂公开方法的共同点：生成只是起点，验证器才是产线核心',
+    intro:
+      '公开材料没有披露完整内部配方，但 OpenAI、Google、Microsoft、Anthropic 与 DeepSeek 展现出相似范式：高质量种子启动，强模型扩量，多种验证器筛选，再通过 SFT / RL 迭代。',
+    points: [
+      {
+        zh: '少量高质量种子启动',
+        en: 'Curated Seeds',
+        desc: '先定义目标能力、示范格式和质量边界；种子数据决定生成分布，通常比盲目追求总量更重要。',
+      },
+      {
+        zh: '强模型大规模采样',
+        en: 'Teacher Sampling',
+        desc: '教师模型或当前策略为每个任务生成多条候选推理与行动轨迹，并覆盖不同难度、语言、工具和失败模式。',
+      },
+      {
+        zh: '异构验证与拒绝采样',
+        en: 'Verify & Reject',
+        desc: '组合规则、执行器、单元测试、reward model、独立 LLM judge 与人工抽检，减少同一个模型既出题又判卷的相关偏差。',
+      },
+      {
+        zh: '训练后再采样，持续迭代',
+        en: 'Train → Resample',
+        desc: '筛选数据用于 SFT、蒸馏、偏好优化或 RL；新 checkpoint 再生成更难数据，形成数据与模型互相推进的飞轮。',
+      },
+    ],
+    image: {
+      src: '/outline/industry-data-flywheel.png',
+      alt: '高质量种子经生成、并行验证、筛选配平与训练后回到下一轮采样的数据飞轮',
+      caption:
+        '共同流水线不是“生成海量文本再喂回去”，而是种子、采样、硬验证与模型审核、去重配平、训练、再采样构成的闭环。公开案例包括 DeepSeek-R1 的拒绝采样、Phi-4 的合成数据课程、STaR 自举与 OpenAI deliberative alignment。',
+    },
+  },
+  {
+    id: 'augmentation-quality-gates',
+    eyebrow: 'Data Augmentation · 04',
+    title: '先建质量门禁，再扩大合成数据规模',
+    intro:
+      '增广能放大能力，也会放大错误。落地时应把“是否可验证”放在“能生成多少”之前，并用严格隔离的真实任务判断它是否真的提高了泛化。',
+    points: [
+      {
+        zh: '五层门禁，逐层淘汰',
+        en: 'Five Quality Gates',
+        desc: '依次检查任务有效、环境真实执行、工具调用合法、中间步骤一致、最终结果正确；不能只看最后答案。',
+      },
+      {
+        zh: '拆分生成者与审核者',
+        en: 'Independent Review',
+        desc: '优先使用确定性验证；模型审核尽量换模型、换提示或多 judge 投票，并保留人工抽检与专门的反作弊审计集。',
+      },
+      {
+        zh: '去重、配平、保留真实数据',
+        en: 'Curate the Mixture',
+        desc: '按任务类型、难度、轨迹长度、工具与结果去重配平，混入真实、人工、失败和多教师数据，防止模式坍缩。',
+      },
+      {
+        zh: '隔离评测决定是否扩量',
+        en: 'Scale After Evidence',
+        desc: '先做原始数据、原始+合成、不同验证策略的消融；只有真实隔离集与分布外测试同时改善，才扩大合成规模。',
+      },
+    ],
+    image: {
+      src: '/outline/augmentation-quality-gates.png',
+      alt: '候选轨迹依次经过五道质量检查，错误样本被分流，合格样本经人工抽检和配平后进入数据仓',
+      caption:
+        '候选数据依次穿过任务、环境、动作、过程与结果五道门禁；不合格样本被分流，合格样本再经抽检、去重和难度配平，最终进入干净数据仓。',
+    },
+  },
+]
+
+export function DataAugmentationSections() {
+  return (
+    <>
+      {DATA_AUGMENTATION_SECTIONS.map((section) => (
+        <SeSection key={section.id} section={section} />
+      ))}
+    </>
+  )
+}
+
+/**
+ * 「Design Harness 的多种落地方式」：按业务方需求自由组合交付形态，
+ * 复用 SeSection 版式，右侧先用占位框，待补配图。
+ */
+const DELIVERY_MODELS_SECTION: Section = {
+  id: 'delivery-models',
+  eyebrow: 'DesignHarness · Delivery',
+  title: 'Design Harness 的多种落地方式',
+  intro:
+    '可以根据业务部门的需求，给出不同程度的落地方式——从一份数据到整套自进化飞轮，自由组合。',
+  points: [
+    {
+      zh: '对基模团队：只交付数据',
+      en: 'Data Only',
+      desc: '对于盘古这种基模团队，可以只交付沉淀下来的轨迹数据，作为他们训练的原料。',
+    },
+    {
+      zh: '对业务团队：交付 Skill 或 Harness',
+      en: 'Skill or Harness',
+      desc: '对于菲尔茨这种业务团队，可以交付 Skill，也可以交付整套 Harness；如果他们要做自己的 Harness，那就交付我们的 Skill。',
+    },
+    {
+      zh: '两种粒度：资产本身 × 飞轮能力',
+      en: 'Assets × Flywheel',
+      desc: '可以只交付资产本身，也可以交付自进化相关的整套飞轮能力——根据对方的需求，自由给出不同的落地方案。',
+    },
+  ],
+  image: {
+    src: '/outline/design-harness-delivery-models.png',
+    alt: '一辆完整智能汽车与可独立交付的智驾传感器、智能座舱和底盘平台围绕排列',
+    caption:
+      '就像造车既可以交付整车，也可以只交付智驾、智能座舱或底盘设计：Design Harness 同样可以按业务需求选择交付粒度——只给轨迹数据或 Skill，也可以交付完整 Harness，乃至连同持续自进化的经验飞轮一起交付。',
+  },
+}
+
+export function DeliveryModelsSection() {
+  return <SeSection section={DELIVERY_MODELS_SECTION} />
 }
 
 /**

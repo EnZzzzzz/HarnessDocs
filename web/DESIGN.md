@@ -80,7 +80,7 @@ rAF 节流监听滚动，每个 `data-fade-row` 按与视口中心的距离实�
 
 ## 大纲章节段落（`components/outline/`）
 
-原按 `大纲.md` 一级标题共 11 页；按需求目前仅保留 1 页核心章节（Codex 自进化方案，`sections/05-self-evolution.ts`），由 `sections.ts` 以 `FEATURED_SECTION` 导出，在时间线之后优先展示，其余章节及其数据文件已移除。
+原按 `大纲.md` 一级标题共 11 页；按需求目前仅保留 1 页核心章节（Codex 自进化方案，`sections/05-self-evolution.ts`），由 `sections.ts` 以 `FEATURED_SECTION` 导出，现挪到整页最后作为压轴，其余章节及其数据文件已移除。
 
 ### 结构（`outline-section.tsx`）
 
@@ -95,14 +95,22 @@ rAF 节流监听滚动，每个 `data-fade-row` 按与视口中心的距离实�
 
 ## Agent 自进化章节（`components/harness/self-evolution-sections.tsx`）
 
-「Skill 即资产」之后插入，内容来自 `docs/agent自进化-字幕整理.md`（抖音视频字幕），共 5 页：`#se-what`（自进化是什么）/ `#se-vs-reflection`（Reflection vs 自进化）/ `#se-layers`（进化的五层）/ `#se-hermes`（Hermes 实例：Learning Loop 四步闭环、Skill+Memory 双资产制、写满报错倒逼精简、后台异步复盘，配图 `public/outline/hermes-memory-files.png`，调研见 `docs/hermes记忆沉淀调研.md`）/ `#se-flywheel`（经验飞轮）。前四页由 `SelfEvolutionSections` 连续渲染；`#se-flywheel` 单独拆为 `SelfEvolutionFlywheelSection`（复用同一 `SeSection` 版式），挪到整页最后、Cordis 之后作为收尾。
+「Skill 即资产」之后先是提问页 `#se-questions`（`components/harness/se-questions-section.tsx`，版式与 `#skill-questions` 一致：大标题「Agent 的自进化，是进化什么？」+ 四个散落问题气泡），随后进入自进化章节。内容来自 `docs/agent自进化-字幕整理.md`（抖音视频字幕），共 5 页：`#se-what`（Agent 的自进化，解决的是 T+1 的问题）/ `#se-vs-reflection`（Reflection vs 自进化）/ `#se-layers`（进化的五层）/ `#se-hermes`（Hermes 实例：Learning Loop 四步闭环、Skill+Memory 双资产制、写满报错倒逼精简、后台异步复盘，配图 `public/outline/hermes-memory-files.png`，调研见 `docs/hermes记忆沉淀调研.md`）/ `#se-flywheel`（经验飞轮）。前四页由 `SelfEvolutionSections` 连续渲染；`#se-flywheel` 单独拆为 `SelfEvolutionFlywheelSection`（复用同一 `SeSection` 版式），挪到整页最后、Cordis 之后作为收尾。
 
 - 布局：标题区（eyebrow + 渐变标题 + 引言）通栏横跨整页（`md:col-span-2`），其下两列——左侧编号要点卡片、右侧 3:2 配图（`public/harness/`，含图注），两列互相垂直居中（`md:self-center`）
 - 同样的通栏布局也应用于「Skill 即资产」页（`skill-asset-section.tsx`），保证两类章节版式统一
+- 整页最后另有一页 `#design-harness-assets`（DesignHarness 的自增长要沉淀什么资产：组件+使用 Skill、设计师真实使用轨迹），复用同一 `SeSection` 版式，右侧为虚线占位框（`image` 省略时自动渲染），待补配图
+- 其后还有 `#chart-evolution`（以图表场景为例的 Harness 自进化四步闭环：爬取 shadcn 组件 → Demo 设计师评审打分 → 自动沉淀 Skill+组件 → 打分轨迹数据增广），同样复用 `SeSection` 版式 + 配图占位框
+- 紧接图表案例新增 4 页数据增广章节：`#trajectory-augmentation`（轨迹多次 rollout、任务变体、故障恢复、前缀分叉）/ `#cot-sft-augmentation`（CoT 多路径采样、过程验证、错误链与风格配比）/ `#industry-augmentation-pipeline`（公开的大厂共同流水线）/ `#augmentation-quality-gates`（五层门禁、独立审核、去重配平与隔离评测）。每页继续采用左侧要点卡 + 右侧 3:2 编辑部手绘插画。
+- 最后是 `#delivery-models`（Design Harness 的多种落地方式：对基模团队只交付数据、对业务团队交付 Skill 或 Harness、资产本身 × 飞轮能力两种粒度自由组合），同版式 + 配图占位框
 
 ## Cordis 时空可组合性段落（`components/harness/cordis-section.tsx`）
 
 全页最后一章（`#cordis`），总结论文 *A Programming Paradigm for Spatiotemporal Composability*（DeepSeek Harness 底层插件框架 Cordis 的理论基础；原文与全文翻译在 `docs/deepseek-harness/`）。复用「Skill 即资产」的通栏版式：左侧五张编号要点卡（动态组合问题 → 时间×空间两维度 → 可逆效应/响应式共效应 → 上下文范式 → Cordis 实现与 Koishi 验证），右侧论文信息卡片（作者、发布、外链），无配图。
+
+## 上下文纯净度对比段落（`components/harness/harness-purity-section.tsx`）
+
+紧跟 `#cordis` 之后（`#purity`）：DeepSeek Harness 的另一大优势「纯净」。左侧列出极简模式的全部上下文——系统提示词全文一句话（"You are a helpful software engineer assistant."）+ bash / str_replace_editor 两张工具卡（含关键使用约束与精简 schema）；右侧三张对照卡：Codex CLI（系统提示词 275 行 / ≈5k tokens、基线 4–6 工具、AGENTS.md ≤32 KiB 等）、Claude Code（首请求 38K–119K tokens、≈27 内置工具、CLAUDE.md 四级分层等）、OpenCode（9 套厂商提示词 7.4–15.4 KB、默认 12–14 工具、改文件后 LSP 诊断回灌 tool result 等）。数据来源：`docs/harness/codex-harness.md`、`docs/harness/claude-code-harness.md` 与 openai/codex、anomalyco/opencode 仓库源码核对（2026-08 快照）。
 
 ## 章节配图：编辑部手绘风
 
