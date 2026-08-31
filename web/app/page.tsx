@@ -4,7 +4,7 @@ import { CordisSection } from '@/components/harness/cordis-section'
 import { HarnessDutySection } from '@/components/harness/harness-duty-section'
 import { HarnessPuritySection } from '@/components/harness/harness-purity-section'
 import { HarnessSection } from '@/components/harness/harness-section'
-import { ChartEvolutionSection, DataAugmentationSections, DeliveryModelsSection, DesignHarnessAssetsSection, SelfEvolutionFlywheelSection, SelfEvolutionSections } from '@/components/harness/self-evolution-sections'
+import { ChartEvolutionSection, DataAugmentationSections, DataFlywheelSection, DeliveryModelsSection, DesignHarnessAssetsSection, SelfEvolutionFlywheelSection, SelfEvolutionSections } from '@/components/harness/self-evolution-sections'
 import { SeQuestionsSection } from '@/components/harness/se-questions-section'
 import { SkillAssetSection } from '@/components/harness/skill-asset-section'
 import { SkillQuestionsSection } from '@/components/harness/skill-questions-section'
@@ -164,9 +164,6 @@ export default function Page() {
     {/* DeepSeek Harness 优势之二：上下文纯净度，对照 Codex / Claude Code / OpenCode */}
     <HarnessPuritySection />
 
-    {/* 收尾：经验飞轮——越工作越聪明的 Agent */}
-    <SelfEvolutionFlywheelSection />
-
     {/* 延伸：DesignHarness 自增长要沉淀的两类资产（右侧配图待补） */}
     <DesignHarnessAssetsSection />
 
@@ -178,6 +175,12 @@ export default function Page() {
 
     {/* 落地：Design Harness 的多种交付形态（右侧配图待补） */}
     <DeliveryModelsSection />
+
+    {/* 倒数第三页：经验飞轮——越工作越聪明的 Agent */}
+    <SelfEvolutionFlywheelSection />
+
+    {/* 接着：数据飞轮——专家知识层 + 高质量种子轨迹数据 */}
+    <DataFlywheelSection />
 
     {/* 压轴：Codex 产品负责人 Tibo 谈 Harness 将走向哪里 */}
     <OutlineSection data={FEATURED_SECTION} />

@@ -1,5 +1,7 @@
 import Image from 'next/image'
 
+import { ChartEvolutionGallery } from './chart-evolution-gallery'
+
 type Point = {
   zh: string
   en: string
@@ -18,6 +20,11 @@ export type Section = {
     alt: string
     caption: string
   }
+  images?: {
+    src: string
+    alt: string
+    caption: string
+  }[]
 }
 
 const SECTIONS: Section[] = [
@@ -159,7 +166,7 @@ const SECTIONS: Section[] = [
 ]
 
 /**
- * 「经验飞轮」单独一页，挪到整页最后（Cordis 之后）作为收尾。
+ * 「经验飞轮」单独一页，放在多种落地方式之后、数据飞轮之前。
  */
 const FLYWHEEL_SECTION: Section = {
   id: 'se-flywheel',
@@ -199,22 +206,26 @@ function SeSection({ section }: { section: Section }) {
       aria-labelledby={`${section.id}-title`}
       className="mx-auto w-full max-w-6xl scroll-mt-24 px-6 py-24 sm:py-32"
     >
-          <div className="grid items-start gap-y-8 md:grid-cols-2 md:gap-x-10 lg:gap-x-16">
-            <header className="md:col-span-2">
-              <p className="text-xs font-semibold tracking-[0.18em] text-indigo-600 uppercase">
-                {section.eyebrow}
-              </p>
-              <h2
-                id={`${section.id}-title`}
-                className="mt-4 bg-gradient-to-br from-slate-950 via-slate-800 to-indigo-900 bg-clip-text text-4xl font-bold tracking-tighter text-transparent lg:text-5xl"
-              >
-                {section.title}
-              </h2>
-              <p className="mt-4 text-sm leading-relaxed text-slate-600 sm:text-base">
-                {section.intro}
-              </p>
-            </header>
+      <div className="grid items-start gap-y-8 md:grid-cols-2 md:gap-x-10 lg:gap-x-16">
+        <header className="md:col-span-2">
+          <p className="text-xs font-semibold tracking-[0.18em] text-indigo-600 uppercase">
+            {section.eyebrow}
+          </p>
+          <h2
+            id={`${section.id}-title`}
+            className="mt-4 bg-gradient-to-br from-slate-950 via-slate-800 to-indigo-900 bg-clip-text text-4xl font-bold tracking-tighter text-transparent lg:text-5xl"
+          >
+            {section.title}
+          </h2>
+          <p className="mt-4 text-sm leading-relaxed text-slate-600 sm:text-base">
+            {section.intro}
+          </p>
+        </header>
 
+        {section.images ? (
+          <ChartEvolutionGallery points={section.points} images={section.images} />
+        ) : (
+          <>
             <ol className="space-y-3 md:col-start-1 md:self-center">
               {section.points.map((point, i) => (
                 <li
@@ -261,7 +272,9 @@ function SeSection({ section }: { section: Section }) {
                 </div>
               )}
             </figure>
-          </div>
+          </>
+        )}
+      </div>
     </section>
   )
 }
@@ -288,6 +301,12 @@ const DESIGN_HARNESS_ASSETS_SECTION: Section = {
       desc: '记录设计师在真实工作中的挑选、调整与放弃过程，这些轨迹是后续复盘与自增长的原料。',
     },
   ],
+  image: {
+    src: '/harness/design-harness-assets.png',
+    alt: '左侧成对沉淀设计组件与使用 Skill，右侧设计师在真实工作中选择、调整、采纳或放弃方案，使用轨迹持续回流到 DesignHarness',
+    caption:
+      'DesignHarness 的资产不是孤立的组件库：每个组件都要和「何时用、怎么用」的 Skill 成对沉淀；与此同时，设计师在真实任务里的选择、调整、比较与放弃被记录成轨迹，再回流到 Harness，持续修正下一版资产。',
+  },
 }
 
 export function DesignHarnessAssetsSection() {
@@ -295,8 +314,8 @@ export function DesignHarnessAssetsSection() {
 }
 
 /**
- * 「以图表场景为例的 Harness 自进化」：四步闭环，复用 SeSection 版式，
- * 右侧先用占位框，待补配图。
+ * 「以图表场景为例的 Harness 自进化」：四步闭环；点击左侧步骤卡，
+ * 右侧切换对应的科技编辑部手绘插画。
  */
 const CHART_EVOLUTION_SECTION: Section = {
   id: 'chart-evolution',
@@ -311,9 +330,9 @@ const CHART_EVOLUTION_SECTION: Section = {
       desc: '批量爬取网上公开的、开源的、优秀的 shadcn 图表组件，作为组件库的初始供给。',
     },
     {
-      zh: '做设计 Demo，设计师评审打分',
-      en: 'Demo & Review',
-      desc: '基于这些组件去做设计的 Demo，然后由设计师进行复合评审打分。',
+      zh: '做设计 Demo，高质量数据沉淀',
+      en: 'Demo & Data',
+      desc: '基于这些组件去做设计的 Demo，然后由设计师进行复合评审打分，沉淀出高质量数据。',
     },
     {
       zh: '自动总结经验，沉淀 Skill + 组件',
@@ -324,6 +343,32 @@ const CHART_EVOLUTION_SECTION: Section = {
       zh: '打分轨迹做数据增广',
       en: 'Trajectory Augmentation',
       desc: '设计师打分的过程本身就是轨迹数据——把好的设计做数据增广，泛化到不同的 Query 上。',
+    },
+  ],
+  images: [
+    {
+      src: '/harness/chart-evolution-01-crawl.png',
+      alt: '采集装置从公开组件网络中筛选多种图表组件，并将优质组件整理进组件库',
+      caption:
+        '先从公开、开源的组件生态中广泛采集图表方案，经过初步检查后，把不同图表类型的优质组件整理成 Harness 的初始供给。',
+    },
+    {
+      src: '/harness/chart-evolution-02-review.png',
+      alt: '设计师对多个图表 Demo 按复合标准评分，采纳高质量方案并淘汰较弱方案',
+      caption:
+        '组件进入真实 Demo 后，由设计师从信息表达、视觉质量和场景适配等维度复合评审；被采纳与被淘汰的判断一起沉淀为高质量数据。',
+    },
+    {
+      src: '/harness/chart-evolution-03-distill.png',
+      alt: 'Harness 将设计师的批注与评分提炼成一一配对的图表组件和使用 Skill',
+      caption:
+        'Harness 消化设计师的评分与批注，把有效经验蒸馏成资产：每个经过验证的图表组件，都和说明其使用条件与方法的 Skill 成对输出。',
+    },
+    {
+      src: '/harness/chart-evolution-04-augment.png',
+      alt: '一条设计师评审轨迹分叉成多个不同查询下重新执行和验证的图表设计任务',
+      caption:
+        '把真实评分轨迹扩展到不同 Query，并重新执行、重新评审每条分支，得到更多可验证的成功路径，让 Harness 的能力泛化到新场景。',
     },
   ],
 }
@@ -539,8 +584,42 @@ export function SelfEvolutionSections() {
 }
 
 /**
- * 「经验飞轮」收尾页：单独放在整页最后（Cordis 之后）。
+ * 「经验飞轮」页：单独一页，放在多种落地方式之后。
  */
 export function SelfEvolutionFlywheelSection() {
   return <SeSection section={FLYWHEEL_SECTION} />
+}
+
+/**
+ * 「数据飞轮」页：紧跟「经验飞轮」之后，从数据角度看要沉淀的两类资产，
+ * 右侧用双层、双环插画表现 Harness 数据积累与 Model 数据积累的相互增强。
+ */
+const DATA_FLYWHEEL_SECTION: Section = {
+  id: 'data-flywheel',
+  eyebrow: 'Self-Evolution · 06',
+  title: '数据飞轮：Harness 专家知识层和 Model 轨迹数据积累',
+  intro:
+    '从数据的角度来看，要沉淀两类数据：一类是 Harness 的专家知识层，另一类是专家真实使用沉淀下来的高质量种子轨迹数据。',
+  points: [
+    {
+      zh: 'Harness 层：专家知识积累',
+      en: 'Skill + Components',
+      desc: '也就是 Skill 和配套的组件——把专家的做法固化成可复用的知识与物料，越用越厚。',
+    },
+    {
+      zh: 'Model 层：高质量种子轨迹数据积累',
+      en: 'Seed Trajectories',
+      desc: '专家真实使用过程中产生的高质量轨迹数据，作为后续训练与数据增广的种子。',
+    },
+  ],
+  image: {
+    src: '/harness/data-flywheel-two-layer.png',
+    alt: '上下两层数据飞轮：下层 Harness 环从专家真实工作中积累 Skill、组件与评审经验，上层 Model 环对种子轨迹进行增广、验证和训练，轨迹向上输送、模型能力向下回流',
+    caption:
+      '下层 Harness 环在一次次真实任务中，把专家反馈沉淀成 Skill、组件与高质量种子轨迹；轨迹向上进入 Model 环，经过增广、验证与训练形成更强能力，再回流到 Harness 改善下一轮执行。两层数据各自积累，两个循环彼此增强。',
+  },
+}
+
+export function DataFlywheelSection() {
+  return <SeSection section={DATA_FLYWHEEL_SECTION} />
 }

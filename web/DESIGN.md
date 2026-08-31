@@ -99,8 +99,9 @@ rAF 节流监听滚动，每个 `data-fade-row` 按与视口中心的距离实�
 
 - 布局：标题区（eyebrow + 渐变标题 + 引言）通栏横跨整页（`md:col-span-2`），其下两列——左侧编号要点卡片、右侧 3:2 配图（`public/harness/`，含图注），两列互相垂直居中（`md:self-center`）
 - 同样的通栏布局也应用于「Skill 即资产」页（`skill-asset-section.tsx`），保证两类章节版式统一
-- 整页最后另有一页 `#design-harness-assets`（DesignHarness 的自增长要沉淀什么资产：组件+使用 Skill、设计师真实使用轨迹），复用同一 `SeSection` 版式，右侧为虚线占位框（`image` 省略时自动渲染），待补配图
-- 其后还有 `#chart-evolution`（以图表场景为例的 Harness 自进化四步闭环：爬取 shadcn 组件 → Demo 设计师评审打分 → 自动沉淀 Skill+组件 → 打分轨迹数据增广），同样复用 `SeSection` 版式 + 配图占位框
+- 整页最后另有一页 `#design-harness-assets`（DesignHarness 的自增长要沉淀什么资产：组件+使用 Skill、设计师真实使用轨迹），复用同一 `SeSection` 版式，右侧配科技编辑部手绘插画 `public/harness/design-harness-assets.png`：左侧组件与 Skill 成对沉淀，右侧呈现设计师选择、调整、采纳与放弃的真实使用轨迹，并通过反馈箭头回流 Harness
+- 其后还有 `#chart-evolution`（以图表场景为例的 Harness 自进化四步闭环：爬取 shadcn 组件 → Demo 设计师评审打分 → 自动沉淀 Skill+组件 → 打分轨迹数据增广）。四张步骤卡可点击，右侧同步切换对应的 3:2 科技编辑部手绘插画；当前步骤以靛蓝边框和浅色底高亮
+- `#data-flywheel` 右侧配双层、双环手绘插画 `public/harness/data-flywheel-two-layer.png`：下层蓝色 Harness 环积累 Skill、组件和专家反馈，上层紫色 Model 环完成轨迹增广、验证与训练；种子轨迹向上输送，增强后的模型能力向下回流
 - 紧接图表案例新增 4 页数据增广章节：`#trajectory-augmentation`（轨迹多次 rollout、任务变体、故障恢复、前缀分叉）/ `#cot-sft-augmentation`（CoT 多路径采样、过程验证、错误链与风格配比）/ `#industry-augmentation-pipeline`（公开的大厂共同流水线）/ `#augmentation-quality-gates`（五层门禁、独立审核、去重配平与隔离评测）。每页继续采用左侧要点卡 + 右侧 3:2 编辑部手绘插画。
 - 最后是 `#delivery-models`（Design Harness 的多种落地方式：对基模团队只交付数据、对业务团队交付 Skill 或 Harness、资产本身 × 飞轮能力两种粒度自由组合），同版式 + 配图占位框
 

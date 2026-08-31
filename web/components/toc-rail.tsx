@@ -24,7 +24,6 @@ const TOC_ITEMS = [
   { id: 'se-hermes', label: 'Hermes 实例' },
   { id: 'cordis', label: 'Cordis 时空可组合' },
   { id: 'purity', label: '上下文纯净' },
-  { id: 'se-flywheel', label: '经验飞轮' },
   { id: 'design-harness-assets', label: 'DesignHarness 资产' },
   { id: 'chart-evolution', label: '图表场景自进化' },
   { id: 'trajectory-augmentation', label: '轨迹数据增广' },
@@ -32,6 +31,8 @@ const TOC_ITEMS = [
   { id: 'industry-augmentation-pipeline', label: '大厂数据流水线' },
   { id: 'augmentation-quality-gates', label: '增广质量门禁' },
   { id: 'delivery-models', label: '多种落地方式' },
+  { id: 'se-flywheel', label: '经验飞轮' },
+  { id: 'data-flywheel', label: '数据飞轮' },
   { id: 'self-evolution', label: 'Codex 自进化' },
 ] as const
 
