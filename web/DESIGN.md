@@ -95,7 +95,7 @@ rAF 节流监听滚动，每个 `data-fade-row` 按与视口中心的距离实�
 
 ## Agent 自进化章节（`components/harness/self-evolution-sections.tsx`）
 
-「Skill 即资产」之后先是提问页 `#se-questions`（`components/harness/se-questions-section.tsx`，版式与 `#skill-questions` 一致：大标题「Agent 的自进化，是进化什么？」+ 四个散落问题气泡），随后进入自进化章节。内容来自 `docs/agent自进化-字幕整理.md`（抖音视频字幕），共 5 页：`#se-what`（Agent 的自进化，解决的是 T+1 的问题）/ `#se-vs-reflection`（Reflection vs 自进化）/ `#se-layers`（进化的五层）/ `#se-hermes`（Hermes 实例：Learning Loop 四步闭环、Skill+Memory 双资产制、写满报错倒逼精简、后台异步复盘，配图 `public/outline/hermes-memory-files.png`，调研见 `docs/hermes记忆沉淀调研.md`）/ `#se-flywheel`（经验飞轮）。前四页由 `SelfEvolutionSections` 连续渲染；`#se-flywheel` 单独拆为 `SelfEvolutionFlywheelSection`（复用同一 `SeSection` 版式），挪到整页最后、Cordis 之后作为收尾。
+「Skill 即资产」之后先是提问页 `#se-questions`（`components/harness/se-questions-section.tsx`，版式与 `#skill-questions` 一致：大标题「Agent 的自进化，是进化什么？」+ 四个散落问题气泡），随后进入自进化章节。内容来自 `docs/agent自进化-字幕整理.md`（抖音视频字幕），共 7 页：`#se-what`（Agent 的自进化，解决的是 T+1 的问题）/ `#se-vs-reflection`（自进化 vs 人工进化：异步沉淀 / Harness 自驱 / 作用于「T+1」任务）/ `#se-reward-driven`（奖励信号驱动：专家由 Skill 编写者转为评审者，Harness 从轨迹与评审意见中识别正负反馈；右侧暂为配图占位）/ `#se-expert-driven`（专家知识驱动：Skill 会老化，被动更新靠人改规范，自进化让专家的一次发现触发模型自动总结并更新 Skill；右侧暂为配图占位）/ `#se-layers`（进化的五层）/ `#se-hermes`（Hermes 实例：Learning Loop 四步闭环、Skill+Memory 双资产制、写满报错倒逼精简、后台异步复盘，配图 `public/outline/hermes-memory-files.png`，调研见 `docs/hermes记忆沉淀调研.md`）/ `#se-flywheel`（经验飞轮）。前四页由 `SelfEvolutionSections` 连续渲染；`#se-flywheel` 单独拆为 `SelfEvolutionFlywheelSection`（复用同一 `SeSection` 版式），挪到整页最后、Cordis 之后作为收尾。
 
 - 布局：标题区（eyebrow + 渐变标题 + 引言）通栏横跨整页（`md:col-span-2`），其下两列——左侧编号要点卡片、右侧 3:2 配图（`public/harness/`，含图注），两列互相垂直居中（`md:self-center`）
 - 同样的通栏布局也应用于「Skill 即资产」页（`skill-asset-section.tsx`），保证两类章节版式统一

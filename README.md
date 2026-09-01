@@ -15,7 +15,7 @@ pnpm install
 pnpm dev
 ```
 
-启动后访问 http://localhost:3000 。开发模式支持热更新，改动 `web/components/` 下的内容文件（如大纲章节数据 `web/components/outline/sections/*.ts`）保存后页面自动刷新。
+启动后访问 http://localhost:9357 。开发模式支持热更新，改动 `web/components/` 下的内容文件（如大纲章节数据 `web/components/outline/sections/*.ts`）保存后页面自动刷新。
 
 ## 其他常用命令
 

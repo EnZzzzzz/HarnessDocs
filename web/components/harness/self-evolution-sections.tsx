@@ -61,36 +61,74 @@ const SECTIONS: Section[] = [
   {
     id: 'se-vs-reflection',
     eyebrow: 'Self-Evolution · 02',
-    title: 'Reflection ≠ 自进化',
+    title: '自进化 vs 人工进化',
     intro:
-      'Reflection 和 Self-Evolution 的区别非常重要——这两个东西，根本就不是一个层级。',
+      '自进化和人工进化的区别非常重要——这两个东西，根本就不是一个层级。',
     points: [
       {
-        zh: 'Reflection 解决「这一次」',
-        en: 'Fix This Task',
-        desc: 'Agent 调错了一个 API，发现参数传错了，想了一下、换另一个参数、调用成功——发现错了，反思一下再改，仅此而已。',
+        zh: '异步沉淀',
+        en: 'Async Distillation',
+        desc: '经验的沉淀不发生在任务执行期间，而是在任务结束后由后台流程异步完成——复盘、蒸馏、写回，不阻塞下一次执行。',
       },
       {
-        zh: '同样的问题下次还会再犯',
-        en: 'No Accumulation',
-        desc: '如果下一次遇到同样的问题，它又从头重新反思一遍——其实它根本没有进化。',
+        zh: 'Harness 自驱',
+        en: 'Harness-Driven',
+        desc: '驱动进化的不是工程师手动改 prompt、调参数，而是 Harness 自己收集反馈、提炼经验并写回——人是把关者，不是流水线上的工人。',
       },
       {
-        zh: '自进化解决「下一次」',
-        en: 'Fix Forever',
-        desc: '拿到错误以后理解为什么错、知道怎么去改，然后做最关键的一步：改完以后永久保存。',
+        zh: '作用于「T+1」任务',
+        en: 'Effective at T+1',
+        desc: '进化的收益不体现在当前任务，而是下一次同类任务——同样的坑，T+1 时刻的 Agent 不会再踩第二次。',
       },
     ],
     image: {
       src: '/harness/reflection-vs-self-evolution.png',
-      alt: '两条时间线对比 Reflection 的临时修复与自进化的永久保存',
+      alt: '人工进化与自进化两条时间线对比：异步沉淀、Harness 自驱，并作用于 T+1 任务',
       caption:
-        '上方时间线中，Agent 通过 Reflection 修好了当前接口错误，但经验随任务结束而消失，下一次仍会重犯；下方时间线把正确适配器与规则保存进自身，因此再次遇到同类任务时可以直接成功。',
+        '上方时间线依赖工程师人工排查日志、修改配置并安装补丁；下方时间线由 Harness 在任务结束后异步收集反馈、蒸馏经验并写回可复用资产，让更新后的能力在 T+1 任务中生效。',
     },
   },
   {
-    id: 'se-layers',
+    id: 'se-reward-driven',
     eyebrow: 'Self-Evolution · 03',
+    title: '奖励信号驱动',
+    intro:
+      '人写的 Skill 不一定是最适合 AI 的——更可行的思路是目标导向加专家评审：AI 负责写，人负责评，奖励信号驱动 Skill 一轮轮迭代到达标。',
+    points: [
+      {
+        zh: '专家角色：从 Skill 编写者到评审者',
+        en: 'Expert as Reviewer',
+        desc: '过去专家知识靠人拆解场景、总结成 Skill 的知识体系，里面藏着大量人工。现在构建好目标测试集，由 AI 去编写 Skill，人只给出评审意见，AI 根据意见反复调整 Skill，直到指标满足要求——人不再需要关心 Skill 怎么写。',
+      },
+      {
+        zh: 'Harness 角色：识别奖励信号并自我迭代',
+        en: 'Detect & Self-Iterate',
+        desc: 'Harness 要从历史轨迹里识别正反馈与负反馈：踩坑的过程——报错、参数问题、框架选型失误——都是负反馈；还有来自人工评审的意见，比如风格要改成什么样、按钮要放在什么位置，同样是驱动迭代的奖励信号。',
+      },
+    ],
+  },
+  {
+    id: 'se-expert-driven',
+    eyebrow: 'Self-Evolution · 04',
+    title: '专家知识驱动',
+    intro:
+      'Skill 是有保质期的——企业的规范经常更新，Skill 就跟着老化。区别在于：老化的 Skill，是等人来修，还是自己长出新版本。',
+    points: [
+      {
+        zh: '被动更新：等人发现，等人改',
+        en: 'Manual Patch',
+        desc: '企业规范一更新，存量 Skill 就过时了。被动模式下只能靠人主动发现结果不对、再手动去改规范、改 Skill——滞后、易漏，改完也只覆盖被注意到的那几处。',
+      },
+      {
+        zh: '自进化：专家提一次，Harness 自己改',
+        en: 'Expert-Seeded, Self-Driven',
+        desc: '头一次使用时，专家发现结果不符合新规范、把问题指出来——模型自己把这次反馈总结成规则，主动触发 Skill 的更新。沉淀只需发生一次，之后的每一次执行都直接生效。',
+      },
+    ],
+  },
+  {
+    id: 'se-layers',
+    eyebrow: 'Self-Evolution · 05',
     title: 'Agent 到底在进化什么？',
     intro:
       '不是让 AI 自己去训练自己——模型参数的更新只是其中最重的一种。更现实的 Agent 自进化，至少可以分成五层。',
@@ -130,7 +168,7 @@ const SECTIONS: Section[] = [
   },
   {
     id: 'se-hermes',
-    eyebrow: 'Self-Evolution · 04',
+    eyebrow: 'Self-Evolution · 06',
     title: 'Hermes：经验是怎么沉淀的？',
     intro:
       '自进化不是纸面概念——Nous Research 的开源 Agent 系统 Hermes 已经把经验沉淀做成了 Learning Loop，每次会话的经验都在后台被自动蒸馏成可复用资产。Continual-Harness 论文（arXiv:2605.09998）把这类闭环形式化，并把 Hermes 列为 assistant 任务的典型参照。',
@@ -170,7 +208,7 @@ const SECTIONS: Section[] = [
  */
 const FLYWHEEL_SECTION: Section = {
   id: 'se-flywheel',
-  eyebrow: 'Self-Evolution · 05',
+  eyebrow: 'Self-Evolution · 07',
   title: '经验飞轮：越工作越聪明的 Agent',
   intro:
     '真正的 Agent 应该形成它的经验飞轮——这也是未来判断一个 Agent 聪不聪明的新标准。',
@@ -596,7 +634,7 @@ export function SelfEvolutionFlywheelSection() {
  */
 const DATA_FLYWHEEL_SECTION: Section = {
   id: 'data-flywheel',
-  eyebrow: 'Self-Evolution · 06',
+  eyebrow: 'Self-Evolution · 08',
   title: '数据飞轮：Harness 专家知识层和 Model 轨迹数据积累',
   intro:
     '从数据的角度来看，要沉淀两类数据：一类是 Harness 的专家知识层，另一类是专家真实使用沉淀下来的高质量种子轨迹数据。',
