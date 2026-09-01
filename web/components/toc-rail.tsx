@@ -23,6 +23,7 @@ const TOC_ITEMS = [
   { id: 'se-reward-driven', label: '奖励信号驱动' },
   { id: 'se-expert-driven', label: '群智迁移' },
   { id: 'se-layers', label: '进化的五层' },
+  { id: 'se-wikiskill', label: 'WikiSkill 经验维基' },
   { id: 'se-hermes', label: 'Hermes 实例' },
   { id: 'cordis', label: 'Cordis 时空可组合' },
   { id: 'purity', label: '上下文纯净' },

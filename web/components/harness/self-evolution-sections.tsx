@@ -106,6 +106,12 @@ const SECTIONS: Section[] = [
         desc: 'Harness 要从历史轨迹里识别正反馈与负反馈：踩坑的过程——报错、参数问题、框架选型失误——都是负反馈；还有来自人工评审的意见，比如风格要改成什么样、按钮要放在什么位置，同样是驱动迭代的奖励信号。',
       },
     ],
+    image: {
+      src: '/harness/reward-driven-ai-expert-loop.png',
+      alt: 'AI 编写 Skill，经测试集评估和专家评审后吸收反馈并持续迭代至达标',
+      caption:
+        'AI 负责把目标转成 Skill，并在测试集上反复验证；专家不再亲自编写，而是评审结果、给出反馈。Harness 将这些正负奖励信号送回下一轮编写，直到 Skill 达到目标指标。',
+    },
   },
   {
     id: 'se-expert-driven',
@@ -125,6 +131,12 @@ const SECTIONS: Section[] = [
         desc: '有些专家非常懂领域知识，却不一定清楚怎么写好一个 Skill。交给 Harness 主动沉淀和管理：头一次使用时专家发现结果不符合新规范、把问题指出来——模型自己把这次反馈总结成规则，主动触发 Skill 的更新。沉淀只需发生一次，之后的每一次执行都直接生效。',
       },
     ],
+    image: {
+      src: '/harness/harness-proactive-knowledge-distillation.png',
+      alt: 'Harness 主动收集专家反馈和任务轨迹，自动蒸馏并写回 Skill v2，供后续多个 Agent 复用',
+      caption:
+        '专家只需指出一次问题，Harness 就会主动捕获反馈与任务轨迹，在后台蒸馏成规则并写回新版 Skill；更新后的知识资产随即被后续任务和更多 Agent 共同复用。',
+    },
   },
   {
     id: 'se-layers',
@@ -167,8 +179,37 @@ const SECTIONS: Section[] = [
     },
   },
   {
-    id: 'se-hermes',
+    id: 'se-wikiskill',
     eyebrow: 'Self-Evolution · 06',
+    title: 'WikiSkill：给经验建一座「维基百科」',
+    intro:
+      '现有技能进化方法改完技能就把分析过程丢了——上次为什么失败、哪个改法被拒，全都散落在历史记录里。WikiSkill（Google Research / Virginia Tech，2026-08-27 发布，arXiv:2608.27454）把 Agent 经验编译成持续生长的知识库，让技能进化站在知识之上，而不是每轮从零开始。',
+    points: [
+      {
+        zh: '三层架构：原始记录 → 知识 → 技能',
+        en: 'Raw → Wiki → Skills',
+        desc: 'Raw 层保存完整执行轨迹，只进不出、永不修改；Wiki 层把零散轨迹编译成结构化知识（patterns/、logs.md、skill-impact.md 账本）；Skills 层是当前生效的技能，每个技能附 PURPOSE.md 记录设计意图。',
+      },
+      {
+        zh: '知识永不回滚，与技能分离',
+        en: 'Wiki Never Rolls Back',
+        desc: '技能改坏了可以回滚技能，但 Wiki 里的积累一条不删——被否决过的改法记在账本上，下一轮不会再被重复提出。知识回答「我们知道什么」，技能回答「该怎么做」。',
+      },
+      {
+        zh: '四步循环，角色分工',
+        en: 'Run → Distill → Propose → Gate',
+        desc: 'Inference Agent 带技能跑任务，但不许看 Wiki——否则直接查答案，轨迹失去分析价值；Wiki Maintainer 对成败轨迹做根因分析、更新知识；Skill Proposer 基于 Wiki 提案；候选技能在验证集跑分，提分接受、掉分回滚。',
+      },
+      {
+        zh: '越强的模型涨得越多，Wiki 层是关键',
+        en: 'Evidence',
+        desc: '五个基准平均分：Qwen-3.6-27B 从 39.4 涨到 63.3；9B 模型加技能（47.4）反超无技能的 27B（39.4）。消融拿掉 Wiki 层，平均分从 63.7% 跌回 48.7%——知识积累才是涨分来源。',
+      },
+    ],
+  },
+  {
+    id: 'se-hermes',
+    eyebrow: 'Self-Evolution · 07',
     title: 'Hermes：经验是怎么沉淀的？',
     intro:
       '自进化不是纸面概念——Nous Research 的开源 Agent 系统 Hermes 已经把经验沉淀做成了 Learning Loop，每次会话的经验都在后台被自动蒸馏成可复用资产。Continual-Harness 论文（arXiv:2605.09998）把这类闭环形式化，并把 Hermes 列为 assistant 任务的典型参照。',
@@ -208,7 +249,7 @@ const SECTIONS: Section[] = [
  */
 const FLYWHEEL_SECTION: Section = {
   id: 'se-flywheel',
-  eyebrow: 'Self-Evolution · 07',
+  eyebrow: 'Self-Evolution · 08',
   title: '经验飞轮：越工作越聪明的 Agent',
   intro:
     '真正的 Agent 应该形成它的经验飞轮——这也是未来判断一个 Agent 聪不聪明的新标准。',
@@ -634,7 +675,7 @@ export function SelfEvolutionFlywheelSection() {
  */
 const DATA_FLYWHEEL_SECTION: Section = {
   id: 'data-flywheel',
-  eyebrow: 'Self-Evolution · 08',
+  eyebrow: 'Self-Evolution · 09',
   title: '数据飞轮：Harness 专家知识层和 Model 轨迹数据积累',
   intro:
     '从数据的角度来看，要沉淀两类数据：一类是 Harness 的专家知识层，另一类是专家真实使用沉淀下来的高质量种子轨迹数据。',
