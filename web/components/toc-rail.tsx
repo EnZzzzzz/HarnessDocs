@@ -21,7 +21,7 @@ const TOC_ITEMS = [
   { id: 'se-what', label: 'T+1 的问题' },
   { id: 'se-vs-reflection', label: '自进化 vs 人工进化' },
   { id: 'se-reward-driven', label: '奖励信号驱动' },
-  { id: 'se-expert-driven', label: '专家知识驱动' },
+  { id: 'se-expert-driven', label: '群智迁移' },
   { id: 'se-layers', label: '进化的五层' },
   { id: 'se-hermes', label: 'Hermes 实例' },
   { id: 'cordis', label: 'Cordis 时空可组合' },

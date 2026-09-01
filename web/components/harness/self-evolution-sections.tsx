@@ -110,19 +110,19 @@ const SECTIONS: Section[] = [
   {
     id: 'se-expert-driven',
     eyebrow: 'Self-Evolution · 04',
-    title: '专家知识驱动',
+    title: '群智迁移积累专家知识资产',
     intro:
       'Skill 是有保质期的——企业的规范经常更新，Skill 就跟着老化。区别在于：老化的 Skill，是等人来修，还是自己长出新版本。',
     points: [
       {
-        zh: '被动更新：等人发现，等人改',
-        en: 'Manual Patch',
+        zh: 'Skill 会老化，需要不停维护',
+        en: 'Continuous Maintenance',
         desc: '企业规范一更新，存量 Skill 就过时了。被动模式下只能靠人主动发现结果不对、再手动去改规范、改 Skill——滞后、易漏，改完也只覆盖被注意到的那几处。',
       },
       {
-        zh: '自进化：专家提一次，Harness 自己改',
-        en: 'Expert-Seeded, Self-Driven',
-        desc: '头一次使用时，专家发现结果不符合新规范、把问题指出来——模型自己把这次反馈总结成规则，主动触发 Skill 的更新。沉淀只需发生一次，之后的每一次执行都直接生效。',
+        zh: 'Harness 主动沉淀和管理 Skill',
+        en: 'Proactive Curation',
+        desc: '有些专家非常懂领域知识，却不一定清楚怎么写好一个 Skill。交给 Harness 主动沉淀和管理：头一次使用时专家发现结果不符合新规范、把问题指出来——模型自己把这次反馈总结成规则，主动触发 Skill 的更新。沉淀只需发生一次，之后的每一次执行都直接生效。',
       },
     ],
   },
