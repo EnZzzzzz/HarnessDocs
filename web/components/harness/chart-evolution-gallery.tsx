@@ -3,11 +3,8 @@
 import Image from 'next/image'
 import { useState } from 'react'
 
-type GalleryPoint = {
-  zh: string
-  en: string
-  desc: string
-}
+import type { Point } from './self-evolution-sections'
+import { PointDetailDialog } from './point-cards'
 
 type GalleryImage = {
   src: string
@@ -16,13 +13,18 @@ type GalleryImage = {
 }
 
 export function ChartEvolutionGallery({
+  id,
   points,
   images,
+  detailEyebrow,
 }: {
-  points: GalleryPoint[]
+  id: string
+  points: Point[]
   images: GalleryImage[]
+  detailEyebrow: string
 }) {
   const [activeIndex, setActiveIndex] = useState(0)
+  const [detailIndex, setDetailIndex] = useState<number | null>(null)
   const activeImage = images[activeIndex]
 
   return (
@@ -36,8 +38,12 @@ export function ChartEvolutionGallery({
               <button
                 type="button"
                 aria-pressed={isActive}
-                aria-controls="chart-evolution-figure"
-                onClick={() => setActiveIndex(index)}
+                aria-controls={id}
+                aria-label={`查看配图和详情：${point.zh}`}
+                onClick={() => {
+                  setActiveIndex(index)
+                  if (point.detail) setDetailIndex(index)
+                }}
                 className={`grid w-full grid-cols-[2rem_1fr] gap-3 rounded-2xl border p-4 text-left backdrop-blur-sm transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 ${
                   isActive
                     ? 'border-indigo-300 bg-indigo-50/80 shadow-sm ring-1 ring-indigo-200'
@@ -69,7 +75,7 @@ export function ChartEvolutionGallery({
       </ol>
 
       <figure
-        id="chart-evolution-figure"
+        id={id}
         aria-live="polite"
         className="md:col-start-2 md:self-center"
       >
@@ -87,6 +93,14 @@ export function ChartEvolutionGallery({
           {activeImage.caption}
         </figcaption>
       </figure>
+
+      <PointDetailDialog
+        point={detailIndex == null ? null : points[detailIndex]}
+        pointIndex={detailIndex}
+        detailEyebrow={detailEyebrow}
+        image={detailIndex == null ? undefined : images[detailIndex]}
+        onClose={() => setDetailIndex(null)}
+      />
     </div>
   )
 }

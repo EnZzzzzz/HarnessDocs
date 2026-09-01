@@ -1,11 +1,18 @@
 import Image from 'next/image'
 
 import { ChartEvolutionGallery } from './chart-evolution-gallery'
+import { PointCards } from './point-cards'
 
-type Point = {
+export type Point = {
   zh: string
   en: string
   desc: string
+  /** 提供时卡片可点击，打开 Q&A 详解弹层（见 point-cards.tsx） */
+  detail?: {
+    intro: string
+    source: string
+    qa: { q: string; a: string[] }[]
+  }
 }
 
 export type Section = {
@@ -14,6 +21,8 @@ export type Section = {
   title: string
   intro: string
   points: Point[]
+  /** 要点详解弹层左上角的小标题，如「WikiSkill · 概念详解」 */
+  detailEyebrow?: string
   /** 省略时右侧渲染虚线占位框，待后续补图 */
   image?: {
     src: string
@@ -116,9 +125,9 @@ const SECTIONS: Section[] = [
   {
     id: 'se-expert-driven',
     eyebrow: 'Self-Evolution · 04',
-    title: '群智迁移积累专家知识资产',
+    title: 'Harness 和专家知识层是两个正交维度，需要共同进化',
     intro:
-      'Skill 是有保质期的——企业的规范经常更新，Skill 就跟着老化。区别在于：老化的 Skill，是等人来修，还是自己长出新版本。',
+      '我们常有的一个误区，是只盯着 Harness 的进化：这个不够好用就换一个，明天出现更好的就再换。Harness 确实要进化，但它还有一个正交的维度——专家知识层同样需要进化：企业的内部规范一升级、行业的专家标准一演进，它也要跟着不停地迭代。',
     points: [
       {
         zh: 'Skill 会老化，需要不停维护',
@@ -181,7 +190,7 @@ const SECTIONS: Section[] = [
   {
     id: 'se-wikiskill',
     eyebrow: 'Self-Evolution · 06',
-    title: 'WikiSkill：给经验建一座「维基百科」',
+    title: 'Google WikiSkill：给经验建一座「维基百科」',
     intro:
       '现有技能进化方法改完技能就把分析过程丢了——上次为什么失败、哪个改法被拒，全都散落在历史记录里。WikiSkill（Google Research / Virginia Tech，2026-08-27 发布，arXiv:2608.27454）把 Agent 经验编译成持续生长的知识库，让技能进化站在知识之上，而不是每轮从零开始。',
     points: [
@@ -189,23 +198,176 @@ const SECTIONS: Section[] = [
         zh: '三层架构：原始记录 → 知识 → 技能',
         en: 'Raw → Wiki → Skills',
         desc: 'Raw 层保存完整执行轨迹，只进不出、永不修改；Wiki 层把零散轨迹编译成结构化知识（patterns/、logs.md、skill-impact.md 账本）；Skills 层是当前生效的技能，每个技能附 PURPOSE.md 记录设计意图。',
+        detail: {
+          intro:
+            'WikiSkill 的回答不是一个新算法，而是一套架构设计：把「经验」和「知识」和「技能」分成三层，各管各的。',
+          source: '内容摘录自 docs/wikiskill/WikiSkill论文解读.md「二、怎么解决的？」',
+          qa: [
+            {
+              q: '第一层：原始记录层（Raw Layer）',
+              a: [
+                '保存每次执行的完整轨迹——Agent 的推理过程、调了哪些工具、返回了什么、最后答案是什么。',
+                '这一层只进不出、永不修改，因为后面所有分析都要回溯「当时到底发生了什么」。原始数据要是丢了，进化就成了无源之水。',
+              ],
+            },
+            {
+              q: '第二层：知识层（Wiki Layer）',
+              a: [
+                '这是整篇论文的核心。它把零散的执行轨迹「编译」成结构化的知识，并且跨轮次持续累积。里面有三样东西：',
+                'patterns/：每个模式一个文件，记录一个具体的失败原因或成功策略，附可操作的修复方案；',
+                'logs.md：进化日志，按轮次记录发现了什么、改了什么；',
+                'skill-impact.md：技能改动的「账本」——哪些改动被接受、哪些被拒绝，附完整 diff。',
+              ],
+            },
+            {
+              q: '第三层：技能层（Skills Layer）',
+              a: [
+                '当前生效的技能集合，Agent 干活时直接读。每个技能除了正文 SKILL.md，还有一份 PURPOSE.md，记录「这个技能是为了解决 Wiki 里的哪个问题而建的」。',
+                '这样将来要改技能时，能回溯到当初的设计意图，而不是盲目打补丁。',
+              ],
+            },
+          ],
+        },
       },
       {
         zh: '知识永不回滚，与技能分离',
         en: 'Wiki Never Rolls Back',
         desc: '技能改坏了可以回滚技能，但 Wiki 里的积累一条不删——被否决过的改法记在账本上，下一轮不会再被重复提出。知识回答「我们知道什么」，技能回答「该怎么做」。',
+        detail: {
+          intro:
+            'Wiki 层有两个关键设计，决定了它和普通「备忘录」不一样：Wiki 永不回滚，知识和技能分离。',
+          source: '内容摘录自 docs/wikiskill/WikiSkill论文解读.md「一、问题是什么？」与「二、怎么解决的？」',
+          qa: [
+            {
+              q: '它要解决的老毛病是什么？',
+              a: [
+                '现有的技能进化方法（比如 EvoSkill、Trace2Skill、SkillOpt）都是同一个套路：分析执行记录 → 直接改技能 → 验证一下 → 不行就回滚。',
+                '问题来了：改技能时的那些分析过程——「上次为什么失败」、「这个改法为什么被拒」、「哪个错误反复出现」——全都散落在历史记录里，用完就丢了。',
+                '打个比方：这就像一个工程师每次修 bug 都从头排查，从不写复盘文档。修完这个 bug，他对系统的理解就清零了。下一次改代码，他可能又把上次被否决的方案重新提一遍——因为他根本不记得上次否决过。',
+              ],
+            },
+            {
+              q: '关键设计一：Wiki 永不回滚',
+              a: [
+                '技能改坏了可以回滚技能，但知识库里的积累一条不删。',
+                '这样下一轮就不会再提「上次已经被拒过的改法」——skill-impact.md 这本账记着哪些改动被接受、哪些被拒绝，附完整 diff。',
+              ],
+            },
+            {
+              q: '关键设计二：知识和技能分离',
+              a: [
+                '知识回答「我们知道什么」，技能回答「我们该怎么做」。',
+                '以前的方法把两者混在一起，改技能时把背后的推理上下文也改没了。',
+              ],
+            },
+          ],
+        },
       },
       {
         zh: '四步循环，角色分工',
         en: 'Run → Distill → Propose → Gate',
         desc: 'Inference Agent 带技能跑任务，但不许看 Wiki——否则直接查答案，轨迹失去分析价值；Wiki Maintainer 对成败轨迹做根因分析、更新知识；Skill Proposer 基于 Wiki 提案；候选技能在验证集跑分，提分接受、掉分回滚。',
+        detail: {
+          intro:
+            '三层之间怎么转起来？每一轮迭代走四步：干活、沉淀、提案、把关。',
+          source: '内容摘录自 docs/wikiskill/WikiSkill论文解读.md「二、怎么解决的？」',
+          qa: [
+            {
+              q: '第一步：干活',
+              a: [
+                'Inference Agent 带着当前技能在训练任务上跑，轨迹存进原始记录层。',
+                '注意，这时它不许看 Wiki——否则它直接查答案，轨迹就失去了参考价值。',
+              ],
+            },
+            {
+              q: '第二步：沉淀',
+              a: [
+                'Wiki Maintainer 分析采样的成功和失败轨迹，做根因分析，更新 Wiki 里的模式目录和日志。',
+              ],
+            },
+            {
+              q: '第三步：提案',
+              a: [
+                'Skill Proposer 读 Wiki 索引、查改动账本、按需翻具体轨迹，提出一次技能创建或修改。',
+              ],
+            },
+            {
+              q: '第四步：把关',
+              a: [
+                '候选技能在验证集上跑分，提分就接受，掉分就回滚技能——但 Wiki 不受影响。',
+              ],
+            },
+            {
+              q: '这套循环的本质是什么？',
+              a: [
+                '说白了，整个机制就是让经验第一次有了清晰的「编译过程」：从具体轨迹中提炼模式，再从模式中生成操作规则。',
+                '没有 Wiki 这一层，提案者每轮都在从零分析原始轨迹；有了这一层，它站在越积越厚的知识之上做决策。',
+              ],
+            },
+          ],
+        },
       },
       {
         zh: '越强的模型涨得越多，Wiki 层是关键',
         en: 'Evidence',
         desc: '五个基准平均分：Qwen-3.6-27B 从 39.4 涨到 63.3；9B 模型加技能（47.4）反超无技能的 27B（39.4）。消融拿掉 Wiki 层，平均分从 63.7% 跌回 48.7%——知识积累才是涨分来源。',
+        detail: {
+          intro:
+            '论文在 5 个基准（数学推理 LiveMath、网页搜索问答 SealQA、表格操作 SpreadsheetBench、长文档问答 OfficeQA、具身交互 ALFWorld）、5 个模型上评测：技能在训练集上进化、验证集上取舍、最终只在没见过的测试集上报分；所有方法从空技能集开始，完整流程独立跑 3 次取平均，显著性用 paired bootstrap 检验（p<0.05）。主要结论有三个。',
+          source: '内容摘录自 docs/wikiskill/WikiSkill论文解读.md「三、指标提升了多少？」',
+          qa: [
+            {
+              q: '结论一：全面涨分，越强的模型涨得越多',
+              a: [
+                '对比无技能基线，五个基准的平均分：Qwen-3.5-4B 从 26.2 涨到 38.5（+12.3），Qwen-3.5-9B 从 29.9 涨到 47.4（+17.5），Qwen-3.6-27B 从 39.4 涨到 63.3（+23.9），Gemma-4-31B 从 41.3 涨到 54.9，Gemini-3.5-Flash 从 49.5 涨到 68.1。对比最强的已有技能进化方法，也分别高出 3.3 到 12.0 分。',
+                '这里有个值得停一下想一想的发现：技能进化和模型规模是互补关系，而不是替代关系——越大的模型，越能从技能中榨出价值。但同时，技能也能弥补规模差距：9B 模型加上 WikiSkill 后平均 47.4%，反超了不用技能的 27B 模型（39.4%）。',
+              ],
+            },
+            {
+              q: '结论二：技能可以跨模型迁移',
+              a: [
+                '甚至「别人进化的技能比自己进化的更好用」：Qwen-3.5-9B 用 27B 进化出来的技能，在 ALFWorld 上达到 70.2%，比用它自己进化的技能（63.4%）还高；连 4B 小模型进化的技能都能帮到 Gemma-4-31B。',
+                '这说明「从经验中发现好策略」和「把策略执行好」是两种能力，可以跨模型分工。当然也有反面教材：4B 的技能里有大量「低配绕行方案」，塞给 Gemini-3.5-Flash 后反而把它的表格操作从 50.5% 拖到了 18.1%——技能里写的是通用流程还是模型专属补丁，决定了迁移的成败。',
+              ],
+            },
+            {
+              q: '结论三：消融证明 Wiki 层是涨分的关键',
+              a: [
+                '拿掉 Wiki、让提案者回到「每次从零分析」的老路，平均分从 63.7% 掉到 48.7%，回落 15 分，基本跌回传统方法的水平。',
+                '反过来，训练时如果让干活的 Agent 也能看 Wiki，成绩反而从 63.7% 降到 60.9%——因为它直接从 Wiki 查答案，轨迹变得没有分析价值了。这两个方向的消融，把「知识该给谁看、不该给谁看」的边界也讲清楚了。',
+              ],
+            },
+          ],
+        },
       },
     ],
+    images: [
+      {
+        src: '/outline/wikiskill-three-layer-architecture.png',
+        alt: '执行轨迹经过知识层整理，最终被蒸馏成可直接调用的技能模块',
+        caption:
+          '三层不是三个副本，而是一条逐步压缩信息的编译链：底层保留不可变的完整轨迹，中层把分散证据组织为模式、日志与改动账本，顶层只留下能在任务中直接执行的技能。越往上越精炼，越往下越便于追溯。',
+      },
+      {
+        src: '/outline/wikiskill-persistent-wiki.png',
+        alt: '稳定的知识档案持续保留，上方技能模块可以替换或回滚',
+        caption:
+          '知识库像只追加的档案室，既保存有效规律，也记住被验证集否决的方案；技能则是可拆换的执行模块。候选技能表现变差时，只回滚上层模块，底层知识与失败原因仍然保留，避免下一轮重走旧路。',
+      },
+      {
+        src: '/outline/wikiskill-four-stage-loop.png',
+        alt: '任务执行、知识蒸馏、技能提案与验证把关组成四阶段闭环',
+        caption:
+          '四个角色彼此隔离：执行者只带当前技能跑任务，维护者从轨迹中提炼知识，提案者据此只生成一次技能改动，验证门再决定接受或回滚。隔离 Wiki 与执行者，是为了让采集到的轨迹仍能反映真实能力。',
+      },
+      {
+        src: '/outline/wikiskill-evidence.png',
+        alt: '不同规模模型借助共享知识层获得提升，移除知识层后表现明显下降',
+        caption:
+          '持续知识对不同规模模型都有放大作用，并且强模型能把技能中的策略执行得更充分；但拿掉 Wiki 层后，平均分会从 63.7% 降到 48.7%。这说明提升并非只来自多写几条提示，而来自跨轮累积、可追溯的知识。',
+      },
+    ],
+    detailEyebrow: 'WikiSkill · 概念详解',
   },
   {
     id: 'se-hermes',
@@ -302,30 +464,18 @@ function SeSection({ section }: { section: Section }) {
         </header>
 
         {section.images ? (
-          <ChartEvolutionGallery points={section.points} images={section.images} />
+          <ChartEvolutionGallery
+            id={`${section.id}-figure`}
+            points={section.points}
+            images={section.images}
+            detailEyebrow={section.detailEyebrow ?? `${section.title} · 概念详解`}
+          />
         ) : (
           <>
-            <ol className="space-y-3 md:col-start-1 md:self-center">
-              {section.points.map((point, i) => (
-                <li
-                  key={point.en}
-                  className="grid grid-cols-[2rem_1fr] gap-3 rounded-2xl border border-slate-200/80 bg-white/55 p-4 backdrop-blur-sm"
-                >
-                  <span className="pt-0.5 font-mono text-[11px] font-semibold text-indigo-500">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <div>
-                    <h3 className="text-sm font-bold tracking-tight text-slate-900">
-                      {point.zh}
-                      <span className="ml-2 text-[11px] font-medium tracking-wide text-slate-400">
-                        {point.en}
-                      </span>
-                    </h3>
-                    <p className="mt-1 text-xs leading-5 text-slate-500">{point.desc}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
+            <PointCards
+              points={section.points}
+              detailEyebrow={section.detailEyebrow ?? `${section.title} · 概念详解`}
+            />
 
             <figure className="md:col-start-2 md:self-center">
               {section.image ? (
