@@ -93,6 +93,52 @@ rAF 节流监听滚动，每个 `data-fade-row` 按与视口中心的距离实�
 - `OutlineSectionData`：id / kicker / title（大标题）/ intro / cards；`OutlineCard`：badge / title / en / tagline / detail / points（每条含 text + source 出处）
 - 每章一个文件（现仅存 `sections/05-self-evolution.ts`），内容经核实：事实优先取自时间线事件卡片，其余按大纲标注的出处（Cordis 论文翻译、tibo 访谈纪要、Continual-Harness PDF、Anthropic/智谱/HarnessEval 原文、知识库 `design-harness/` 笔记）
 
+## 全局详情页卡片规范
+
+所有由页面卡片打开的详情弹层，以 `components/outline/outline-section.tsx` 的 `OutlineSection` 详情卡为全局设计基准。Harness 六职责、Outline、WikiSkill / Hermes 要点、Cordis 等详情组件即使数据结构不同，也应复用下面的视觉层级和交互规则；不要各自发明另一套弹层外观。
+
+通用实现位于 `components/detail-dialog-frame.tsx`：WikiSkill、Hermes 和 Cordis 的详情内容统一通过 `DetailDialogFrame` 渲染；`OutlineSection` 保留为视觉与交互基准。后续新增详情页时优先复用共享骨架，不复制遮罩、滚动锁定、滚动条和关闭逻辑。
+
+### 一、整体骨架
+
+- 弹层在视口中央显示，外层使用全屏半透明深色遮罩与轻量 `backdrop-blur`；点击遮罩或按 `Esc` 关闭，打开期间锁定页面背景滚动。
+- 主卡使用白色背景、`rounded-3xl`、细白边框和柔和靛蓝阴影；最大高度统一为 `85vh`，由卡片内部承担滚动，页面本身不能跟随滚动。
+- 主卡必须设置 `[transform:translateZ(0)]`，建立独立合成层，避免遮罩的 `backdrop-blur` 把弹层内容一起模糊。
+- 有封面或正文配图的详情使用较宽容器，基准为 `max-w-3xl`；纯文字详情使用 `max-w-xl`。移动端保留页面安全边距，不能贴住视口边缘。
+- 卡片采用纵向两段结构：顶部封面固定不滚动；下方为 `flex min-h-0 flex-1 flex-col` 的内容区。不要把整个卡片做成单一滚动容器，否则长文滚动后会丢失封面的视觉锚点。
+
+### 二、顶部配图
+
+- 只要详情数据提供封面图，图片必须位于整张详情卡的最顶部、标题和正文之前，不得插在徽章之后或正文中间。
+- 封面区域横向铺满卡片，固定为 `h-52 sm:h-64`，使用 `shrink-0`，底部带一条很淡的靛蓝分隔线；图片使用 `h-full w-full object-cover`，不额外增加内边距和圆角。
+- 封面沿用卡片正面的同一张图和同一条语义化 `alt`。裁切时必须保住中央核心隐喻；不能为了铺满而拉伸变形。
+- 如果没有封面图，直接省略整个封面区域，让徽章、关闭按钮和标题自然成为卡片顶部；不渲染虚线占位框、空白色块或默认装饰图。
+- 封面图负责概括主题；正文中的截图、图表和证据图仍按内容顺序穿插，使用 `rounded-xl`、细边框及图注，不能拿第一张证据截图冒充封面。
+
+### 三、头部与正文层级
+
+- 内容区基准内边距为 `p-8`。顶部第一行只放编号/类别徽章和弱化的关闭按钮；二者使用常规 `flex items-center justify-between` 布局，关闭按钮不能绝对定位悬浮在封面或标题上。
+- 关闭按钮使用淡灰色小尺寸 X，默认不抢视觉焦点，悬停时才加深；仍须保留清晰的 `aria-label` 和键盘焦点状态。
+- 中文标题使用 `text-2xl font-bold tracking-tight text-slate-900`；英文副标题紧跟中文标题，使用更小、更淡的文字，不能与主标题争夺层级。
+- 正文使用 `text-sm leading-relaxed text-slate-600`，自然段之间保持稳定间距。详情按“问题 → 做法 → 效果”或 Q&A 顺序组织；来源、URL 与图注使用更小、更淡的辅助文字。
+- 详情中的图片必须有语义化 `alt`。有说明或来源时使用紧邻图片的 `figcaption`；长 URL 允许 `break-all`，但不得挤压正文宽度。
+
+### 四、滚动区与滚动条
+
+- 只有标题、正文、正文配图和来源所在的内容主体滚动；顶部封面、徽章与关闭按钮固定在原位。滚动容器使用 `min-h-0 flex-1 overflow-y-auto pr-2`。
+- 滚动条默认透明隐藏，鼠标悬停滚动区或用户正在滚动时才显示。使用 CSS 变量 `--sb` 控制颜色：默认 `transparent`，hover 或 `[data-scrolling]` 时切换为 `#e2e8f0`。
+- Firefox 使用 `[scrollbar-color:var(--sb)_transparent] [scrollbar-width:thin]`；WebKit 使用 1.5 宽度、透明轨道和圆角滑块。不要使用浏览器默认的宽重滚动条。
+- `scroll` 事件触发 `data-scrolling`，停止滚动约 800ms 后自动隐藏；计时器在弹层关闭和组件卸载时清理。
+- 滚动到底部后，遮罩与页面仍保持静止；滚轮事件不能穿透到底层页面。
+
+### 五、验收标准
+
+- 在桌面视口下，封面完整占据卡片顶部，正文再长也不会让弹层超过 `85vh`。
+- 在窄屏下，卡片保留安全边距，封面不变形，标题不与关闭按钮重叠，正文可以独立滚动。
+- 分别验证：有封面、无封面、纯文字、包含多张正文证据图四种状态。
+- 验证点击遮罩、关闭按钮、`Esc` 三种退出方式，以及弹层开关前后背景滚动锁定是否正确恢复。
+- 检查滚动条默认不可见、hover/滚动时出现、停止约 800ms 后淡出；同时检查 Firefox 与 Chromium 的细滚动条表现。
+
 ## Agent 自进化章节（`components/harness/self-evolution-sections.tsx`）
 
 「Skill 即资产」之后先是提问页 `#se-questions`（`components/harness/se-questions-section.tsx`，版式与 `#skill-questions` 一致：大标题「Agent 的自进化，是进化什么？」+ 四个散落问题气泡），随后进入自进化章节。内容来自 `docs/agent自进化-字幕整理.md`（抖音视频字幕），共 8 页：`#se-what`（Agent 的自进化，解决的是 T+1 的问题）/ `#se-vs-reflection`（自进化 vs 人工进化：异步沉淀 / Harness 自驱 / 作用于「T+1」任务）/ `#se-reward-driven`（奖励信号驱动：专家由 Skill 编写者转为评审者，Harness 从轨迹与评审意见中识别正负反馈；配图 `public/harness/reward-driven-ai-expert-loop.png`）/ `#se-expert-driven`（Harness 和专家知识层是两个正交维度，需要共同进化：Skill 会老化需要不停维护，Harness 主动沉淀和管理 Skill，专家的一次发现触发模型自动总结并更新 Skill；配图 `public/harness/harness-proactive-knowledge-distillation.png`）/ `#se-layers`（进化的五层）/ `#se-wikiskill`（WikiSkill 论文：Raw → Wiki → Skills 三层架构、知识永不回滚、四步循环角色分工、消融证明 Wiki 层是涨分关键；右侧暂为占位框，内容见 `docs/wikiskill/WikiSkill论文解读.md`。四张要点卡均带 `detail` 字段，点击打开 Q&A 详解弹层，弹层实现复用 cordis-section 的模式并抽为通用组件 `components/harness/point-cards.tsx`——任何要点带 `detail`（intro + source + qa）即自动变为可点击卡片；详解正文摘录自论文解读原文）/ `#se-hermes`（Hermes 实例：Learning Loop 四步闭环、Skill+Memory 双资产制、写满报错倒逼精简、后台异步复盘，配图 `public/outline/hermes-memory-files.png`，调研见 `docs/hermes记忆沉淀调研.md`）/ `#se-flywheel`（经验飞轮）。前四页由 `SelfEvolutionSections` 连续渲染；`#se-flywheel` 单独拆为 `SelfEvolutionFlywheelSection`（复用同一 `SeSection` 版式），挪到整页最后、Cordis 之后作为收尾。

@@ -1,7 +1,9 @@
 'use client'
 
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+
+import { DetailDialogFrame } from '../detail-dialog-frame'
 
 const POINTS = [
   {
@@ -243,20 +245,6 @@ export function CordisSection() {
   const activePoint = POINTS[activeIndex]
   const detailPoint = detailIndex == null ? null : POINTS[detailIndex]
 
-  // 详情弹层打开期间：Esc 关闭 + 锁定页面滚动
-  useEffect(() => {
-    if (detailIndex == null) return
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setDetailIndex(null)
-    }
-    document.addEventListener('keydown', onKeyDown)
-    document.body.style.overflow = 'hidden'
-    return () => {
-      document.removeEventListener('keydown', onKeyDown)
-      document.body.style.overflow = ''
-    }
-  }, [detailIndex])
-
   return (
     <section
       id="cordis"
@@ -367,55 +355,23 @@ export function CordisSection() {
 
       {/* 概念详解弹层：点击任意卡片打开对应概念的 Q&A 详解 */}
       {detailPoint && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="cordis-detail-title"
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8"
+        <DetailDialogFrame
+          titleId="cordis-detail-title"
+          eyebrow={`Cordis · 概念详解 ${String((detailIndex ?? 0) + 1).padStart(2, '0')}`}
+          title={
+            <>
+              {detailPoint.zh}
+              <span className="ml-2.5 text-sm font-medium tracking-wide text-slate-400">
+                {detailPoint.en}
+              </span>
+            </>
+          }
+          cover={{ src: detailPoint.image, alt: detailPoint.alt }}
+          onClose={() => setDetailIndex(null)}
         >
-          <button
-            type="button"
-            aria-label="关闭详情"
-            onClick={() => setDetailIndex(null)}
-            className="absolute inset-0 cursor-pointer bg-slate-950/40 backdrop-blur-sm"
-          />
-          <div className="relative max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-3xl border border-white/80 bg-white/95 p-6 shadow-[0_32px_80px_-32px_rgba(30,40,90,0.5)] sm:p-10">
-            <div className="mb-7 aspect-[3/2] overflow-hidden rounded-2xl bg-slate-50">
-              <Image
-                src={detailPoint.image}
-                alt={detailPoint.alt}
-                width={1536}
-                height={1024}
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div className="flex items-start justify-between gap-6">
-              <div>
-                <p className="text-xs font-semibold tracking-[0.18em] text-indigo-600 uppercase">
-                  Cordis · 概念详解 {String((detailIndex ?? 0) + 1).padStart(2, '0')}
-                </p>
-                <h3
-                  id="cordis-detail-title"
-                  className="mt-3 bg-gradient-to-br from-slate-950 via-slate-800 to-indigo-900 bg-clip-text text-2xl font-bold tracking-tight text-transparent sm:text-3xl"
-                >
-                  {detailPoint.zh}
-                  <span className="ml-3 align-middle text-sm font-medium tracking-wide text-slate-400">
-                    {detailPoint.en}
-                  </span>
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-slate-600">
-                  {detailPoint.detail.intro}
-                </p>
-              </div>
-              <button
-                type="button"
-                aria-label="关闭"
-                onClick={() => setDetailIndex(null)}
-                className="shrink-0 cursor-pointer rounded-full border border-slate-200 px-3 py-1.5 text-xs font-medium text-slate-500 transition-colors hover:border-indigo-200 hover:text-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-              >
-                关闭
-              </button>
-            </div>
+            <p className="mt-4 text-sm leading-relaxed text-slate-600">
+              {detailPoint.detail.intro}
+            </p>
 
             <div className="mt-8 space-y-7">
               {detailPoint.detail.qa.map((item, i) => (
@@ -456,8 +412,7 @@ export function CordisSection() {
             <p className="mt-8 rounded-2xl border border-indigo-100 bg-indigo-50/60 px-4 py-3 text-xs leading-5 text-indigo-700">
               {detailPoint.detail.source}，完整译文见 docs/deepseek-harness/ 目录。
             </p>
-          </div>
-        </div>
+        </DetailDialogFrame>
       )}
     </section>
   )

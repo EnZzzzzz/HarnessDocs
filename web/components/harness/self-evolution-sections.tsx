@@ -517,6 +517,7 @@ function SeSection({ section }: { section: Section }) {
             <PointCards
               points={section.points}
               detailEyebrow={section.detailEyebrow ?? `${section.title} · 概念详解`}
+              detailImage={section.image}
             />
 
             <figure className="md:col-start-2 md:self-center">
