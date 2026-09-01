@@ -98,33 +98,8 @@ const SECTIONS: Section[] = [
     },
   },
   {
-    id: 'se-reward-driven',
-    eyebrow: 'Self-Evolution · 03',
-    title: '奖励信号驱动',
-    intro:
-      '人写的 Skill 不一定是最适合 AI 的——更可行的思路是目标导向加专家评审：AI 负责写，人负责评，奖励信号驱动 Skill 一轮轮迭代到达标。',
-    points: [
-      {
-        zh: '专家角色：从 Skill 编写者到评审者',
-        en: 'Expert as Reviewer',
-        desc: '过去专家知识靠人拆解场景、总结成 Skill 的知识体系，里面藏着大量人工。现在构建好目标测试集，由 AI 去编写 Skill，人只给出评审意见，AI 根据意见反复调整 Skill，直到指标满足要求——人不再需要关心 Skill 怎么写。',
-      },
-      {
-        zh: 'Harness 角色：识别奖励信号并自我迭代',
-        en: 'Detect & Self-Iterate',
-        desc: 'Harness 要从历史轨迹里识别正反馈与负反馈：踩坑的过程——报错、参数问题、框架选型失误——都是负反馈；还有来自人工评审的意见，比如风格要改成什么样、按钮要放在什么位置，同样是驱动迭代的奖励信号。',
-      },
-    ],
-    image: {
-      src: '/harness/reward-driven-ai-expert-loop.png',
-      alt: 'AI 编写 Skill，经测试集评估和专家评审后吸收反馈并持续迭代至达标',
-      caption:
-        'AI 负责把目标转成 Skill，并在测试集上反复验证；专家不再亲自编写，而是评审结果、给出反馈。Harness 将这些正负奖励信号送回下一轮编写，直到 Skill 达到目标指标。',
-    },
-  },
-  {
     id: 'se-expert-driven',
-    eyebrow: 'Self-Evolution · 04',
+    eyebrow: 'Self-Evolution · 03',
     title: 'Harness 和专家知识层是两个正交维度，需要共同进化',
     intro:
       '我们常有的一个误区，是只盯着 Harness 的进化：这个不够好用就换一个，明天出现更好的就再换。Harness 确实要进化，但它还有一个正交的维度——专家知识层同样需要进化：企业的内部规范一升级、行业的专家标准一演进，它也要跟着不停地迭代。',
@@ -145,6 +120,31 @@ const SECTIONS: Section[] = [
       alt: 'Harness 主动收集专家反馈和任务轨迹，自动蒸馏并写回 Skill v2，供后续多个 Agent 复用',
       caption:
         '专家只需指出一次问题，Harness 就会主动捕获反馈与任务轨迹，在后台蒸馏成规则并写回新版 Skill；更新后的知识资产随即被后续任务和更多 Agent 共同复用。',
+    },
+  },
+  {
+    id: 'se-reward-driven',
+    eyebrow: 'Self-Evolution · 04',
+    title: 'Human in the Loop 到 Self Evolution',
+    intro:
+      '人写的 Skill 不一定是最适合 AI 的——更可行的思路是目标导向加专家评审：AI 负责写，人负责评，奖励信号驱动 Skill 一轮轮迭代到达标。',
+    points: [
+      {
+        zh: '专家角色：从 Skill 编写者到评审者',
+        en: 'Expert as Reviewer',
+        desc: '过去专家知识靠人拆解场景、总结成 Skill 的知识体系，里面藏着大量人工。现在构建好目标测试集，由 AI 去编写 Skill，人只给出评审意见，AI 根据意见反复调整 Skill，直到指标满足要求——人不再需要关心 Skill 怎么写。',
+      },
+      {
+        zh: 'Harness 角色：识别奖励信号并自我迭代',
+        en: 'Detect & Self-Iterate',
+        desc: 'Harness 要从历史轨迹里识别正反馈与负反馈：踩坑的过程——报错、参数问题、框架选型失误——都是负反馈；还有来自人工评审的意见，比如风格要改成什么样、按钮要放在什么位置，同样是驱动迭代的奖励信号。',
+      },
+    ],
+    image: {
+      src: '/harness/reward-driven-ai-expert-loop.png',
+      alt: 'AI 编写 Skill，经测试集评估和专家评审后吸收反馈并持续迭代至达标',
+      caption:
+        'AI 负责把目标转成 Skill，并在测试集上反复验证；专家不再亲自编写，而是评审结果、给出反馈。Harness 将这些正负奖励信号送回下一轮编写，直到 Skill 达到目标指标。',
     },
   },
   {
