@@ -75,6 +75,10 @@ const POINTS = [
             '时间维度对应「修改」：组件被移除时，它对共享环境做的每一处修改——资源分配、事件注册、状态变更——都必须被完全、有序地逆转。',
             '空间维度对应「依赖」：组件之间的依赖必须能以结构化、可验证的方式声明、发现和解析；依赖发生变化时，还要协调各方组件的生命周期。',
           ],
+          image: '/outline/cordis-temporal-spatial-metaphor.png',
+          alt: '左侧沿雪地脚印按相反顺序撤销组件副作用，右侧供给组件下线后依赖链上的组件同步失活而独立支路保持运行',
+          caption:
+            '时间可组合性像沿雪地脚印原路退回：后发生的修改先撤销，直到环境恢复为出发前的状态。空间可组合性像一张声明清楚的供电网络：上游供给下线时，所有直接和间接依赖它的组件一起失活；没有依赖关系的支路不受影响。',
         },
         {
           q: '静态组合不也有这两个问题吗？',
@@ -376,6 +380,15 @@ export function CordisSection() {
             className="absolute inset-0 cursor-pointer bg-slate-950/40 backdrop-blur-sm"
           />
           <div className="relative max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-3xl border border-white/80 bg-white/95 p-6 shadow-[0_32px_80px_-32px_rgba(30,40,90,0.5)] sm:p-10">
+            <div className="mb-7 aspect-[3/2] overflow-hidden rounded-2xl bg-slate-50">
+              <Image
+                src={detailPoint.image}
+                alt={detailPoint.alt}
+                width={1536}
+                height={1024}
+                className="h-full w-full object-cover"
+              />
+            </div>
             <div className="flex items-start justify-between gap-6">
               <div>
                 <p className="text-xs font-semibold tracking-[0.18em] text-indigo-600 uppercase">
@@ -420,6 +433,22 @@ export function CordisSection() {
                       </p>
                     ))}
                   </div>
+                  {'image' in item ? (
+                    <figure className="mt-5">
+                      <div className="aspect-[3/2] overflow-hidden rounded-2xl border border-slate-200/80 bg-slate-50">
+                        <Image
+                          src={item.image!}
+                          alt={item.alt ?? ''}
+                          width={1536}
+                          height={1024}
+                          className="h-full w-full object-cover"
+                        />
+                      </div>
+                      <figcaption className="mt-2.5 px-1 text-[11px] leading-5 text-slate-500">
+                        {item.caption}
+                      </figcaption>
+                    </figure>
+                  ) : null}
                 </section>
               ))}
             </div>

@@ -107,7 +107,9 @@ rAF 节流监听滚动，每个 `data-fade-row` 按与视口中心的距离实�
 
 ## Cordis 时空可组合性段落（`components/harness/cordis-section.tsx`）
 
-全页最后一章（`#cordis`），总结论文 *A Programming Paradigm for Spatiotemporal Composability*（DeepSeek Harness 底层插件框架 Cordis 的理论基础；原文与全文翻译在 `docs/deepseek-harness/`）。复用「Skill 即资产」的通栏版式：左侧五张编号要点卡（动态组合问题 → 时间×空间两维度 → 可逆效应/响应式共效应 → 上下文范式 → Cordis 实现与 Koishi 验证），右侧论文信息卡片（作者、发布、外链），无配图。
+全页最后一章（`#cordis`），总结论文 *A Programming Paradigm for Spatiotemporal Composability*（DeepSeek Harness 底层插件框架 Cordis 的理论基础；原文与全文翻译在 `docs/deepseek-harness/`）。复用「Skill 即资产」的通栏版式：左侧五张编号要点卡（动态组合问题 → 时间×空间两维度 → 可逆效应/响应式共效应 → 上下文范式 → Cordis 实现与 Koishi 验证），右侧显示当前要点对应的 3:2 配图和论文信息卡片（作者、发布、外链）；点击要点后，详情弹层顶部复用该要点的配图。
+
+「时间 × 空间」详情的首个问答另配一张双栏解释图 `public/outline/cordis-temporal-spatial-metaphor.png`：时间侧用雪地脚印表示副作用按 LIFO 原路撤销，空间侧用显式依赖网络表示上游供给下线后依赖组件联动失活、无关支路继续运行。
 
 ## 上下文纯净度对比段落（`components/harness/harness-purity-section.tsx`）
 
