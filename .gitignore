@@ -3,3 +3,8 @@
 opende-design
 # 下载的视频与字幕缓存（video-subtitle-extract skill）
 .cache/
+
+# RSI 独立站点与本地生成产物
+/web-rsi/
+/tmp/
+/output/
