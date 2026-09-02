@@ -38,11 +38,41 @@ export type Section = {
 
 const SECTIONS: Section[] = [
   {
+    id: 'rsi-what',
+    eyebrow: 'Recursive Self-Improvement · Definition',
+    title: 'RSI 是什么？',
+    intro:
+      'RSI（Recursive Self-Improvement，递归式自我改进）不是简单地“这一次做得比上一次好”，而是系统参与改进自身，并让改进后的系统更擅长完成下一轮自我改进。',
+    points: [
+      {
+        zh: 'Self-Improvement：系统改进自身',
+        en: 'Improve the System',
+        desc: '系统参与修改真正影响自身能力的部分，例如 Memory、Skill、Tool、Harness，乃至模型和训练流程，而不只是润色当前这一次的答案。',
+      },
+      {
+        zh: 'Recursion：更新后的系统继续改进',
+        en: 'V1 → V2 → V3',
+        desc: 'V1 参与产生 V2，V2 再参与产生 V3。改进不是一次性的补丁，而是一轮能够再次启动下一轮的持续闭环。',
+      },
+      {
+        zh: '关键：连“改进能力”也在变强',
+        en: 'Improve the Ability to Improve',
+        desc: '严格的 RSI 要求 T+1 不仅更会完成任务，也更会发现问题、提出修改、验证结果并更新自己——改进本身会增强下一次改进。',
+      },
+    ],
+    image: {
+      src: '/outline/harness-self-evolution-editorial.png',
+      alt: 'Harness 在检查、修改与验证的循环中持续升级自身能力的手绘插画',
+      caption:
+        '检查发现问题，修改系统自身，再通过验证决定是否保留更新；新版系统随后成为下一轮循环的起点。只有当这条闭环能够持续运行，并逐步增强系统的自我改进能力时，才是严格意义上的 RSI。',
+    },
+  },
+  {
     id: 'se-what',
     eyebrow: 'Self-Evolution · 01',
-    title: 'Agent 的自进化，解决的是 T+1 的问题',
+    title: '自进化 Agent，和传统 Agent 有什么不同？',
     intro:
-      '今天绝大多数 Agent 干了一万次活以后，和第一次干活的时候能力几乎没有区别——昨天踩过的坑今天继续踩，昨天走过的弯路今天继续走。',
+      '传统 Agent 解决的是 T0 问题，自进化解决的是 T+1 问题。',
     points: [
       {
         zh: '传统 Agent：任务结束就结束了',
@@ -70,9 +100,9 @@ const SECTIONS: Section[] = [
   {
     id: 'se-vs-reflection',
     eyebrow: 'Self-Evolution · 02',
-    title: '自进化 vs 人工进化',
+    title: 'RSI 的过程是用户无感知的',
     intro:
-      '自进化和人工进化的区别非常重要——这两个东西，根本就不是一个层级。',
+      '任务结束后，Harness 会在后台自动复盘、提炼经验并完成更新，不打断用户当下的工作。',
     points: [
       {
         zh: '异步沉淀',
@@ -98,36 +128,44 @@ const SECTIONS: Section[] = [
     },
   },
   {
-    id: 'se-expert-driven',
+    id: 'se-scenarios',
     eyebrow: 'Self-Evolution · 03',
-    title: 'Harness 和专家知识层是两个正交维度，需要共同进化',
+    title: '场景举例：RSI 如何在真实工作中发生？',
     intro:
-      '我们常有的一个误区，是只盯着 Harness 的进化：这个不够好用就换一个，明天出现更好的就再换。Harness 确实要进化，但它还有一个正交的维度——专家知识层同样需要进化：企业的内部规范一升级、行业的专家标准一演进，它也要跟着不停地迭代。',
+      'RSI 不要求专家先学会如何改 Harness，而是从真实生产反馈中发现问题，把一次次纠正自动沉淀成可审核、可复用的更新。',
     points: [
       {
-        zh: 'Skill 会老化，需要不停维护',
-        en: 'Continuous Maintenance',
-        desc: '企业规范一更新，存量 Skill 就过时了。被动模式下只能靠人主动发现结果不对、再手动去改规范、改 Skill——滞后、易漏，改完也只覆盖被注意到的那几处。',
+        zh: '设计规范：从大版本到持续的小版本',
+        en: 'Design Standard Evolution',
+        desc: '设计师先主导上线一套设计规范的大版本。进入生产环境后，RSI 持续收集“不够遵循规范”的真实反馈，自动归纳共性问题、修订规则并形成小版本，再提交给设计师审核发布。',
       },
       {
-        zh: 'Harness 主动沉淀和管理 Skill',
-        en: 'Proactive Curation',
-        desc: '有些专家非常懂领域知识，却不一定清楚怎么写好一个 Skill。交给 Harness 主动沉淀和管理：头一次使用时专家发现结果不符合新规范、把问题指出来——模型自己把这次反馈总结成规则，主动触发 Skill 的更新。沉淀只需发生一次，之后的每一次执行都直接生效。',
+        zh: '专家知识：在使用中自然长成 Skill',
+        en: 'Knowledge to Skill',
+        desc: '设计专家清楚领域知识，却未必擅长把知识写成 Skill。RSI 从专家的选择、纠正和评审中总结稳定做法，自动整理成 Skill；专家只需判断结果对不对，不必亲自研究 Skill 应该怎么写。',
       },
     ],
-    image: {
-      src: '/harness/harness-proactive-knowledge-distillation.png',
-      alt: 'Harness 主动收集专家反馈和任务轨迹，自动蒸馏并写回 Skill v2，供后续多个 Agent 复用',
-      caption:
-        '专家只需指出一次问题，Harness 就会主动捕获反馈与任务轨迹，在后台蒸馏成规则并写回新版 Skill；更新后的知识资产随即被后续任务和更多 Agent 共同复用。',
-    },
+    images: [
+      {
+        src: '/harness/design-harness-assets.png',
+        alt: '设计师的真实使用反馈回流到 Design Harness，推动设计规范持续形成新版本',
+        caption:
+          '设计规范的大版本由设计师主导；上线后，真实任务里的采用、调整与纠正持续回流，RSI 将共性反馈整理成小版本，经过审核后再发布。',
+      },
+      {
+        src: '/harness/harness-proactive-knowledge-distillation.png',
+        alt: 'Harness 从设计专家的反馈和任务轨迹中提炼知识并自动写成可复用 Skill',
+        caption:
+          '专家负责指出什么是对的，Harness 负责观察使用过程、提炼稳定规则并写成 Skill，让领域知识在真实工作中自然沉淀。',
+      },
+    ],
   },
   {
     id: 'se-reward-driven',
     eyebrow: 'Self-Evolution · 04',
-    title: 'Human in the Loop 到 Self Evolution',
+    title: '设计师的角色，正从执行者转向评审者',
     intro:
-      '人写的 Skill 不一定是最适合 AI 的——更可行的思路是目标导向加专家评审：AI 负责写，人负责评，奖励信号驱动 Skill 一轮轮迭代到达标。',
+      '从 Human in the Loop 到 Self Evolution',
     points: [
       {
         zh: '专家角色：从 Skill 编写者到评审者',
@@ -148,9 +186,34 @@ const SECTIONS: Section[] = [
     },
   },
   {
-    id: 'se-layers',
+    id: 'se-expert-driven',
     eyebrow: 'Self-Evolution · 05',
-    title: 'Agent 到底在进化什么？',
+    title: '为什么有了 Harness，还需要 RSI？',
+    intro:
+      'Harness 能力与专家知识是两个正交的增长维度：前者决定系统“怎么做”，后者决定系统“知道什么”，只有两者共同进化，Agent 才能持续变强。',
+    points: [
+      {
+        zh: 'Skill 会老化，需要不停维护',
+        en: 'Continuous Maintenance',
+        desc: '企业规范一更新，存量 Skill 就过时了。被动模式下只能靠人主动发现结果不对、再手动去改规范、改 Skill——滞后、易漏，改完也只覆盖被注意到的那几处。',
+      },
+      {
+        zh: 'Harness 主动沉淀和管理 Skill',
+        en: 'Proactive Curation',
+        desc: '有些专家非常懂领域知识，却不一定清楚怎么写好一个 Skill。交给 Harness 主动沉淀和管理：头一次使用时专家发现结果不符合新规范、把问题指出来——模型自己把这次反馈总结成规则，主动触发 Skill 的更新。沉淀只需发生一次，之后的每一次执行都直接生效。',
+      },
+    ],
+    image: {
+      src: '/harness/harness-proactive-knowledge-distillation.png',
+      alt: 'Harness 主动收集专家反馈和任务轨迹，自动蒸馏并写回 Skill v2，供后续多个 Agent 复用',
+      caption:
+        '专家只需指出一次问题，Harness 就会主动捕获反馈与任务轨迹，在后台蒸馏成规则并写回新版 Skill；更新后的知识资产随即被后续任务和更多 Agent 共同复用。',
+    },
+  },
+  {
+    id: 'se-layers',
+    eyebrow: 'Self-Evolution · 06',
+    title: 'RSI 到底在进化什么？',
     intro:
       '不是让 AI 自己去训练自己——模型参数的更新只是其中最重的一种。更现实的 Agent 自进化，至少可以分成五层。',
     points: [
@@ -189,7 +252,7 @@ const SECTIONS: Section[] = [
   },
   {
     id: 'se-wikiskill',
-    eyebrow: 'Self-Evolution · 06',
+    eyebrow: 'Self-Evolution · 07',
     title: 'Google WikiSkill：给经验建一座「维基百科」',
     intro:
       '现有技能进化方法改完技能就把分析过程丢了——上次为什么失败、哪个改法被拒，全都散落在历史记录里。WikiSkill（Google Research / Virginia Tech，2026-08-27 发布，arXiv:2608.27454）把 Agent 经验编译成持续生长的知识库，让技能进化站在知识之上，而不是每轮从零开始。',
@@ -371,7 +434,7 @@ const SECTIONS: Section[] = [
   },
   {
     id: 'se-hermes',
-    eyebrow: 'Self-Evolution · 07',
+    eyebrow: 'Self-Evolution · 08',
     title: 'Hermes：经验是怎么沉淀的？',
     intro:
       '自进化不是纸面概念——Nous Research 的开源 Agent 系统 Hermes 已经把经验沉淀做成了 Learning Loop，每次会话的经验都在后台被自动蒸馏成可复用资产。Continual-Harness 论文（arXiv:2605.09998）把这类闭环形式化，并把 Hermes 列为 assistant 任务的典型参照。',
@@ -453,7 +516,7 @@ const SECTIONS: Section[] = [
  */
 const FLYWHEEL_SECTION: Section = {
   id: 'se-flywheel',
-  eyebrow: 'Self-Evolution · 08',
+  eyebrow: 'Self-Evolution · 09',
   title: '经验飞轮：越工作越聪明的 Agent',
   intro:
     '真正的 Agent 应该形成它的经验飞轮——这也是未来判断一个 Agent 聪不聪明的新标准。',
@@ -868,7 +931,7 @@ export function SelfEvolutionFlywheelSection() {
  */
 const DATA_FLYWHEEL_SECTION: Section = {
   id: 'data-flywheel',
-  eyebrow: 'Self-Evolution · 09',
+  eyebrow: 'Self-Evolution · 10',
   title: '数据飞轮：Harness 专家知识层和 Model 轨迹数据积累',
   intro:
     '从数据的角度来看，要沉淀两类数据：一类是 Harness 的专家知识层，另一类是专家真实使用沉淀下来的高质量种子轨迹数据。',
