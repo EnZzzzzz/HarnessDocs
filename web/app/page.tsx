@@ -4,7 +4,7 @@ import { CordisSection } from '@/components/harness/cordis-section'
 import { HarnessDutySection } from '@/components/harness/harness-duty-section'
 import { HarnessPuritySection } from '@/components/harness/harness-purity-section'
 import { HarnessSection } from '@/components/harness/harness-section'
-import { ChartEvolutionSection, DataAugmentationSections, DataFlywheelSection, DeliveryModelsSection, DesignHarnessAssetsSection, SelfEvolutionFlywheelSection, SelfEvolutionSections } from '@/components/harness/self-evolution-sections'
+import { DataAugmentationSections, DataFlywheelSection, DeliveryModelsSection, DesignHarnessAssetsSection, SelfEvolutionFlywheelSection, SelfEvolutionSections } from '@/components/harness/self-evolution-sections'
 import { SeQuestionsSection } from '@/components/harness/se-questions-section'
 import { SkillAssetSection } from '@/components/harness/skill-asset-section'
 import { SkillQuestionsSection } from '@/components/harness/skill-questions-section'
@@ -166,9 +166,6 @@ export default function Page() {
 
     {/* 延伸：DesignHarness 自增长要沉淀的两类资产（右侧配图待补） */}
     <DesignHarnessAssetsSection />
-
-    {/* 举例：以图表场景跑通 Harness 自进化四步闭环（右侧配图待补） */}
-    <ChartEvolutionSection />
 
     {/* 深入：轨迹与思维链数据如何增广，以及大厂公开的共同流水线 */}
     <DataAugmentationSections />

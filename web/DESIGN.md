@@ -141,14 +141,19 @@ rAF 节流监听滚动，每个 `data-fade-row` 按与视口中心的距离实�
 
 ## Agent 自进化章节（`components/harness/self-evolution-sections.tsx`）
 
-「Skill 即资产」之后先是提问页 `#se-questions`（`components/harness/se-questions-section.tsx`，版式与 `#skill-questions` 一致：大标题「Agent 的自进化，是进化什么？」+ 四个散落问题气泡），随后进入自进化章节。内容来自 `docs/agent自进化-字幕整理.md`（抖音视频字幕），共 8 页：`#se-what`（Agent 的自进化，解决的是 T+1 的问题）/ `#se-vs-reflection`（自进化 vs 人工进化：异步沉淀 / Harness 自驱 / 作用于「T+1」任务）/ `#se-expert-driven`（Harness 和专家知识层是两个正交维度，需要共同进化：Skill 会老化需要不停维护，Harness 主动沉淀和管理 Skill，专家的一次发现触发模型自动总结并更新 Skill；配图 `public/harness/harness-proactive-knowledge-distillation.png`）/ `#se-reward-driven`（Human in the Loop 到 Self Evolution：专家由 Skill 编写者转为评审者，Harness 从轨迹与评审意见中识别正负反馈；配图 `public/harness/reward-driven-ai-expert-loop.png`）/ `#se-layers`（进化的五层）/ `#se-wikiskill`（WikiSkill 论文：Raw → Wiki → Skills 三层架构、知识永不回滚、四步循环角色分工、消融证明 Wiki 层是涨分关键；右侧暂为占位框，内容见 `docs/wikiskill/WikiSkill论文解读.md`。四张要点卡均带 `detail` 字段，点击打开 Q&A 详解弹层，弹层实现复用 cordis-section 的模式并抽为通用组件 `components/harness/point-cards.tsx`——任何要点带 `detail`（intro + source + qa）即自动变为可点击卡片；详解正文摘录自论文解读原文）/ `#se-hermes`（Hermes 实例：Learning Loop 四步闭环、Skill+Memory 双资产制、写满报错倒逼精简、后台异步复盘，配图 `public/outline/hermes-memory-files.png`，调研见 `docs/hermes记忆沉淀调研.md`）/ `#se-flywheel`（经验飞轮）。前四页由 `SelfEvolutionSections` 连续渲染；`#se-flywheel` 单独拆为 `SelfEvolutionFlywheelSection`（复用同一 `SeSection` 版式），挪到整页最后、Cordis 之后作为收尾。
+「Skill 即资产」之后先是提问页 `#se-questions`（`components/harness/se-questions-section.tsx`，版式与 `#skill-questions` 一致：大标题「Agent 的自进化，是进化什么？」+ 四个散落问题气泡），随后进入自进化章节。内容来自 `docs/agent自进化-字幕整理.md`（抖音视频字幕）。WikiSkill 部分先用 `#se-wikiskill-flow` 总览完整循环：Infer Agent 只读取当前 Skill 执行并留下 Raw Trace；Skill Manager 内的 Wiki Maintainer 复盘成败轨迹、Skill Proposer 根据 Wiki 与原始证据提出单次修改；验证门接受或回滚后进入下一轮。右侧带标注流程图为 `public/outline/wikiskill-overview-flow.png`。下一页 `#se-wikiskill` 再展开 Raw → Wiki → Skills 三层架构、知识永不回滚、角色分工和消融证据，内容见 `docs/wikiskill/WikiSkill论文解读.md`。
+
+WikiSkill 之后是 WebGrader 三页（`#webgrader-problem` / `#webgrader-solution` / `#webgrader-results`，内容见 `docs/webgrader/WebGrader论文解读.md`），按「问题 → 方案 → 效果」展开：第一页讲 RL 网页开发的奖励难题（手写脚本写不起、大模型裁判没走到决定性一步就下结论、「网站说谎」案例）；第二页讲四层解法（WebGen-Verifier-100 考场、需求先行的流程契约、规划→落地→取证→判决四段流水线、残差驱动进化 + SkillGraph 路由、冻结后发奖励）；第三页讲效果（52.01% FSR、+7.88 点、分数涨在取证环节、长流程仍是盲区）。三页右侧暂用配图占位框，待补编辑部手绘插画。
+
+WebGrader 之后是 `#eval-dataset`（评测集如何构建）：以一次真实的设计迭代为例——同一个 Expenses Report 仪表盘从最初版（60 分）→ 设计师红框标注（70 分）→ 改版后再评审（80 分）→ 最终版（90 分），说明带顺序、带分数的种子数据如何收集，以及如何据此构建一个至少能区分好坏效果的评测 Agent。右侧四张真实设计稿截图（`public/harness/eval-dataset-v*.png`，已统一补白到 3:2），点击左侧步骤卡切换。
+
+`#se-hermes` 继续介绍 Hermes 的 Learning Loop、Skill+Memory 双资产制、容量约束和后台异步复盘；`#se-flywheel` 单独由 `SelfEvolutionFlywheelSection` 渲染，放在 Cordis 之后作为收尾。
 
 - 布局：标题区（eyebrow + 渐变标题 + 引言）通栏横跨整页（`md:col-span-2`），其下两列——左侧编号要点卡片、右侧 3:2 配图（`public/harness/`，含图注），两列互相垂直居中（`md:self-center`）
 - 同样的通栏布局也应用于「Skill 即资产」页（`skill-asset-section.tsx`），保证两类章节版式统一
 - 整页最后另有一页 `#design-harness-assets`（DesignHarness 的自增长要沉淀什么资产：组件+使用 Skill、设计师真实使用轨迹），复用同一 `SeSection` 版式，右侧配科技编辑部手绘插画 `public/harness/design-harness-assets.png`：左侧组件与 Skill 成对沉淀，右侧呈现设计师选择、调整、采纳与放弃的真实使用轨迹，并通过反馈箭头回流 Harness
-- 其后还有 `#chart-evolution`（以图表场景为例的 Harness 自进化四步闭环：爬取 shadcn 组件 → Demo 设计师评审打分 → 自动沉淀 Skill+组件 → 打分轨迹数据增广）。四张步骤卡可点击，右侧同步切换对应的 3:2 科技编辑部手绘插画；当前步骤以靛蓝边框和浅色底高亮
 - `#data-flywheel` 右侧配双层、双环手绘插画 `public/harness/data-flywheel-two-layer.png`：下层蓝色 Harness 环积累 Skill、组件和专家反馈，上层紫色 Model 环完成轨迹增广、验证与训练；种子轨迹向上输送，增强后的模型能力向下回流
-- 紧接图表案例新增 4 页数据增广章节：`#trajectory-augmentation`（轨迹多次 rollout、任务变体、故障恢复、前缀分叉）/ `#cot-sft-augmentation`（CoT 多路径采样、过程验证、错误链与风格配比）/ `#industry-augmentation-pipeline`（公开的大厂共同流水线）/ `#augmentation-quality-gates`（五层门禁、独立审核、去重配平与隔离评测）。每页继续采用左侧要点卡 + 右侧 3:2 编辑部手绘插画。
+- 4 页数据增广章节：`#trajectory-augmentation`（轨迹多次 rollout、任务变体、故障恢复、前缀分叉）/ `#cot-sft-augmentation`（CoT 多路径采样、过程验证、错误链与风格配比）/ `#industry-augmentation-pipeline`（公开的大厂共同流水线）/ `#augmentation-quality-gates`（五层门禁、独立审核、去重配平与隔离评测）。每页继续采用左侧要点卡 + 右侧 3:2 编辑部手绘插画。
 - 最后是 `#delivery-models`（Design Harness 的多种落地方式：对基模团队只交付数据、对业务团队交付 Skill 或 Harness、资产本身 × 飞轮能力两种粒度自由组合），同版式 + 配图占位框
 
 ## Cordis 时空可组合性段落（`components/harness/cordis-section.tsx`）

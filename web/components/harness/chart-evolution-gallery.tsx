@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import type { Point } from './self-evolution-sections'
 import { PointDetailDialog } from './point-cards'
@@ -25,7 +25,18 @@ export function ChartEvolutionGallery({
 }) {
   const [activeIndex, setActiveIndex] = useState(0)
   const [detailIndex, setDetailIndex] = useState<number | null>(null)
+  // 图片点击放大：true 时以原比例全屏展示当前配图，点击遮罩或 Esc 关闭
+  const [zoomed, setZoomed] = useState(false)
   const activeImage = images[activeIndex]
+
+  useEffect(() => {
+    if (!zoomed) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setZoomed(false)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [zoomed])
 
   return (
     <div className="contents">
@@ -79,20 +90,45 @@ export function ChartEvolutionGallery({
         aria-live="polite"
         className="md:col-start-2 md:self-center"
       >
-        <div className="aspect-[3/2] overflow-hidden rounded-3xl bg-white/40">
-          <Image
-            key={activeImage.src}
-            src={activeImage.src}
-            alt={activeImage.alt}
-            width={1536}
-            height={1024}
-            className="h-full w-full animate-in object-cover fade-in duration-300"
-          />
-        </div>
+        <button
+          type="button"
+          onClick={() => setZoomed(true)}
+          aria-label={`放大查看配图：${activeImage.alt}`}
+          className="block w-full cursor-zoom-in rounded-3xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2"
+        >
+          <div className="aspect-[3/2] overflow-hidden rounded-3xl bg-white/40">
+            <Image
+              key={activeImage.src}
+              src={activeImage.src}
+              alt={activeImage.alt}
+              width={1536}
+              height={1024}
+              className="h-full w-full animate-in object-cover fade-in duration-300"
+            />
+          </div>
+        </button>
         <figcaption className="mt-3 px-1 text-left text-[11px] leading-5 text-slate-400">
           {activeImage.caption}
         </figcaption>
       </figure>
+
+      {/* 点击放大层：原比例展示当前配图，点击任意处或 Esc 关闭 */}
+      {zoomed && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={activeImage.alt}
+          className="fixed inset-0 z-50 flex cursor-zoom-out items-center justify-center bg-slate-950/60 p-6 backdrop-blur-sm sm:p-10"
+          onClick={() => setZoomed(false)}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={activeImage.src}
+            alt={activeImage.alt}
+            className="max-h-full max-w-full animate-in rounded-2xl shadow-2xl fade-in zoom-in-95 duration-200"
+          />
+        </div>
+      )}
 
       <PointDetailDialog
         point={detailIndex == null ? null : points[detailIndex]}
