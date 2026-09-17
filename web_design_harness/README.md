@@ -1,6 +1,6 @@
-# Design Harness
+# Design Harness · RSI 方案研讨
 
-独立的设计研讨 Web 项目。Next.js App Router + React + TypeScript + Tailwind CSS v4 + shadcn/ui（Base UI）。采用「研究刊物 + 设计师工作台」视觉方向，完整规范见 [DESIGN.md](./DESIGN.md)。
+独立 Next.js App Router + React + TypeScript + Tailwind CSS v4 + shadcn/ui（Base UI）汇报站。设计规范见 [DESIGN.md](./DESIGN.md)，三章文案规划见 [CONTENT.md](./CONTENT.md)。
 
 ## 本地运行
 
@@ -12,7 +12,7 @@ pnpm install
 pnpm dev
 ```
 
-打开 http://localhost:9358 。独立于兄弟目录 `web/`，不共享其依赖或运行时文件。
+访问 http://localhost:9358，自动进入第一章。
 
 ```bash
 pnpm build
@@ -20,19 +20,23 @@ pnpm typecheck
 pnpm start
 ```
 
-## 首轮页面
+## 章节
 
-- `/`：研究概览，刊物式问题引导、设计过程示意与三个研究问题。
-- `/workbench`：过程研讨，三个可切换的设计阶段，以及可显隐的编辑批注。案例是用于验证版式和交互的示意内容，不代表真实研究结果。
+- `/skills`：Skill 版本管理，留下改动、快照与派生关系。
+- `/cases`：评测用例集，固定任务与比较对象。
+- `/review`：评测与人的判断，人工查看、证据保留与下一次迭代；自动评测按需补充。
 
-## 结构
+根路径跳转 `/skills`，旧 `/workbench` 跳转 `/review`。三章共享 AppShell，通过侧栏、手机顶栏及上下章入口导航。
 
-- `app/layout.tsx`：元数据、中文语言标记与全局 AppShell。
-- `components/app-shell.tsx`：共享顶栏、侧栏、正文与页脚。
-- `components/navigation.tsx`：路径感知的章节导航。
-- `components/design-draft.tsx`：代码原生示意稿件。
-- `components/workbench.tsx`：阶段切换与批注交互。
-- `components/ui/button.tsx`：shadcn/ui Base UI 按钮；配置见 `components.json`。
-- `app/globals.css`：主题变量、版式、响应式与减少动效规则。
+页面为方案汇报，不连接实际 Runner 或评分服务。产品配图来自用户 `rsi-harness/assets`，图片数据均为示例。原始规格快照位于 `public/reference`；人工优先的文案方向依据用户最新讨论要求。
 
-只需本地系统字体，无远程图片、字体、账户或后端配置。
+## 核心文件
+
+- `components/app-shell.tsx`：共用框架。
+- `lib/chapters.ts`：三个章节的导航信息。
+- `components/chapter-layout.tsx`：章节标题、正文段落、旁注与转场。
+- `components/proposal-image.tsx`：完整配图与原图链接。
+- `components/chapter-figures.tsx`：配图切换。
+- `components/ui/button.tsx`：shadcn/ui Base UI 按钮。
+
+独立依赖和端口，不从兄弟项目导入运行时文件。使用本地系统字体与自带配图。
