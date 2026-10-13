@@ -6,8 +6,8 @@ export const metadata: Metadata = { title: "评测用例集", description: "把�
 
 export default function CasesPage() {
   return <article className="page narrative-page">
-    <ChapterHeader index={3} title={<>换一组任务，<br />它还会<em>更好吗？</em></>} lead={<><p>上一章留下了两种 Skill 改法。如果一个拿去做作品集，另一个拿去做数据看板，生成结果当然不同，却很难说清谁的改动更有效。</p><p>比较之前，先把任务放在同一张桌上。评测用例集要解决的，就是让这些任务能够反复使用，也让人知道每次究竟在看什么。</p></>} />
-    <ProposalImage file="mockup-05-cases-datasets.png" title="04 / 用例与数据集" caption="把需求、附件、初始项目和预期行为放在一起。页面为产品设计示意。" priority />
+    <ChapterHeader index={5} title={<>换一组任务，<br />它还会<em>更好吗？</em></>} lead={<><p>上一章留下了两种 Skill 改法。如果一个拿去做作品集，另一个拿去做数据看板，生成结果当然不同，却很难说清谁的改动更有效。</p><p>比较之前，先把任务放在同一张桌上。评测用例集要解决的，就是让这些任务能够反复使用，也让人知道每次究竟在看什么。</p></>} />
+    <ProposalImage file="mockup-05-cases-datasets.png" title="06 / 用例与数据集" caption="把需求、附件、初始项目和预期行为放在一起。页面为产品设计示意。" priority />
     <StorySection id="case" number="01" title="一条用例，要比一句提示词更完整。">
       <p>用例（Case）就是一份可以交给 Agent 的任务单。“做一个作品集”只是开头。面向谁、参考哪张图、从空项目开始还是修改已有代码、哪些交互必须能用，都应该跟着任务一起保存。</p>
       <div className="case-sheet"><div className="case-sheet-heading"><span className="eyebrow accent">示意任务单 / CASE</span><h3>为独立设计师制作个人作品集</h3></div><dl><div><dt>要做什么</dt><dd>展示作品、个人介绍与联系方式。</dd></div><div><dt>带入什么</dt><dd>同一份参考图、内容素材与初始 React 项目。</dd></div><div><dt>看哪些场景</dt><dd>桌面和窄屏浏览；打开作品详情，再返回列表。</dd></div><div><dt>希望看到什么</dt><dd>作品容易找到，详情可以访问，窄屏内容不溢出。</dd></div></dl></div>
@@ -25,6 +25,6 @@ export default function CasesPage() {
       <p>这里可以分两步走：先保存“要看哪些任务、关注哪些问题”，让人工评审有共同依据；需要量化时，再明确权重、缺失项和失败怎么处理，并引入适合的检查工具。</p>
       <p>用于评分的参考答案或隐藏检查材料，要与 Agent 的任务输入分开。否则，题目里夹着答案，看到的表现就失去了比较意义。</p>
     </StorySection>
-    <ChapterFooter index={3} bridge="版本和任务都固定了，接下来把结果摆出来：先由人看差异、走交互、留下理由，再决定这次改动是否值得继续。" sources={[{file:"02-cases.md",label:"用例与数据集"},{file:"03-benchmarks.md",label:"Benchmark 与评分"}]} />
+    <ChapterFooter index={5} bridge="版本和任务都固定了，接下来把结果摆出来：先由人看差异、走交互、留下理由，再决定这次改动是否值得继续。" sources={[{file:"02-cases.md",label:"用例与数据集"},{file:"03-benchmarks.md",label:"Benchmark 与评分"}]} />
   </article>;
 }

@@ -7,9 +7,9 @@ export const metadata: Metadata = { title: "评测与人的判断", description:
 
 export default function ReviewPage() {
   return <article className="page narrative-page">
-    <ChapterHeader index={4} title={<>有没有变好，<br />先让人<em>看得清。</em></>} lead={<><p>两份 Skill 做完了同一组任务，结果已经摆在眼前。一个页面更漂亮，但表单不能提交；另一个视觉普通，却把交互做完整了。</p><p>这时候，一个总分未必说得清问题。现阶段可以先没有自动评测环节：让人看产物、试操作、说明理由，再决定下一步怎么改。</p></>} />
+    <ChapterHeader index={6} title={<>有没有变好，<br />先让人<em>看得清。</em></>} lead={<><p>两份 Skill 做完了同一组任务，结果已经摆在眼前。一个页面更漂亮，但表单不能提交；另一个视觉普通，却把交互做完整了。</p><p>这时候，一个总分未必说得清问题。现阶段可以先没有自动评测环节：让人看产物、试操作、说明理由，再决定下一步怎么改。</p></>} />
     <div className="human-first-label"><span className="red-dot" /> 当前方向：人工判断为主 · 自动评测可后续补充</div>
-    <ProposalImage file="mockup-09-experiment-comparison.png" title="05 / 把两次结果放在一起看" caption="对比界面的设计设想。图中数值仅为配图示例；当前汇报重点是产物对照与人工判断，不以示例分数作结论。" priority />
+    <ProposalImage file="mockup-09-experiment-comparison.png" title="07 / 把两次结果放在一起看" caption="对比界面的设计设想。图中数值仅为配图示例；当前汇报重点是产物对照与人工判断，不以示例分数作结论。" priority />
     <StorySection id="run" number="01" title="先把产物跑出来，也留下它怎么来的。">
       <p>选择 Skill 版本、任务以及运行配置，提交一次实验（Experiment）。本地 Runner 为每次执行（Run）建立独立工作目录，调用 DeepSeekHarness，留下运行日志与生成产物。</p>
       <ChapterFigures label="查看执行过程配图" items={[
@@ -36,6 +36,6 @@ export default function ReviewPage() {
       <p>等待人工评审时，已有记录和证据仍可同步。Runner 用后台队列处理上传，断网或重启后补传。同步失败不改变执行结论；只有本地副本的源码，也不能因为云端已经有一条记录，就当作可以恢复。</p>
       <EditorialNote label="这一轮真正完成的闭环"><p>保存能力版本 → 用同一组任务生成 → 人查看并记录判断 → 根据问题派生新版本。自动评测以后可以加入，人的迭代现在就能开始。</p></EditorialNote>
     </StorySection>
-    <ChapterFooter index={4} bridge="下一次打开版本树时，我们希望看到的不只是又多了一个版本，而是知道它为什么出现，以及准备解决什么问题。" sources={[{file:"03-benchmarks.md",label:"人工评分与证据"},{file:"04-experiments.md",label:"实验与对比"},{file:"06-artifacts-sync.md",label:"采集与同步"}]} />
+    <ChapterFooter index={6} bridge="下一次打开版本树时，我们希望看到的不只是又多了一个版本，而是知道它为什么出现，以及准备解决什么问题。" sources={[{file:"03-benchmarks.md",label:"人工评分与证据"},{file:"04-experiments.md",label:"实验与对比"},{file:"06-artifacts-sync.md",label:"采集与同步"}]} />
   </article>;
 }

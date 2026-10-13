@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="drawio" version="26.0.0">
+  <diagram id="rsi-learning-loop-v3" name="RSI 自进化闭环架构 · 子能力">
+    <mxGraphModel dx="2450" dy="1430" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2450" pageHeight="1430" math="0" shadow="0" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="RSI：以证据驱动的 Design Harness 自进化闭环" style="text;html=1;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=Arial;fontSize=34;fontStyle=1;fontColor=#213040;" vertex="1" parent="1">
+          <mxGeometry x="150" y="35" width="2030" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="每轮固定输入条件，执行并保留证据；专家先定义判断，系统再从标注中提炼可验证的 Skill 改动。" style="text;html=1;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=Arial;fontSize=18;fontColor=#637384;" vertex="1" parent="1">
+          <mxGeometry x="150" y="95" width="2070" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="expert_inputs" value="&lt;b&gt;专家标准持续输入&lt;/b&gt;  ｜  设计师：品牌 / 审美 / 体验规范与标注  ｜  工程师：质量文件 / 技术约束 / 可执行检查规则" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#F2ECF7;strokeColor=#AF98C5;strokeWidth=1.4;fontFamily=Arial;fontSize=17;fontColor=#614D72;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="150" y="165" width="2100" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="query" value="01  场景定义与 Query 发现" style="swimlane;startSize=60;horizontal=1;container=1;pointerEvents=0;rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#F5F9FD;swimlaneFillColor=#F5F9FD;strokeColor=#789DBF;strokeWidth=1.8;fontFamily=Arial;fontSize=22;fontStyle=1;fontColor=#243F58;align=left;spacingLeft=26;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="150" y="285" width="640" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="query_ability_1" value="&lt;b&gt;场景模板&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#647B90&quot;&gt;目标 · 约束&lt;/font&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#A8C0D5;strokeWidth=1.2;fontFamily=Arial;fontSize=17;fontColor=#294661;align=center;verticalAlign=middle;" vertex="1" parent="query">
+          <mxGeometry x="30" y="82" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="query_ability_2" value="&lt;b&gt;Query 候选池&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#647B90&quot;&gt;需求 · 失败样本&lt;/font&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#A8C0D5;strokeWidth=1.2;fontFamily=Arial;fontSize=17;fontColor=#294661;align=center;verticalAlign=middle;" vertex="1" parent="query">
+          <mxGeometry x="230" y="82" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="query_ability_3" value="&lt;b&gt;用例集版本&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#647B90&quot;&gt;回归集 · 探索集&lt;/font&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#A8C0D5;strokeWidth=1.2;fontFamily=Arial;fontSize=17;fontColor=#294661;align=center;verticalAlign=middle;" vertex="1" parent="query">
+          <mxGeometry x="430" y="82" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="query_tech" value="技术候选  PostgreSQL · Git · 检索 / 筛选" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;fillColor=#E7F0F8;strokeColor=#C3D6E5;strokeWidth=1;fontFamily=Arial;fontSize=15;fontColor=#526F87;align=left;verticalAlign=middle;spacingLeft=16;" vertex="1" parent="query">
+          <mxGeometry x="30" y="207" width="580" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="execute" value="02  Harness 执行" style="swimlane;startSize=60;horizontal=1;container=1;pointerEvents=0;rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#F5F9FD;swimlaneFillColor=#F5F9FD;strokeColor=#789DBF;strokeWidth=1.8;fontFamily=Arial;fontSize=22;fontStyle=1;fontColor=#243F58;align=left;spacingLeft=26;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="880" y="285" width="640" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="execute_ability_1" value="&lt;b&gt;Harness 适配&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#647B90&quot;&gt;CLI · Hook · Plugin&lt;/font&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#A8C0D5;strokeWidth=1.2;fontFamily=Arial;fontSize=17;fontColor=#294661;align=center;verticalAlign=middle;" vertex="1" parent="execute">
+          <mxGeometry x="30" y="82" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="execute_ability_2" value="&lt;b&gt;标准注入&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#647B90&quot;&gt;Skill · 质量文件&lt;/font&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#A8C0D5;strokeWidth=1.2;fontFamily=Arial;fontSize=17;fontColor=#294661;align=center;verticalAlign=middle;" vertex="1" parent="execute">
+          <mxGeometry x="230" y="82" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="execute_ability_3" value="&lt;b&gt;隔离执行&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#647B90&quot;&gt;容器 · 环境 · 超时&lt;/font&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#A8C0D5;strokeWidth=1.2;fontFamily=Arial;fontSize=17;fontColor=#294661;align=center;verticalAlign=middle;" vertex="1" parent="execute">
+          <mxGeometry x="430" y="82" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="execute_tech" value="技术候选  CLI / Hook / Plugin · 容器 · OpenTelemetry" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;fillColor=#E7F0F8;strokeColor=#C3D6E5;strokeWidth=1;fontFamily=Arial;fontSize=15;fontColor=#526F87;align=left;verticalAlign=middle;spacingLeft=16;" vertex="1" parent="execute">
+          <mxGeometry x="30" y="207" width="580" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="snapshot" value="03  采集与冻结运行快照" style="swimlane;startSize=60;horizontal=1;container=1;pointerEvents=0;rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#F5F9FD;swimlaneFillColor=#F5F9FD;strokeColor=#789DBF;strokeWidth=1.8;fontFamily=Arial;fontSize=22;fontStyle=1;fontColor=#243F58;align=left;spacingLeft=26;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1610" y="285" width="640" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="snapshot_ability_1" value="&lt;b&gt;运行采集&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#647B90&quot;&gt;事件 · 截图 · Git 差异&lt;/font&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#A8C0D5;strokeWidth=1.2;fontFamily=Arial;fontSize=17;fontColor=#294661;align=center;verticalAlign=middle;" vertex="1" parent="snapshot">
+          <mxGeometry x="30" y="82" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="snapshot_ability_2" value="&lt;b&gt;清洗校验&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#647B90&quot;&gt;Schema · 去重&lt;/font&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#A8C0D5;strokeWidth=1.2;fontFamily=Arial;fontSize=17;fontColor=#294661;align=center;verticalAlign=middle;" vertex="1" parent="snapshot">
+          <mxGeometry x="230" y="82" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="snapshot_ability_3" value="&lt;b&gt;快照归档&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#647B90&quot;&gt;Run ID · 产物摘要&lt;/font&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#A8C0D5;strokeWidth=1.2;fontFamily=Arial;fontSize=17;fontColor=#294661;align=center;verticalAlign=middle;" vertex="1" parent="snapshot">
+          <mxGeometry x="430" y="82" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="snapshot_tech" value="技术候选  OBS · PostgreSQL · Git · SHA-256" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;fillColor=#E7F0F8;strokeColor=#C3D6E5;strokeWidth=1;fontFamily=Arial;fontSize=15;fontColor=#526F87;align=left;verticalAlign=middle;spacingLeft=16;" vertex="1" parent="snapshot">
+          <mxGeometry x="30" y="207" width="580" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="sample_contract" value="&lt;b&gt;贯穿全环的样本契约&lt;/b&gt;  ｜  Query 版本 · Run ID · Harness / 模型 / 环境 · Skill commit · 产物摘要 · 标注引用 · 评测结论" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFF7E9;strokeColor=#D8B579;strokeWidth=1.3;fontFamily=Arial;fontSize=16;fontColor=#785A31;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="490" y="625" width="1420" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="update" value="06  Skill 更新与发布" style="swimlane;startSize=60;horizontal=1;container=1;pointerEvents=0;rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#F5F9FD;swimlaneFillColor=#F5F9FD;strokeColor=#789DBF;strokeWidth=1.8;fontFamily=Arial;fontSize=22;fontStyle=1;fontColor=#243F58;align=left;spacingLeft=26;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="150" y="785" width="640" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="update_ability_1" value="&lt;b&gt;Skill 编辑&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#647B90&quot;&gt;规则 · Prompt&lt;/font&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#A8C0D5;strokeWidth=1.2;fontFamily=Arial;fontSize=17;fontColor=#294661;align=center;verticalAlign=middle;" vertex="1" parent="update">
+          <mxGeometry x="30" y="82" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="update_ability_2" value="&lt;b&gt;版本关系&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#647B90&quot;&gt;父版本 · 差异&lt;/font&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#A8C0D5;strokeWidth=1.2;fontFamily=Arial;fontSize=17;fontColor=#294661;align=center;verticalAlign=middle;" vertex="1" parent="update">
+          <mxGeometry x="230" y="82" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="update_ability_3" value="&lt;b&gt;发布门禁&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#647B90&quot;&gt;PR · CI · 回退&lt;/font&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#A8C0D5;strokeWidth=1.2;fontFamily=Arial;fontSize=17;fontColor=#294661;align=center;verticalAlign=middle;" vertex="1" parent="update">
+          <mxGeometry x="430" y="82" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="update_tech" value="技术候选  Git · PR / CI · 发布记录" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;fillColor=#E7F0F8;strokeColor=#C3D6E5;strokeWidth=1;fontFamily=Arial;fontSize=15;fontColor=#526F87;align=left;verticalAlign=middle;spacingLeft=16;" vertex="1" parent="update">
+          <mxGeometry x="30" y="207" width="580" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="extract" value="05  经验提取与总结" style="swimlane;startSize=60;horizontal=1;container=1;pointerEvents=0;rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#F5F9FD;swimlaneFillColor=#F5F9FD;strokeColor=#789DBF;strokeWidth=1.8;fontFamily=Arial;fontSize=22;fontStyle=1;fontColor=#243F58;align=left;spacingLeft=26;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="880" y="785" width="640" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="extract_ability_1" value="&lt;b&gt;样本聚合&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#647B90&quot;&gt;共性问题 · 反例&lt;/font&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#A8C0D5;strokeWidth=1.2;fontFamily=Arial;fontSize=17;fontColor=#294661;align=center;verticalAlign=middle;" vertex="1" parent="extract">
+          <mxGeometry x="30" y="82" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="extract_ability_2" value="&lt;b&gt;规则候选&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#647B90&quot;&gt;证据 · 适用范围&lt;/font&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#A8C0D5;strokeWidth=1.2;fontFamily=Arial;fontSize=17;fontColor=#294661;align=center;verticalAlign=middle;" vertex="1" parent="extract">
+          <mxGeometry x="230" y="82" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="extract_ability_3" value="&lt;b&gt;专家复核&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#647B90&quot;&gt;采纳 · 废弃&lt;/font&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#A8C0D5;strokeWidth=1.2;fontFamily=Arial;fontSize=17;fontColor=#294661;align=center;verticalAlign=middle;" vertex="1" parent="extract">
+          <mxGeometry x="430" y="82" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="extract_tech" value="技术候选  批处理 / LLM · SQL · Iceberg（二期）" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;fillColor=#E7F0F8;strokeColor=#C3D6E5;strokeWidth=1;fontFamily=Arial;fontSize=15;fontColor=#526F87;align=left;verticalAlign=middle;spacingLeft=16;" vertex="1" parent="extract">
+          <mxGeometry x="30" y="207" width="580" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="annotate" value="04  专家标注与对照评测" style="swimlane;startSize=60;horizontal=1;container=1;pointerEvents=0;rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#F5F9FD;swimlaneFillColor=#F5F9FD;strokeColor=#789DBF;strokeWidth=1.8;fontFamily=Arial;fontSize=22;fontStyle=1;fontColor=#243F58;align=left;spacingLeft=26;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1610" y="785" width="640" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="annotate_ability_1" value="&lt;b&gt;设计师标注&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#647B90&quot;&gt;定位 · 理由 · 标准&lt;/font&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#A8C0D5;strokeWidth=1.2;fontFamily=Arial;fontSize=17;fontColor=#294661;align=center;verticalAlign=middle;" vertex="1" parent="annotate">
+          <mxGeometry x="30" y="82" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="annotate_ability_2" value="&lt;b&gt;工程门禁&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#647B90&quot;&gt;Lint · 类型 · 测试&lt;/font&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#A8C0D5;strokeWidth=1.2;fontFamily=Arial;fontSize=17;fontColor=#294661;align=center;verticalAlign=middle;" vertex="1" parent="annotate">
+          <mxGeometry x="230" y="82" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="annotate_ability_3" value="&lt;b&gt;对照评测&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#647B90&quot;&gt;审美 · 功能 · 退步&lt;/font&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#A8C0D5;strokeWidth=1.2;fontFamily=Arial;fontSize=17;fontColor=#294661;align=center;verticalAlign=middle;" vertex="1" parent="annotate">
+          <mxGeometry x="430" y="82" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="annotate_tech" value="技术候选  标注台 · ESLint / TS · Playwright / axe" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;fillColor=#E7F0F8;strokeColor=#C3D6E5;strokeWidth=1;fontFamily=Arial;fontSize=15;fontColor=#526F87;align=left;verticalAlign=middle;spacingLeft=16;" vertex="1" parent="annotate">
+          <mxGeometry x="30" y="207" width="580" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="foundation" value="&lt;b&gt;横切技术底座&lt;/b&gt;  ｜  身份 / 项目隔离：OIDC / SSO · RBAC · 审计  ｜  可观测：OpenTelemetry  ｜  业务元数据：PostgreSQL  ｜  文件：OBS  ｜  文本版本：Git  ｜  分析：OBS + Iceberg + 查询引擎（二期）" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#F4F6F7;strokeColor=#A9B2B9;strokeWidth=1.2;fontFamily=Arial;fontSize=16;fontColor=#596771;align=center;verticalAlign=middle;spacingLeft=20;spacingRight=20;" vertex="1" parent="1">
+          <mxGeometry x="150" y="1145" width="2100" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="note" value="架构讨论稿 v3 · 技术均为候选而非已实现；初期由设计师 / 工程师提供评判，自动评测与湖仓分析随数据成熟逐步引入。" style="text;html=1;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=Arial;fontSize=15;fontColor=#73808B;" vertex="1" parent="1">
+          <mxGeometry x="150" y="1280" width="2110" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="flow_01_02" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#638EAE;strokeWidth=2.5;endArrow=block;endSize=9;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="query" target="execute">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow_02_03" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#638EAE;strokeWidth=2.5;endArrow=block;endSize=9;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="execute" target="snapshot">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow_03_04" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#638EAE;strokeWidth=2.5;endArrow=block;endSize=9;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="snapshot" target="annotate">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow_04_05" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#638EAE;strokeWidth=2.5;endArrow=block;endSize=9;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="annotate" target="extract">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow_05_06" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#638EAE;strokeWidth=2.5;endArrow=block;endSize=9;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="extract" target="update">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow_06_01" value="下一轮：同一回归集 + 新探索集" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#C77F3F;strokeWidth=2.7;endArrow=block;endSize=9;fontFamily=Arial;fontSize=15;fontStyle=1;fontColor=#A16B37;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="update" target="query">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="65" y="920" />
+              <mxPoint x="65" y="420" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
