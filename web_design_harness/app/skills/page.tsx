@@ -7,8 +7,8 @@ export const metadata: Metadata = { title: "Skill 版本管理", description: "�
 
 export default function SkillsPage() {
   return <article className="page narrative-page">
-    <ChapterHeader index={0} title={<>这次改好了，<br />能不能留下<em>为什么？</em></>} lead={<><p>你给 Skill 加了一条“优先检查窄屏布局”，重新生成，页面看起来顺眼了。又改了几轮，却发现有些任务反而退步了。</p><p>这时最想知道的是：到底从哪一次改动开始，结果发生了变化？RSI Harness 的第一步，就是把这些改动留下来。</p></>} />
-    <ProposalImage file="mockup-04-asset-version.png" title="01 / Skill 版本管理" caption="版本树把每一次修改放回它的来处。产品效果图，示例成绩不作为版本优劣的依据。" priority />
+    <ChapterHeader index={2} title={<>这次改好了，<br />能不能留下<em>为什么？</em></>} lead={<><p>你给 Skill 加了一条“优先检查窄屏布局”，重新生成，页面看起来顺眼了。又改了几轮，却发现有些任务反而退步了。</p><p>这时最想知道的是：到底从哪一次改动开始，结果发生了变化？RSI Harness 的第一步，就是把这些改动留下来。</p></>} />
+    <ProposalImage file="mockup-04-asset-version.png" title="03 / Skill 版本管理" caption="版本树把每一次修改放回它的来处。产品效果图，示例成绩不作为版本优劣的依据。" priority />
     <StorySection id="keep-versions" number="01" title="先别覆盖旧文件，给这次修改留一个位置。">
       <p>技能包（Skill）可以理解成给 Agent 的操作手册：遇到这类任务，应该怎样做。它还可以带着脚本、资源和依赖说明。修改这份手册，就是在修改 Agent 下一次做事的方法。</p>
       <p>如果每次都直接覆盖文件，我们最后只剩下最新的一份。方案里，每次保存都形成一个<strong>不可变的版本快照</strong>：当时的完整内容、修改说明和父版本一起保存。还没保存的内容是草稿；保存之后再修改，就创建新版本。</p>
@@ -29,6 +29,6 @@ export default function SkillsPage() {
       <p>方案采用 <strong>DeepSeekHarness 作为唯一执行底座</strong>。它的底座版本，和我们迭代的 Harness 配置版本分别记录。这样回看结果时，才能区分是自己的改动，还是底座升级带来的变化。</p>
       <EditorialNote label="默认版本只是一个指针"><p>把某个版本设为默认，只影响后续选择。已经提交的实验继续使用当时固定的版本，不会悄悄换成新的。</p></EditorialNote>
     </StorySection>
-    <ChapterFooter index={0} bridge="现在知道改了什么了。但只看一个页面，能说明这次修改值得保留吗？我们还需要一组可以反复使用的任务。" sources={[{file:"01-assets.md",label:"资产与版本"},{file:"04-experiments.md",label:"实验配置快照"},{file:"05-runner.md",label:"执行底座"}]} />
+    <ChapterFooter index={2} bridge="现在知道改了什么了。但只看一个页面，能说明这次修改值得保留吗？我们还需要一组可以反复使用的任务。" sources={[{file:"01-assets.md",label:"资产与版本"},{file:"04-experiments.md",label:"实验配置快照"},{file:"05-runner.md",label:"执行底座"}]} />
   </article>;
 }
