@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1200" viewBox="0 0 1600 1200" role="img" aria-labelledby="title desc">
+  <title id="title">端侧采集通道六层架构</title>
+  <desc id="desc">从快照数据契约开始，经 CLI 唯一同步入口、Harness 插件、标注插件、云端同步能力，到云端接收与一致性校验。插件不直连云端，统一调用 CLI。</desc>
+  <defs>
+    <linearGradient id="page" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fbfcff"/>
+      <stop offset="1" stop-color="#f5f7fc"/>
+    </linearGradient>
+    <linearGradient id="cloud" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f1efff"/>
+      <stop offset="1" stop-color="#edf5ff"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f4f8ff"/>
+      <stop offset="1" stop-color="#f5f3ff"/>
+    </linearGradient>
+    <linearGradient id="contract" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#eef4ff"/>
+      <stop offset=".5" stop-color="#f3f0ff"/>
+      <stop offset="1" stop-color="#edf8f5"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-30%" width="140%" height="170%">
+      <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#344266" flood-opacity=".10"/>
+    </filter>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="8.2" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#526fd1"/>
+    </marker>
+    <marker id="arrowRed" viewBox="0 0 10 10" refX="8.2" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#d85d59"/>
+    </marker>
+    <style>
+      text{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif}
+      .ink{fill:#17213d}.muted{fill:#66708a}.blue{fill:#415fc4}.red{fill:#c74e4a}
+      .layer{fill:#fff;stroke:#dce3f1;stroke-width:1.5}.dash{stroke-dasharray:8 9}
+      .label{font-size:18px;font-weight:700;letter-spacing:.06em}.h{font-size:26px;font-weight:700}.body{font-size:18px}.small{font-size:15px}.pill{font-size:15px;font-weight:600}
+    </style>
+  </defs>
+
+  <rect width="1600" height="1200" rx="34" fill="url(#page)"/>
+  <circle cx="1410" cy="130" r="230" fill="#dfe8ff" opacity=".34"/>
+  <circle cx="170" cy="1010" r="260" fill="#ece5ff" opacity=".28"/>
+
+  <text x="110" y="92" class="ink" font-size="42" font-weight="760">端侧采集通道：六层依赖架构</text>
+  <text x="110" y="132" class="muted body">先把数据说清楚，再打通唯一入口；端侧完成采集，云端负责可靠传输与一致性把关</text>
+
+  <g transform="translate(110 166)">
+    <rect width="1380" height="64" rx="18" fill="#fff5f3" stroke="#f1c9c5"/>
+    <circle cx="34" cy="32" r="13" fill="#d85d59"/>
+    <path d="M28 32h12M34 26v12" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+    <text x="62" y="27" class="red label">关键架构决策</text>
+    <text x="62" y="49" class="ink body">插件不直连云端，统一调用 CLI</text>
+  </g>
+
+  <!-- layer 6 -->
+  <g filter="url(#shadow)">
+    <rect x="250" y="270" width="1100" height="112" rx="22" fill="url(#cloud)" stroke="#d8d8f0" stroke-width="1.5"/>
+  </g>
+  <rect x="280" y="294" width="54" height="54" rx="16" fill="#6c5cc7"/>
+  <text x="307" y="329" text-anchor="middle" fill="#fff" font-size="22" font-weight="700">6</text>
+  <text x="358" y="335" class="ink h">云端接收与一致性校验</text>
+  <g transform="translate(760 306)"><rect width="120" height="40" rx="20" fill="#fff" opacity=".82"/><text x="60" y="26" text-anchor="middle" class="blue pill">完整性</text></g>
+  <g transform="translate(895 306)"><rect width="120" height="40" rx="20" fill="#fff" opacity=".82"/><text x="60" y="26" text-anchor="middle" class="blue pill">ID 对齐</text></g>
+  <g transform="translate(1030 306)"><rect width="120" height="40" rx="20" fill="#fff" opacity=".82"/><text x="60" y="26" text-anchor="middle" class="blue pill">残缺标记</text></g>
+  <g transform="translate(1165 306)"><rect width="120" height="40" rx="20" fill="#fff" opacity=".82"/><text x="60" y="26" text-anchor="middle" class="blue pill">项目隔离</text></g>
+
+  <!-- layer 5 -->
+  <g filter="url(#shadow)"><rect x="250" y="414" width="1100" height="112" rx="22" class="layer"/></g>
+  <rect x="280" y="443" width="54" height="54" rx="16" fill="#4d76c9"/><text x="307" y="478" text-anchor="middle" fill="#fff" font-size="22" font-weight="700">5</text>
+  <text x="358" y="479" class="ink h">云端同步能力</text>
+  <g transform="translate(655 450)"><rect width="120" height="40" rx="20" fill="#eef3ff"/><text x="60" y="26" text-anchor="middle" class="blue pill">静默上传</text></g>
+  <g transform="translate(790 450)"><rect width="120" height="40" rx="20" fill="#eef3ff"/><text x="60" y="26" text-anchor="middle" class="blue pill">增量传输</text></g>
+  <g transform="translate(925 450)"><rect width="120" height="40" rx="20" fill="#eef3ff"/><text x="60" y="26" text-anchor="middle" class="blue pill">断点续传</text></g>
+  <g transform="translate(1060 450)"><rect width="120" height="40" rx="20" fill="#eef3ff"/><text x="60" y="26" text-anchor="middle" class="blue pill">离线队列</text></g>
+  <g transform="translate(1195 450)"><rect width="120" height="40" rx="20" fill="#eef3ff"/><text x="60" y="26" text-anchor="middle" class="blue pill">体积治理</text></g>
+  <path d="M800 414V389" stroke="#526fd1" stroke-width="3" marker-end="url(#arrowBlue)"/>
+
+  <!-- layer 2: CLI sits directly below cloud capabilities -->
+  <g filter="url(#shadow)"><rect x="250" y="558" width="1100" height="112" rx="22" fill="#fff" stroke="#e3a7a3" stroke-width="2.5"/></g>
+  <rect x="280" y="587" width="54" height="54" rx="16" fill="#d85d59"/><text x="307" y="622" text-anchor="middle" fill="#fff" font-size="22" font-weight="700">2</text>
+  <text x="358" y="623" class="ink h">CLI · 唯一同步入口</text>
+  <g transform="translate(720 594)"><rect width="120" height="40" rx="20" fill="#fff0ee"/><text x="60" y="26" text-anchor="middle" class="red pill">上传下载</text></g>
+  <g transform="translate(855 594)"><rect width="120" height="40" rx="20" fill="#fff0ee"/><text x="60" y="26" text-anchor="middle" class="red pill">用户鉴权</text></g>
+  <g transform="translate(990 594)"><rect width="120" height="40" rx="20" fill="#fff0ee"/><text x="60" y="26" text-anchor="middle" class="red pill">项目绑定</text></g>
+  <g transform="translate(1125 594)"><rect width="160" height="40" rx="20" fill="#fee7e5"/><text x="80" y="26" text-anchor="middle" class="red pill">唯一上云通道</text></g>
+  <path d="M800 558V529" stroke="#526fd1" stroke-width="3" marker-end="url(#arrowBlue)"/>
+
+  <!-- layer 4 -->
+  <g filter="url(#shadow)"><rect x="250" y="702" width="1100" height="112" rx="22" fill="url(#edge)" stroke="#dae1f2" stroke-width="1.5"/></g>
+  <rect x="280" y="731" width="54" height="54" rx="16" fill="#527fc0"/><text x="307" y="766" text-anchor="middle" fill="#fff" font-size="22" font-weight="700">4</text>
+  <text x="358" y="767" class="ink h">标注插件</text>
+  <g transform="translate(620 738)"><rect width="120" height="40" rx="20" fill="#e9f3ff"/><text x="60" y="26" text-anchor="middle" class="blue pill">元素选取</text></g>
+  <g transform="translate(755 738)"><rect width="120" height="40" rx="20" fill="#e9f3ff"/><text x="60" y="26" text-anchor="middle" class="blue pill">截图快照</text></g>
+  <g transform="translate(890 738)"><rect width="120" height="40" rx="20" fill="#e9f3ff"/><text x="60" y="26" text-anchor="middle" class="blue pill">标注 JSON</text></g>
+  <g transform="translate(1025 738)"><rect width="210" height="40" rx="20" fill="#e9f3ff"/><text x="105" y="26" text-anchor="middle" class="blue pill">锚定 run / commit</text></g>
+
+  <!-- layer 3 -->
+  <g filter="url(#shadow)"><rect x="250" y="846" width="1100" height="112" rx="22" fill="url(#edge)" stroke="#dae1f2" stroke-width="1.5"/></g>
+  <rect x="280" y="875" width="54" height="54" rx="16" fill="#528db2"/><text x="307" y="910" text-anchor="middle" fill="#fff" font-size="22" font-weight="700">3</text>
+  <text x="358" y="911" class="ink h">Harness 插件</text>
+  <g transform="translate(620 882)"><rect width="150" height="40" rx="20" fill="#e9f7f8"/><text x="75" y="26" text-anchor="middle" fill="#39778e" class="pill">生命周期钩子</text></g>
+  <g transform="translate(785 882)"><rect width="150" height="40" rx="20" fill="#e9f7f8"/><text x="75" y="26" text-anchor="middle" fill="#39778e" class="pill">Git 轨迹</text></g>
+  <g transform="translate(950 882)"><rect width="150" height="40" rx="20" fill="#e9f7f8"/><text x="75" y="26" text-anchor="middle" fill="#39778e" class="pill">dist 收敛</text></g>
+  <g transform="translate(1115 882)"><rect width="150" height="40" rx="20" fill="#e9f7f8"/><text x="75" y="26" text-anchor="middle" fill="#39778e" class="pill">平台适配</text></g>
+
+  <!-- plugins call CLI, never cloud directly -->
+  <path d="M1378 902h54V614h-58" fill="none" stroke="#d85d59" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowRed)"/>
+  <path d="M1378 758h54" fill="none" stroke="#d85d59" stroke-width="3" stroke-linecap="round"/>
+  <text x="1460" y="758" transform="rotate(-90 1460 758)" class="red small" text-anchor="middle">插件统一调用 CLI</text>
+
+  <!-- layer 1 -->
+  <g filter="url(#shadow)"><rect x="250" y="990" width="1100" height="112" rx="22" fill="url(#contract)" stroke="#ccd8ed" stroke-width="1.8"/></g>
+  <rect x="280" y="1019" width="54" height="54" rx="16" fill="#374a7b"/><text x="307" y="1054" text-anchor="middle" fill="#fff" font-size="22" font-weight="700">1</text>
+  <text x="358" y="1055" class="ink h">快照数据契约</text>
+  <g transform="translate(620 1026)"><rect width="120" height="40" rx="20" fill="#fff" opacity=".82"/><text x="60" y="26" text-anchor="middle" class="blue pill">统一 ID</text></g>
+  <g transform="translate(755 1026)"><rect width="120" height="40" rx="20" fill="#fff" opacity=".82"/><text x="60" y="26" text-anchor="middle" class="blue pill">Git + 源码</text></g>
+  <g transform="translate(890 1026)"><rect width="120" height="40" rx="20" fill="#fff" opacity=".82"/><text x="60" y="26" text-anchor="middle" class="blue pill">标注 JSON</text></g>
+  <g transform="translate(1025 1026)"><rect width="120" height="40" rx="20" fill="#fff" opacity=".82"/><text x="60" y="26" text-anchor="middle" class="blue pill">dist 产物</text></g>
+  <g transform="translate(1160 1026)"><rect width="140" height="40" rx="20" fill="#fff" opacity=".82"/><text x="70" y="26" text-anchor="middle" class="blue pill">元素定位</text></g>
+
+  <!-- dependency spine -->
+  <path d="M92 1070V304" stroke="#aab6cf" stroke-width="2" class="dash" marker-end="url(#arrowBlue)"/>
+  <text x="64" y="696" transform="rotate(-90 64 696)" class="muted small" text-anchor="middle">建设依赖：自下而上</text>
+
+  <text x="800" y="1150" text-anchor="middle" class="muted small">建设顺序：契约 → CLI → 单一 Harness 闭环 → 标注插件 → 横向适配</text>
+</svg>
