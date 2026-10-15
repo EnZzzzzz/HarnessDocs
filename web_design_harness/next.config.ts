@@ -1,3 +1,8 @@
 import type { NextConfig } from "next";
-const config: NextConfig = { turbopack: { root: process.cwd() } };
+const config: NextConfig = {
+  output: "export",
+  images: { unoptimized: true },
+  trailingSlash: true,
+  turbopack: { root: process.cwd() },
+};
 export default config;
